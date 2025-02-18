@@ -1,5 +1,9 @@
 @import "bootstrap/scss/functions";
-@import "@/assets/plugins/variables";
+@import "@assets/variables";
 
 // 引用UI套件
 @import "bootstrap/scss/bootstrap";
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+// 頁面
+@import "./common/layout.scss";
