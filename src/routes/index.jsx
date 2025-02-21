@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createHashRouter } from 'react-router-dom';
 import FontLayout from '@/FrontApp';
 import HomePage from '@pages/front/HomePage';
 import ProductsPage from '@pages/front/products/ProductsPage';
@@ -95,6 +95,6 @@ const routers = [
     },
 ];
 
-const router = createBrowserRouter(routers);
+const router = createHashRouter(routers);
 
 export default router;
