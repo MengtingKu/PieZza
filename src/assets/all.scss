@@ -6,4 +6,6 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
 
 // 頁面
-@import "./common/layout.scss";
+@import "@assets/common/layout.scss";
+@import "@assets/front/product-list.scss";
+@import "@assets/front/product-detail.scss";

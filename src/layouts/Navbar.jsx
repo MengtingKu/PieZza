@@ -5,7 +5,7 @@ const Navbar = () => {
     const routes = [
         { path: '/', name: 'Home' },
         { path: '/products', name: 'Menu' },
-        { path: '/carts', name: 'Blog' },
+        { path: '/articles', name: 'Blog' },
         { path: '/about', name: 'About Us' },
     ];
 
@@ -15,7 +15,7 @@ const Navbar = () => {
                 <div className="container-fluid">
                     <Link className="navbar-brand" to="/">
                         <img
-                            src="/pie_zza.png"
+                            src="/pie_zza.webp"
                             alt="logo"
                             className="img-fluid logo"
                         />

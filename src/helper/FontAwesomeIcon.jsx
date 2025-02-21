@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-    faFacebook,
-    faTwitter,
-    faGithub,
+    faFacebookF,
+    faInstagram,
+    faThreads,
+    faLine,
 } from '@fortawesome/free-brands-svg-icons';
 import {
     faHome,
@@ -14,14 +15,23 @@ import {
     faMoneyBills,
     faNewspaper,
     faPercent,
+    faMobileScreenButton,
+    faEnvelopeCircleCheck,
+    faLocationDot,
+    faPowerOff,
+    faRightToBracket,
     faArrowRightFromBracket,
+    faCartArrowDown,
+    faStar,
+    faTags,
 } from '@fortawesome/free-solid-svg-icons';
-import { faUser as faRegularUser } from '@fortawesome/free-regular-svg-icons'; // 引入 Regular 版本的 fa-user
+import { faUser as faRegularUser } from '@fortawesome/free-regular-svg-icons';
 
 const icons = {
-    facebook: faFacebook,
-    twitter: faTwitter,
-    github: faGithub,
+    facebook: faFacebookF,
+    ig: faInstagram,
+    threads: faThreads,
+    line: faLine,
     home: faHome,
     user: faUser,
     settings: faCog,
@@ -30,8 +40,16 @@ const icons = {
     moneyBills: faMoneyBills,
     newspaper: faNewspaper,
     discount: faPercent,
+    phone: faMobileScreenButton,
+    email: faEnvelopeCircleCheck,
+    login: faRightToBracket,
     logout: faArrowRightFromBracket,
-    regularUser: faRegularUser, // 使用 fa-regular fa-user 並命名為 regularUser
+    address: faLocationDot,
+    rest: faPowerOff,
+    cart: faCartArrowDown,
+    star: faStar,
+    tag: faTags,
+    regularUser: faRegularUser,
 };
 
 const Icon = ({ icon, size = 'lg', color = null }) => {
@@ -40,13 +58,7 @@ const Icon = ({ icon, size = 'lg', color = null }) => {
         return null;
     }
 
-    return (
-        <FontAwesomeIcon
-            icon={icons[icon]}
-            size={size}
-            color={color}
-        ></FontAwesomeIcon>
-    );
+    return <FontAwesomeIcon icon={icons[icon]} size={size} color={color} />;
 };
 
 Icon.propTypes = {

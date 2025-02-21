@@ -1,6 +1,5 @@
 const NotFount = () => {
-
-  return (<>404</>);
-}
+    return <>404...</>;
+};
 
 export default NotFount;

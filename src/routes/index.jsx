@@ -1,7 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
 import FontLayout from '@/FrontApp';
 import HomePage from '@pages/front/HomePage';
-import ProductsPage from '@pages/front/ProductsPage';
+import ProductsPage from '@pages/front/products/ProductsPage';
+import ProductCategoryPage from '@pages/front/products/ProductCategoryPage';
+import ProductDetailPage from '@pages/front/products/ProductDetailPage';
 import ArticlesPage from '@pages/front/ArticlesPage';
 import AboutUs from '@pages/front/AboutUs';
 import CartsPage from '@pages/front/CartsPage';
@@ -26,19 +28,33 @@ const routers = [
                 element: <HomePage />,
             },
             {
-                path: '/products',
+                path: 'products',
                 element: <ProductsPage />,
+                children: [
+                    {
+                        index: true,
+                        element: <ProductCategoryPage />,
+                    },
+                    {
+                        path: ':category',
+                        element: <ProductCategoryPage />,
+                    },
+                ],
             },
             {
-                path: '/articles',
+                path: 'product/:id',
+                element: <ProductDetailPage />,
+            },
+            {
+                path: 'articles',
                 element: <ArticlesPage />,
             },
             {
-                path: '/about',
+                path: 'about',
                 element: <AboutUs />,
             },
             {
-                path: '/carts',
+                path: 'carts',
                 element: <CartsPage />,
             },
         ],

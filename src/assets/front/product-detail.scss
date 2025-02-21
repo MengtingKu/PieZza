@@ -1,0 +1,119 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap");
+
+// 產品說明頁的變數表
+$font-primary: "Caveat Brush", serif;
+$font-size-base: 1rem;
+$font-size-lg: $font-size-base * 1.6;
+$font-size-md: $font-size-base * 1.4;
+$font-color: $gray-800;
+$action-color: $orange-500;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.product_detail {
+    font-family: $font-primary;
+    color: $font-color;
+
+    .product_swiper {
+        .swiper {
+            width: 100%;
+            height: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .mySwiper2 {
+            height: 400px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .mySwiper {
+            height: 120px;
+            padding: 10px 0;
+            margin: 5px 0;
+        }
+
+        .mySwiper .swiper-slide {
+            width: 25%;
+            height: 100%;
+            opacity: 0.4;
+        }
+
+        .mySwiper .swiper-slide-thumb-active {
+            opacity: 1;
+        }
+    }
+
+    .detail_content {
+        .select_btn {
+            font-size: $font-size-lg;
+            margin: 0;
+        }
+    }
+
+    .special_list {
+        .special_title {
+            font-size: $font-size-lg;
+            margin: 5px 0 20px 0;
+        }
+
+        .swiper-slide {
+            position: relative;
+        }
+
+        .item_title {
+            color: $action-color;
+            position: absolute;
+            right: 0;
+        }
+
+        .special_img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+            filter: drop-shadow(0px -1px 5px $action-color);
+            margin: 15px 2px;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        .rotate {
+            animation: rotate-keyframe 60s linear infinite;
+        }
+
+        @keyframes rotate-keyframe {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    }
+}
