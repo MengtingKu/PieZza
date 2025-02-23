@@ -1,0 +1,78 @@
+// 响应式设计和断点 https://sass.xiniushu.com/rwd
+$breakpoints: (
+    "xs": (
+        max-width: 576px // 575px 以下
+    ),
+    "sm": (
+        min-width: 576px // 577px 以上
+    ),
+    "md": (
+        min-width: 767px
+    ),
+    "lg": (
+        min-width: 991px
+    ),
+    "xl": (
+        min-width: 1199px
+    ),
+    "xxl": (
+        min-width: 1500px
+    )
+);
+
+@mixin respond_to($breakpoint) {
+    $raw-query: map-get($breakpoints, $breakpoint);
+
+    @if $raw-query {
+        $query: if(type-of($raw-query) == "string", unquote($raw-query), inspect($raw-query));
+
+        @media #{$query} {
+            @content;
+        }
+    } @else {
+        @error 'No value found for `#{$breakpoint}`. '
+           + '沒有斷點，請在 `$breakpoints` map. 新增條件 ლ(╹◡╹ლ)';
+    }
+}
+
+@mixin center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin hover_effect($transform: none, $transition: 500ms, $color: null) {
+    transition: all $transition ease;
+    -o-transition: all $transition ease;
+    -webkit-transition: all $transition ease;
+    -moz-transition: all $transition ease;
+    -ms-transition: all $transition ease;
+    -o-transform: $transform;
+    -webkit-transform: $transform;
+    -moz-transform: $transform;
+    -ms-transform: $transform;
+    transform: $transform;
+    cursor: pointer;
+
+    @if $color != null {
+        &:hover {
+            background-color: $color;
+        }
+    }
+}
+
+@mixin bgi_size($size: cover, $position: center center) {
+    background-size: $size;
+    background-position: $position;
+}
+
+@mixin bgi_color($color: #000, $repeat: no-repeat) {
+    background-color: $color;
+    background-repeat: $repeat;
+}
+
+@mixin img_setup($height: 200px, $width: 100%) {
+    height: $height;
+    width: $width;
+    object-fit: cover;
+}

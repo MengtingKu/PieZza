@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit';
 import frontApi from '@api/frontApi';
 
 const cartSlice = createSlice({
@@ -12,30 +12,62 @@ const cartSlice = createSlice({
     reducers: {},
     extraReducers: builder => {
         builder
-            .addCase(postCart.pending, state => {
-                state.isCartLoading = true;
-                state.message = null;
-            })
             .addCase(getCart.fulfilled, (state, action) => {
                 state.isCartLoading = false;
-                state.product = action.payload;
+                state.carts = action.payload;
             })
-            .addCase(postCart.fulfilled, (state, action) => {
-                state.isCartLoading = false;
-                state.success = action.payload.success;
-                state.message = action.payload.message;
-            })
-            .addCase(postCart.rejected, (state, action) => {
-                state.isCartLoading = false;
-                state.message = action.error.message;
-            });
+            .addMatcher(
+                isAnyOf(
+                    getCart.pending,
+                    postCart.pending,
+                    putCartItem.pending,
+                    deleteCartItem.pending,
+                    deleteCarts.pending
+                ),
+                state => {
+                    state.isCartLoading = true;
+                    state.message = null;
+                }
+            )
+            .addMatcher(
+                isAnyOf(
+                    postCart.fulfilled,
+                    putCartItem.fulfilled,
+                    deleteCartItem.fulfilled,
+                    deleteCarts.pending
+                ),
+                (state, action) => {
+                    state.isCartLoading = false;
+                    state.success = action.payload.success;
+                    state.message = action.payload.message;
+                }
+            )
+            .addMatcher(
+                isAnyOf(
+                    getCart.rejected,
+                    postCart.rejected,
+                    putCartItem.rejected,
+                    deleteCarts.rejected
+                ),
+                (state, action) => {
+                    state.isCartLoading = false;
+                    state.message = action.error.message;
+                }
+            );
     },
 });
 
 export const getCart = createAsyncThunk('cart/getCart', async () => {
     const res = await frontApi.cart.getCart();
+    const CartTableData = res.data.data.carts?.map(item => {
+        const flatItem = { ...item };
+        for (const [key, value] of Object.entries(item.product)) {
+            flatItem[`product_${key}`] = value;
+        }
+        return flatItem;
+    });
 
-    return res.data.data;
+    return { ...res.data.data, carts: CartTableData };
 });
 
 export const postCart = createAsyncThunk(
@@ -78,10 +110,11 @@ export const deleteCartItem = createAsyncThunk(
         };
     }
 );
+
 export const deleteCarts = createAsyncThunk(
     'cart/deleteCarts',
     async (_, { dispatch }) => {
-        const res = await frontApi.cart.deleteCartById();
+        const res = await frontApi.cart.deleteCarts();
         dispatch(getCart());
 
         return {

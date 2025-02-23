@@ -1,30 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap");
-
-// 產品列表的變數表
-$font-primary: "Caveat Brush", serif;
-$font-size-base: 1rem;
-$font-size-lg: $font-size-base * 1.6;
-$font-size-md: $font-size-base * 1.4;
-$action-color: $orange-500;
-$hover-color: $orange-600;
-
-// 跳轉產品說明 hover 集合
-@mixin hover-effect($transform: none, $transition: 400ms) {
-    transition: all $transition ease;
-    transform: $transform;
-    cursor: pointer;
-}
-
-// 產品列表頁面的所有樣式設定
 .product_list {
-    font-family: $font-primary;
+    font-family: "Caveat Brush", serif;
 
     .filter_item {
         margin: 0 10px;
         font-size: $font-size-md;
 
         a {
-            color: $gray-900;
+            color: $font;
             text-decoration: none;
             padding: 8px 22px;
 
@@ -34,7 +16,7 @@ $hover-color: $orange-600;
         }
 
         .active {
-            background: $action-color;
+            background: $remind;
             border-radius: 50px;
             color: $white;
         }
@@ -42,42 +24,104 @@ $hover-color: $orange-600;
 
     .product_card {
         img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
+            @include img_setup(250px);
+
+            @include respond_to("xl") {
+                @include img_setup(300px);
+            }
 
             &:hover {
-                @include hover-effect(translate(0%, -5%));
+                @include hover_effect(translate(0%, -5%));
             }
         }
 
         .card-title {
-            font-size: $font-size-lg;
+            color: $font;
+            font-size: $font-size-md;
             font-weight: bolder;
+            letter-spacing: 1px;
 
             &:hover {
-                @include hover-effect();
-                color: $action-color;
+                @include hover_effect();
+                color: $remind;
             }
         }
 
-        .add_toCart {
-            padding: 10px 20px 10px 0;
-            color: $action-color;
-            text-decoration: underline;
-            font-size: $font-size-base;
+        .card-subtitle {
+            font-size: $font-size-md;
+        }
 
-            &:hover {
-                @include hover-effect();
-                font-size: $font-size-md;
-                color: $hover-color;
+        .unit_price {
+            font-size: $font-size-md;
+            color: rgba($shadow, 0.8);
+            letter-spacing: 1px;
+        }
+    }
+
+    .add_toCartBtn {
+        padding: 8px 16px;
+        color: $remind;
+        font-size: $font-size-base;
+        -o-transition: 0.5s;
+        -webkit-transition: 0.5s;
+        -moz-transition: 0.5s;
+        -ms-transition: 0.5s;
+        transition: 0.5s;
+
+        &:hover {
+            border: 1px solid rgba($link, 0.5);
+            border-radius: 0;
+            color: $link;
+
+            @include respond_to("md") {
+                &::before {
+                    @include hover_effect(skewY(8deg), 500ms);
+                    inset: -2px -6px -2px 15px;
+                    border-left: 2px solid $link;
+                    border-right: 2px solid $link;
+                }
+                &::after {
+                    @include hover_effect(skewX(8deg), 500ms);
+                    inset: -8px -8px -8px -8px;
+                    border-top: 2px solid $link;
+                    border-bottom: 2px solid $link;
+                }
+            }
+        }
+
+        @include respond_to("md") {
+            &::before {
+                content: "";
+                position: absolute;
+                inset: -5px 5px;
+                -o-transition: 1s;
+                -webkit-transition: 1s;
+                -moz-transition: 1s;
+                -ms-transition: 1s;
+                transition: 1s;
+                border-left: 2px solid $link;
+                border-right: 2px solid $link;
             }
 
-            &:disabled {
-                color: $gray-600;
-                border: 0;
-                cursor: not-allowed;
+            &::after {
+                content: "";
+                position: absolute;
+                inset: -5px 0px;
+                -o-transition: 1s;
+                -webkit-transition: 1s;
+                -moz-transition: 1s;
+                -ms-transition: 1s;
+                transition: 1s;
+                border-top: 2px solid $link;
+                border-bottom: 2px solid $link;
             }
         }
     }
+}
+
+button:disabled,
+[type="button"]:disabled,
+[type="reset"]:disabled,
+[type="submit"]:disabled {
+    color: $disabled;
 }

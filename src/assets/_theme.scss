@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap");
+
+$font: #343a40; // 全局字體顏色
+$reverse-font: $white;
+$reverse-theme: #ffc107; // 取代 $orange-500
+$reverse-sub-theme: #fff3cd; // 在黑色底需要強烈對比可以用
+$link: #feb446; // 連結使用
+$remind: #ff8c00; // active 和 hover
+$backup: #ffd700;
+$shadow: #2c170b;
+$bg-theme: #1a0b03;
+$reverse-bg-theme: $white; // 黑色底的對比白色
+$disabled: $gray-600;
+$money: #279b37;
+
+$social-colors: (
+    facebook: #3b5998,
+    line: #00c300,
+    threads: $black
+);
+
+$font-size-base: 1rem;
+$font-size-lg: $font-size-base * 1.6;
+$font-size-md: $font-size-base * 1.2;
+$font-size-sm: $font-size-base * 0.8;
+
+*,
+*::after,
+*::before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    line-height: 1.5;
+}
+
+.dynamic_table .table {
+    --bs-table-hover-bg: rgba(255, 243, 204, 0.305);
+}
+
+.wish_mark {
+    color: $reverse-theme;
+}

@@ -24,8 +24,16 @@ import {
     faCartArrowDown,
     faStar,
     faTags,
+    faPlus,
+    faMinus,
+    faTrashCan,
+    faFireFlameCurved,
+    faBasketShopping,
 } from '@fortawesome/free-solid-svg-icons';
-import { faUser as faRegularUser } from '@fortawesome/free-regular-svg-icons';
+import {
+    faUser as faRegularUser,
+    faStar as faRegularStar,
+} from '@fortawesome/free-regular-svg-icons';
 
 const icons = {
     facebook: faFacebookF,
@@ -47,8 +55,14 @@ const icons = {
     address: faLocationDot,
     rest: faPowerOff,
     cart: faCartArrowDown,
-    star: faStar,
+    basket: faBasketShopping,
+    fillStar: faStar,
+    star: faRegularStar,
     tag: faTags,
+    plus: faPlus,
+    minus: faMinus,
+    remove: faTrashCan,
+    fire: faFireFlameCurved,
     regularUser: faRegularUser,
 };
 

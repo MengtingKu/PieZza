@@ -1,22 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap");
-
-// 產品說明頁的變數表
-$font-primary: "Caveat Brush", serif;
-$font-size-base: 1rem;
-$font-size-lg: $font-size-base * 1.6;
-$font-size-md: $font-size-base * 1.4;
-$font-color: $gray-800;
-$action-color: $orange-500;
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 .product_detail {
-    font-family: $font-primary;
-    color: $font-color;
+    font-family: "Caveat Brush", serif;
+    color: $font;
+    letter-spacing: 1px;
 
     .product_swiper {
         .swiper {
@@ -29,7 +14,7 @@ $action-color: $orange-500;
         .swiper-slide {
             text-align: center;
             font-size: 18px;
-            background: #fff;
+            background: $reverse-bg-theme;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -68,9 +53,61 @@ $action-color: $orange-500;
     }
 
     .detail_content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .category_tag {
+            background: $shadow;
+            color: $reverse-sub-theme;
+        }
+
+        .product_title {
+            margin: 0;
+            color: $font;
+            font-size: $font-size-lg;
+            font-weight: bolder;
+        }
+
+        .product_subtitle,
+        .unit_price {
+            font-size: $font-size-md;
+        }
+
         .select_btn {
             font-size: $font-size-lg;
             margin: 0;
+        }
+
+        .add_toCartBtn {
+            &:hover {
+                color: $link;
+                border: 1px solid transparent;
+
+                &::before {
+                    @include hover_effect(skewY(2deg), 500ms);
+                    inset: -15px -5px;
+                    border-left: 2px solid $link;
+                    border-right: 2px solid $link;
+                }
+
+                &::after {
+                    inset: -10px -5px;
+                    border-top: 2px solid $link;
+                    border-bottom: 2px solid $link;
+                }
+            }
+
+            &::before {
+                inset: -10px 2px -12px 4px;
+                border-left: 2px solid $link;
+                border-right: 2px solid $link;
+            }
+            &::after {
+                inset: -5px -3px -5px 0px;
+                border-top: 2px solid $link;
+                border-bottom: 2px solid $link;
+            }
         }
     }
 
@@ -85,7 +122,7 @@ $action-color: $orange-500;
         }
 
         .item_title {
-            color: $action-color;
+            color: $remind;
             position: absolute;
             right: 0;
         }
@@ -95,7 +132,7 @@ $action-color: $orange-500;
             height: 200px;
             object-fit: cover;
             border-radius: 50%;
-            filter: drop-shadow(0px -1px 5px $action-color);
+            filter: drop-shadow(0px -1px 5px $remind);
             margin: 15px 2px;
 
             &:hover {
@@ -116,4 +153,11 @@ $action-color: $orange-500;
             }
         }
     }
+}
+
+button:disabled,
+[type="button"]:disabled,
+[type="reset"]:disabled,
+[type="submit"]:disabled {
+    color: $disabled;
 }

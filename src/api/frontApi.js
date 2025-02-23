@@ -9,7 +9,8 @@ const frontApi = {
     cart: {
         getCart: () => request('get', `/cart`),
         postCart: params => request('post', `/cart`, { data: params }),
-        putCartById: (id, params) => request('put', `/cart/${id}`, params),
+        putCartById: (id, params) =>
+            request('put', `/cart/${id}`, { data: params }),
         deleteCartById: id => request('delete', `/cart/${id}`),
         deleteCarts: () => request('delete', `/carts`),
     },

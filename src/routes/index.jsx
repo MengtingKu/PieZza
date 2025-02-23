@@ -6,7 +6,8 @@ import ProductCategoryPage from '@pages/front/products/ProductCategoryPage';
 import ProductDetailPage from '@pages/front/products/ProductDetailPage';
 import ArticlesPage from '@pages/front/ArticlesPage';
 import AboutUs from '@pages/front/AboutUs';
-import CartsPage from '@pages/front/CartsPage';
+import WishList from '@pages/front/wish/WishList';
+import CartsPage from '@pages/front/carts/CartsPage';
 
 import NotFount from '@pages/NotFount';
 import Login from '@pages/LoginForm';
@@ -52,6 +53,10 @@ const routers = [
             {
                 path: 'about',
                 element: <AboutUs />,
+            },
+            {
+                path: 'wish',
+                element: <WishList />,
             },
             {
                 path: 'carts',
