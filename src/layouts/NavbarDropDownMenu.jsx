@@ -9,11 +9,11 @@ import { getCart, deleteCartItem } from '@slices/cartSlice';
 import { splitText } from '@helper/splitText';
 
 const NavbarDropDownMenu = () => {
-    const dropdownRef = useRef(null);
-    const dropdownInstance = useRef(null);
     const dispatch = useDispatch();
     const { carts } = useSelector(state => state.cart);
     const navigate = useNavigate();
+    const dropdownRef = useRef(null);
+    const dropdownInstance = useRef(null);
     const [isOpenDropdown, setIsOpenDropdown] = useState(false);
     const [isToggle, setIsToggle] = useState(false);
     useClickAway(dropdownRef, () => setIsOpenDropdown(false));
@@ -96,6 +96,7 @@ const NavbarDropDownMenu = () => {
         dropdownInstance.current = new Dropdown(dropdownRef.current, {
             backdrop: false,
         });
+        console.log('test=>', isOpenDropdown);
 
         if (isOpenDropdown) {
             dropdownInstance.current.show();

@@ -1,9 +1,10 @@
+import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Icon from '@helper/FontAwesomeIcon';
-import PropTypes from 'prop-types';
 import { postCart } from '@slices/cartSlice';
 import { splitText } from '@helper/splitText';
+import Icon from '@helper/FontAwesomeIcon';
+import WishMark from '@pages/front/wish/WishMark';
 
 const ProductCard = ({ product }) => {
     const navigate = useNavigate();
@@ -31,9 +32,8 @@ const ProductCard = ({ product }) => {
                                 {splitText(product?.title).engText}
                             </span>
                         </div>
-                        <span className="position-absolute top-0 end-0 wish_mark">
-                            <Icon icon="star" />
-                        </span>
+
+                        <WishMark productId={product?.id} />
                     </h5>
                     <span className="mb-2 text-body-secondary">
                         {product.content}

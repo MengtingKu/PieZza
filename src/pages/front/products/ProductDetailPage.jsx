@@ -10,8 +10,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { getProducts, getProductById } from '@slices/productSlice';
 import { postCart } from '@slices/cartSlice';
-import Icon from '@helper/FontAwesomeIcon';
 import { splitText } from '@helper/splitText';
+import Icon from '@helper/FontAwesomeIcon';
+import WishMark from '@pages/front/wish/WishMark';
 
 const ProductDetailPage = () => {
     const { id } = useParams();
@@ -163,10 +164,7 @@ const ProductDetailPage = () => {
                                 加入購物車 <Icon icon="cart" />
                             </button>
                         </div>
-
-                        <span className="position-absolute top-0 end-0 wish_mark">
-                            <Icon icon="star" />
-                        </span>
+                        <WishMark productId={product?.id} />
                     </div>
                 </div>
             </div>
