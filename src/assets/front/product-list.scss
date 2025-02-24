@@ -1,3 +1,30 @@
+.card_img {
+    img {
+        @include img_setup(250px);
+
+        @include respond_to("xl") {
+            @include img_setup(300px);
+        }
+
+        &:hover {
+            @include hover_effect(translate(0%, -5%));
+        }
+    }
+    .special_offer {
+        top: 5%;
+        left: -3%;
+        width: 60px;
+        height: 30px;
+        text-align: center;
+        text-transform: uppercase;
+        border-radius: 300px 0 0 300px;
+        border-radius: 0 300px 300px 0;
+        background: linear-gradient(to bottom right, $red, 50%, $backup);
+        box-shadow: 5px 5px 5px $reverse-sub-theme;
+        color: $reverse-sub-theme;
+    }
+}
+
 .product_list {
     font-family: "Caveat Brush", serif;
 

@@ -28,7 +28,7 @@ const ProductsPage = () => {
     }, [dispatch, products.length]);
 
     return (
-        <section className="container product_list">
+        <div className="container product_list">
             {isLoading ? (
                 <p>Loading...</p>
             ) : (
@@ -62,7 +62,7 @@ const ProductsPage = () => {
                     <Outlet />
                 </>
             )}
-        </section>
+        </div>
     );
 };
 

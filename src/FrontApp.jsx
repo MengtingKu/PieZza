@@ -3,14 +3,15 @@ import Navbar from '@layouts/Navbar';
 import Footer from '@layouts/Footer';
 import NavbarDropDownMenu from '@layouts/NavbarDropDownMenu';
 
-
 const FrontApp = () => {
     return (
         <>
-            <Navbar >
+            <Navbar>
                 <NavbarDropDownMenu />
             </Navbar>
-            <Outlet />
+            <main>
+                <Outlet />
+            </main>
             <Footer />
         </>
     );

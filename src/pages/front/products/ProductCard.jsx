@@ -14,12 +14,21 @@ const ProductCard = ({ product }) => {
     return (
         <>
             <div className="card h-100 border-0">
-                <img
-                    src={product.imageUrl}
-                    className="shadow rounded"
-                    alt={product.title}
-                    onClick={() => navigate(`/product/${product.id}`)}
-                />
+                <div className="position-relative card_img">
+                    <img
+                        src={product.imageUrl}
+                        className="shadow rounded"
+                        alt={product.title}
+                        onClick={() => navigate(`/product/${product.id}`)}
+                    />
+
+                    {product.origin_price > product.price && (
+                        <span className="position-absolute special_offer">
+                            sale
+                        </span>
+                    )}
+                </div>
+
                 <div className="card-body d-flex flex-column justify-content-between z-1 px-0">
                     <h5 className="position-relative">
                         <div

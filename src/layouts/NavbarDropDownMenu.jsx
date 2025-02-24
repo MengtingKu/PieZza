@@ -136,6 +136,7 @@ const NavbarDropDownMenu = () => {
             <div
                 ref={dropdownRef}
                 className="dropdown-menu dropdown-menu-end p-2"
+                style={{ height: '500px', overflow: 'scroll' }}
             >
                 <DynamicTable
                     data={carts.carts || []}
