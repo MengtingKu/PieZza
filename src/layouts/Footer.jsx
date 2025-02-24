@@ -5,7 +5,7 @@ const Footer = () => {
     return (
         <footer className="footer">
             <div className="footer_top_bg">
-                <img src="/customer-top-bg.png" alt="footer-top-bg" />
+                <img src="./customer-top-bg.png" alt="footer-top-bg" />
             </div>
             <div className="container mt-5 mb-3">
                 <div className="row gx-5">

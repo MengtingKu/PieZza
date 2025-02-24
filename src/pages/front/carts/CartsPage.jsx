@@ -211,7 +211,7 @@ const CartsPage = () => {
             {carts.total === 0 ? (
                 <div className="text-center my-3 lh-lg">
                     <img
-                        src="/emptyCart.webp"
+                        src="./emptyCart.webp"
                         alt="空購物車"
                         className="img-fluid"
                     />

@@ -31,7 +31,7 @@ const Navbar = ({ children }) => {
                 <div className="container-fluid">
                     <Link className="navbar-brand" to="/">
                         <img
-                            src="/pie_zza.webp"
+                            src="./pie_zza.webp"
                             alt="logo"
                             className="img-fluid logo"
                         />
