@@ -76,3 +76,19 @@ $breakpoints: (
     width: $width;
     object-fit: cover;
 }
+
+@mixin rotateShake($duration: 2s) {
+    animation: rotate-shake $duration ease-in-out infinite;
+
+    @keyframes rotate-shake {
+        0% {
+            transform: rotate(135deg);
+        }
+        50% {
+            transform: rotate(230deg);
+        }
+        100% {
+            transform: rotate(135deg);
+        }
+    }
+}

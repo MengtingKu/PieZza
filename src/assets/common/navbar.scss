@@ -1,5 +1,20 @@
 @import "@assets/common/logo.scss";
 
+.shopping_qty {
+    @include center();
+    font-size: 0.6rem;
+    background: linear-gradient(to bottom right, $red, 66%, $backup);
+    border: 1px solid rgba($reverse-sub-theme, 0.3);
+    box-sizing: border-box;
+    box-shadow:
+        rgba($reverse-sub-theme, 0.63) 2px 1.2px 7.2px,
+        rgba($reverse-sub-theme, 0.31) 0px 0.8px 1.8px;
+    border-radius: 16px;
+    width: 16px;
+    height: 16px;
+    color: $reverse-font;
+}
+
 .header {
     background-color: $bg-theme;
 
@@ -70,20 +85,5 @@
                 border-bottom: 1px solid $money;
             }
         }
-    }
-
-    .shopping_qty {
-        @include center();
-        font-size: 9px;
-        background: $remind;
-        border: 1px solid rgba($reverse-sub-theme, 0.3);
-        box-sizing: border-box;
-        box-shadow:
-            rgba($reverse-sub-theme, 0.63) 2px 1.2px 7.2px,
-            rgba($reverse-sub-theme, 0.31) 0px 0.8px 1.8px;
-        border-radius: 16px;
-        width: 16px;
-        height: 16px;
-        color: $reverse-font;
     }
 }

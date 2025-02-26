@@ -6,7 +6,7 @@ import { useClickAway } from 'react-use';
 import DynamicTable from '@components/common/DynamicTable';
 import Icon from '@helper/FontAwesomeIcon';
 import { getCart, deleteCartItem } from '@slices/cartSlice';
-import { splitText } from '@helper/splitText';
+import { splitText } from '@helper/stringAndDataHelpers';
 
 const NavbarDropDownMenu = () => {
     const dispatch = useDispatch();
@@ -138,34 +138,41 @@ const NavbarDropDownMenu = () => {
                 className="dropdown-menu dropdown-menu-end p-2"
                 style={{ height: '500px', overflow: 'scroll' }}
             >
-                <DynamicTable
-                    data={carts.carts || []}
-                    fields={dropdownCartFields}
-                    endActions={dropdownCartActions}
-                    tFooter={dropdownCartFooter()}
-                />
-                <div className="d-flex">
-                    <button
-                        type="button"
-                        className="btn w-75 text-center btn-sm me-2 to_cartBtn"
-                        onClick={() => {
-                            closeDropdown();
-                            navigate('/carts');
-                        }}
-                    >
-                        購物車 <Icon icon="cart" />
-                    </button>
-                    <button
-                        type="button"
-                        className="btn w-75 text-center btn-sm ms-2 to_payBtn"
-                        onClick={() => {
-                            closeDropdown();
-                            navigate('/');
-                        }}
-                    >
-                        結帳去 <Icon icon="moneyBills" />
-                    </button>
-                </div>
+                {' '}
+                {carts.carts.length ? (
+                    <>
+                        <DynamicTable
+                            data={carts.carts || []}
+                            fields={dropdownCartFields}
+                            endActions={dropdownCartActions}
+                            tFooter={dropdownCartFooter()}
+                        />
+                        <div className="d-flex">
+                            <button
+                                type="button"
+                                className="btn w-75 text-center btn-sm me-2 to_cartBtn"
+                                onClick={() => {
+                                    closeDropdown();
+                                    navigate('/carts');
+                                }}
+                            >
+                                購物車 <Icon icon="cart" />
+                            </button>
+                            <button
+                                type="button"
+                                className="btn w-75 text-center btn-sm ms-2 to_payBtn"
+                                onClick={() => {
+                                    closeDropdown();
+                                    navigate('/checkout');
+                                }}
+                            >
+                                結帳去 <Icon icon="moneyBills" />
+                            </button>
+                        </div>
+                    </>
+                ) : (
+                    <>還沒有商品</>
+                )}
             </div>
         </>
     );

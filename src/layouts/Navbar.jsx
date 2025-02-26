@@ -3,8 +3,12 @@ import { Link, NavLink } from 'react-router-dom';
 import { useClickAway } from 'react-use';
 import Icon from '@helper/FontAwesomeIcon';
 import { useState, useRef, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getOrder } from '@slices/orderSlice';
 
 const Navbar = ({ children }) => {
+    const { orders } = useSelector(state => state.order);
+    const dispatch = useDispatch();
     const [isOpen, setIsOpen] = useState(false);
     const navbarCollapse = useRef(null);
     const navbarRef = useRef(null);
@@ -25,13 +29,17 @@ const Navbar = ({ children }) => {
         }
     }, [isOpen]);
 
+    useEffect(() => {
+        dispatch(getOrder());
+    }, [dispatch]);
+
     return (
         <header className="header">
             <nav ref={navbarRef} className="navbar navbar-expand-lg">
                 <div className="container-fluid">
                     <Link className="navbar-brand" to="/">
                         <img
-                            src="./pie_zza.webp"
+                            src="./pie-zza.webp"
                             alt="logo"
                             className="img-fluid logo"
                         />
@@ -73,6 +81,18 @@ const Navbar = ({ children }) => {
                                     </li>
                                 );
                             })}
+                            {orders.length && (
+                                <li className="nav-item me-1">
+                                    <NavLink
+                                        className="nav-link"
+                                        aria-current="page"
+                                        to="orders"
+                                        onClick={() => setIsOpen(false)}
+                                    >
+                                        我的訂單
+                                    </NavLink>
+                                </li>
+                            )}
                             <li className="nav-item">{children}</li>
                         </ul>
                     </div>

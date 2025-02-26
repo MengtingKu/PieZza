@@ -22,8 +22,10 @@ const WishList = () => {
 
     return (
         <div className="container my-4 product_list product_detail">
-            <h3>私藏美味</h3>
-            <h6>A Taste That Belongs to Me</h6>
+            <div className="page_title">
+                <h3>私藏美味</h3>
+                <h6>A Taste That Belongs to Me</h6>
+            </div>
             <nav className="my-3" aria-label="breadcrumb">
                 <ol className="breadcrumb">
                     <li className="breadcrumb-item">

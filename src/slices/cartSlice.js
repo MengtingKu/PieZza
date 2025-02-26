@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit';
 import frontApi from '@api/frontApi';
+import { transformTableData } from '@helper/stringAndDataHelpers';
 
 const cartSlice = createSlice({
     name: 'cart',
@@ -59,15 +60,9 @@ const cartSlice = createSlice({
 
 export const getCart = createAsyncThunk('cart/getCart', async () => {
     const res = await frontApi.cart.getCart();
-    const CartTableData = res.data.data.carts?.map(item => {
-        const flatItem = { ...item };
-        for (const [key, value] of Object.entries(item.product)) {
-            flatItem[`product_${key}`] = value;
-        }
-        return flatItem;
-    });
+    const transformCartTableData = transformTableData(res.data.data.carts);
 
-    return { ...res.data.data, carts: CartTableData };
+    return { ...res.data.data, carts: transformCartTableData };
 });
 
 export const postCart = createAsyncThunk(

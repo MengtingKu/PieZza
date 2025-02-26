@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import Icon from '@helper/FontAwesomeIcon';
 import DynamicTable from '@components/common/DynamicTable';
-import { useDispatch, useSelector } from 'react-redux';
 import {
     getCart,
     putCartItem,
     deleteCartItem,
     deleteCarts,
 } from '@slices/cartSlice';
-import { splitText } from '@helper/splitText';
-import { useNavigate } from 'react-router-dom';
+import { splitText } from '@helper/stringAndDataHelpers';
 
 const CartsPage = () => {
     const navigate = useNavigate();
@@ -211,7 +211,7 @@ const CartsPage = () => {
             {carts.total === 0 ? (
                 <div className="text-center my-3 lh-lg">
                     <img
-                        src="./emptyCart.webp"
+                        src="./empty-cart.webp"
                         alt="空購物車"
                         className="img-fluid"
                     />
@@ -232,19 +232,12 @@ const CartsPage = () => {
             ) : (
                 <>
                     <div className="d-flex justify-content-between align-items-center my-3">
+                        <div className="page_title">
+                            <h3>購物車清單</h3>
+                            <h6>pizza cart</h6>
+                        </div>
                         <button
-                            type="button"
-                            className="btn go_shoppingBtn"
-                            onClick={() => navigate('/products')}
-                        >
-                            <Icon icon="angleLeft" />
-                            <span className="ms-2">
-                                {' '}
-                                <Icon icon="pizzaSlice" /> 購物去
-                            </span>
-                        </button>
-                        <button
-                            className="btn btn-outline-danger"
+                            className="btn btn-outline-danger border-0"
                             type="button"
                             onClick={() => {
                                 dispatch(deleteCarts());
@@ -261,6 +254,31 @@ const CartsPage = () => {
                         endActions={cartActions}
                         tFooter={cartTableFooter()}
                     />
+                    <div className="d-flex justify-content-end align-items-center mb-2">
+                        <button
+                            type="button"
+                            className="btn go_shoppingBtn"
+                            onClick={() => navigate('/products')}
+                        >
+                            <Icon icon="angleLeft" />
+                            <span className="mx-2"> 購物去 go shopping</span>
+                            <Icon icon="pizzaSlice" />
+                        </button>
+                        <span className="mx-3 text-warning">|</span>
+                        <button
+                            className="btn go_shoppingBtn go_checkoutBtn"
+                            type="button"
+                            onClick={() => {
+                                navigate('/checkout');
+                            }}
+                            disabled={isCartLoading}
+                        >
+                            <span className="me-2">
+                                結帳去 proceed to checkout
+                            </span>
+                            <Icon icon="angleRight" />
+                        </button>
+                    </div>
                 </>
             )}
         </div>

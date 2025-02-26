@@ -42,13 +42,13 @@ const productSlice = createSlice({
 
 export const getProducts = createAsyncThunk('product/getProducts', async () => {
     const res = await frontApi.products.getProductsAll();
-    const grouped = Map.groupBy(res.data.products, product =>
+    const grouped = Object.groupBy(res.data.products, product =>
         product.origin_price > product.price ? 'sale' : 'normal'
     );
-    const [[, sale], [, normal]] = grouped;
+    const { sale, normal } = grouped;
 
     return {
-        products: [...normal, ...sale],
+        products: [...sale, ...normal],
         message: res.data.message,
         success: res.data.success,
     };

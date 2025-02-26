@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { getProducts, getProductById } from '@slices/productSlice';
 import { postCart } from '@slices/cartSlice';
-import { splitText } from '@helper/splitText';
+import { splitText } from '@helper/stringAndDataHelpers';
 import Icon from '@helper/FontAwesomeIcon';
 import WishMark from '@pages/front/wish/WishMark';
 

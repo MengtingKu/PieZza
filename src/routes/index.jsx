@@ -8,6 +8,10 @@ import ArticlesPage from '@pages/front/ArticlesPage';
 import AboutUs from '@pages/front/AboutUs';
 import WishList from '@pages/front/wish/WishList';
 import CartsPage from '@pages/front/carts/CartsPage';
+import OrderPage from '@pages/front/checkout/OrderPage';
+import OrderPayment from '@pages/front/checkout/OrderPayment';
+import OrderSuccess from '@pages/front/checkout/OrderSuccess';
+import OrderListPage from '@pages/front/order/OrderListPage';
 
 import NotFount from '@pages/NotFount';
 import Login from '@pages/LoginForm';
@@ -61,6 +65,22 @@ const routers = [
             {
                 path: 'carts',
                 element: <CartsPage />,
+            },
+            {
+                path: 'checkout',
+                element: <OrderPage />,
+            },
+            {
+                path: 'payment/:orderId',
+                element: <OrderPayment />,
+            },
+            {
+                path: 'finish/:orderId',
+                element: <OrderSuccess />,
+            },
+            {
+                path: 'orders',
+                element: <OrderListPage />,
             },
         ],
     },

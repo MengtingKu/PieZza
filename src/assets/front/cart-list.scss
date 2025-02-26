@@ -1,4 +1,5 @@
 .cart_list {
+    color: $font;
     font-family: "Caveat Brush", serif;
     letter-spacing: 1px;
 
@@ -33,5 +34,13 @@
         @include img_setup(100px, 100px);
         border-radius: 50%;
         filter: drop-shadow(5px 5px 8px rgba($shadow, 0.5));
+    }
+
+    .go_checkoutBtn {
+        &:hover {
+            cursor:
+                url("https://i.imgur.com/MGctvOR.png") 0 50,
+                auto;
+        }
     }
 }

@@ -20,7 +20,7 @@ const frontApi = {
     order: {
         getOrder: () => request('get', `/orders`),
         getOrderById: order_id => request('get', `/order/${order_id}`),
-        postOrderById: params => request('post', `/order`, params),
+        postOrder: params => request('post', `/order`, { data: params }),
     },
     pay: {
         postPayById: order_id => request('post', `/pay/${order_id}`),

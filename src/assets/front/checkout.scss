@@ -1,0 +1,94 @@
+.checkout {
+    color: $font;
+
+    .form-control {
+        border-radius: 0;
+        padding-top: 10px;
+        padding-bottom: 10px;
+
+        &::placeholder {
+            font-family: "Montserrat", serif;
+            color: rgba($font, 0.3);
+        }
+    }
+
+    img {
+        @include img_setup(60px, 60px);
+        margin: 10px 0;
+    }
+
+    tr {
+        border: transparent;
+    }
+
+    tfoot {
+        border-top: 2px solid rgba($shadow, 0.1);
+    }
+
+    .shopping_qty {
+        background: rgba($remind, 0.6);
+        font-size: 0.8rem;
+        right: 10px;
+
+        @include respond_to("md") {
+            right: -10px;
+        }
+
+        @include respond_to("xl") {
+            right: 0;
+        }
+    }
+
+    .payment_notice {
+        line-height: 1.7;
+
+        li {
+            list-style-type: circle;
+        }
+    }
+
+    .order_info {
+        font-family: "Montserrat", serif;
+        letter-spacing: initial;
+
+        .order_state {
+            font-weight: 800;
+            font-size: $font-size-md;
+        }
+    }
+
+    .connect_lines {
+        @include center;
+        flex-direction: column;
+        padding-top: 35px;
+    }
+
+    .baked_pizza {
+        position: absolute;
+        top: -20px;
+        left: 40%;
+        @include img_setup(45px, 45px);
+        @include rotateShake(3s);
+    }
+
+    .stage_bar {
+        display: block;
+        width: 100px;
+        height: 5px;
+        border-radius: 30px;
+        background-color: rgba($shadow, 0.6);
+    }
+
+    .user_avatar {
+        @include center;
+        @include img_setup(50px, 50px);
+        border-radius: 50%;
+        border: 1px solid black;
+    }
+
+    .success_stamp {
+        bottom: 0;
+        right: 0;
+        filter: initial;
+    }
+}

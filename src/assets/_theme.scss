@@ -40,6 +40,10 @@ body {
     line-height: 1.5;
 }
 
+a {
+    text-decoration: none;
+}
+
 .dynamic_table .table {
     --bs-table-hover-bg: rgba(255, 243, 204, 0.305);
 }

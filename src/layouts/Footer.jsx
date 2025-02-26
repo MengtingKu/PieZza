@@ -12,7 +12,7 @@ const Footer = () => {
                     <div className="col-md-4">
                         <div className="brand_block">
                             <img
-                                src="/pie_zza.webp"
+                                src="./pie-zza.webp"
                                 alt="logo"
                                 className="logo"
                             />
