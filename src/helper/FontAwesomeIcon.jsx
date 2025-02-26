@@ -36,6 +36,7 @@ import {
     faFireFlameCurved,
     faBasketShopping,
     faCircleInfo,
+    faFileInvoice,
 } from '@fortawesome/free-solid-svg-icons';
 import {
     faUser as faRegularUser,
@@ -77,6 +78,7 @@ const icons = {
     check: faCheck,
     fire: faFireFlameCurved,
     info: faCircleInfo,
+    order: faFileInvoice,
     regularUser: faRegularUser,
 };
 

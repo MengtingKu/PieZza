@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 /**
  * 中英文本分割
  * @param {String} text - API 回傳的產品名稱
@@ -29,3 +31,12 @@ export const transformTableData = arrayData => {
         return flatItem;
     });
 };
+
+/**
+ * 把時間戳轉換城需要的格式
+ * @param {Number} timestamp
+ * @param {String} type
+ * @returns {String} - 時間依照需求轉換的樣式
+ */
+export const formatTimestamp = (timestamp, type = 'YYYY-MM-DD HH:mm:ss') =>
+    dayjs.unix(timestamp).format(type);

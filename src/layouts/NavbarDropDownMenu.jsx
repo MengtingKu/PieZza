@@ -94,7 +94,7 @@ const NavbarDropDownMenu = () => {
 
     useEffect(() => {
         dropdownInstance.current = new Dropdown(dropdownRef.current, {
-            backdrop: false,
+            backdrop: true,
         });
         console.log('test=>', isOpenDropdown);
 

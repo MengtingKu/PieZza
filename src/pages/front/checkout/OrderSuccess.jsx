@@ -116,8 +116,9 @@ const OrderSuccess = () => {
                         navigate('/orders');
                     }}
                 >
-                    <span className="me-2">查看訂單 view orders</span>
-                    <Icon icon="angleRight" />
+                    <Icon icon="angleLeft" />
+                    <span className="mx-2">查看訂單 view orders</span>
+                    <Icon icon="order" />
                 </button>
                 <span className="mx-3 text-warning">|</span>
                 <button
@@ -125,9 +126,9 @@ const OrderSuccess = () => {
                     className="btn go_shoppingBtn"
                     onClick={() => navigate('/products')}
                 >
-                    <Icon icon="angleLeft" />
-                    <span className="mx-2">逛逛 go around</span>
                     <Icon icon="basket" />
+                    <span className="mx-2">逛逛 go around</span>
+                    <Icon icon="angleRight" />
                 </button>
             </div>
         </div>

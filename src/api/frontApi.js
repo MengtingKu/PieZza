@@ -18,7 +18,7 @@ const frontApi = {
         postCoupon: params => request('post', `/coupon`, params),
     },
     order: {
-        getOrder: () => request('get', `/orders`),
+        getOrder: page => request('get', `/orders?page=${page}`),
         getOrderById: order_id => request('get', `/order/${order_id}`),
         postOrder: params => request('post', `/order`, { data: params }),
     },

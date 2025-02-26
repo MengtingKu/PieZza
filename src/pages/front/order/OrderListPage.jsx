@@ -1,11 +1,24 @@
 import { useSelector } from 'react-redux';
+import { getOrder } from '@slices/orderSlice';
+import OrderCollapse from '@components/front/OrderCollapse';
+import Pagination from '@components/common/Pagination';
 
 const OrderListPage = () => {
-    const { isOrderLoading } = useSelector(state => state.order);
+    const { isOrderLoading, orders, pagination } = useSelector(
+        state => state.order
+    );
+
+    const fetchGetOrder = page => {
+        return async dispatch => {
+            const response = await dispatch(getOrder(page));
+
+            return response.payload;
+        };
+    };
 
     return (
         <div
-            className="container my-4 cart_list checkout"
+            className="container my-5 cart_list order_list"
             style={
                 isOrderLoading
                     ? {
@@ -37,6 +50,8 @@ const OrderListPage = () => {
                 <h3>我的訂單</h3>
                 <h6>My orders</h6>
             </div>
+            <OrderCollapse orders={orders} />
+            <Pagination pagination={pagination} fetchData={fetchGetOrder} />
         </div>
     );
 };

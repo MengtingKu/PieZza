@@ -1,10 +1,12 @@
 import { createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit';
-import dayjs from 'dayjs';
 import frontApi from '@api/frontApi';
-import { transformTableData } from '@helper/stringAndDataHelpers';
+import {
+    transformTableData,
+    formatTimestamp,
+} from '@helper/stringAndDataHelpers';
 
 const orderTitle = {
-    email: '郵件地址',
+    email: '郵件信箱',
     name: '姓名',
     tel: '連絡電話',
     address: '地址',
@@ -71,8 +73,8 @@ const orderSlice = createSlice({
     },
 });
 
-export const getOrder = createAsyncThunk('order/getOrder', async () => {
-    const res = await frontApi.order.getOrder();
+export const getOrder = createAsyncThunk('order/getOrder', async (page = 1) => {
+    const res = await frontApi.order.getOrder(page);
 
     return {
         orders: res.data.orders,
@@ -96,9 +98,7 @@ export const getOrderById = createAsyncThunk(
         orderInf.unshift({
             id: 'create_at',
             title: orderTitle['create_at'],
-            value: dayjs
-                .unix(res.data?.order['create_at'])
-                .format('YYYY-MM-DD HH:mm:ss'),
+            value: formatTimestamp(res.data?.order['create_at']),
         });
         orderInf.push({
             id: 'message',
