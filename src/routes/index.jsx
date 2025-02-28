@@ -4,8 +4,9 @@ import HomePage from '@pages/front/HomePage';
 import ProductsPage from '@pages/front/products/ProductsPage';
 import ProductCategoryPage from '@pages/front/products/ProductCategoryPage';
 import ProductDetailPage from '@pages/front/products/ProductDetailPage';
-import ArticlesPage from '@pages/front/ArticlesPage';
-import AboutUs from '@pages/front/AboutUs';
+import BlogPage from '@pages/front/blog/BlogPage';
+import BlogDetail from '@pages/front/blog/BlogDetail';
+import AboutUs from '@pages/front/about/AboutUs';
 import WishList from '@pages/front/wish/WishList';
 import CartsPage from '@pages/front/carts/CartsPage';
 import OrderPage from '@pages/front/checkout/OrderPage';
@@ -51,8 +52,12 @@ const routers = [
                 element: <ProductDetailPage />,
             },
             {
-                path: 'articles',
-                element: <ArticlesPage />,
+                path: 'blog',
+                element: <BlogPage />,
+            },
+            {
+                path: 'blog/:id',
+                element: <BlogDetail />,
             },
             {
                 path: 'about',

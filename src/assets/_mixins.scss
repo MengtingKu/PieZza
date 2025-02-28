@@ -64,6 +64,7 @@ $breakpoints: (
 @mixin bgi_size($size: cover, $position: center center) {
     background-size: $size;
     background-position: $position;
+    background-attachment: fixed;
 }
 
 @mixin bgi_color($color: #000, $repeat: no-repeat) {
@@ -77,18 +78,18 @@ $breakpoints: (
     object-fit: cover;
 }
 
-@mixin rotateShake($duration: 2s) {
-    animation: rotate-shake $duration ease-in-out infinite;
+@mixin rotateShake($duration: 5s) {
+    animation: rotate-shake $duration cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
 
     @keyframes rotate-shake {
         0% {
-            transform: rotate(135deg);
+            transform: rotate(0deg);
         }
         50% {
-            transform: rotate(230deg);
+            transform: rotate(-10deg);
         }
         100% {
-            transform: rotate(135deg);
+            transform: rotate(5deg);
         }
     }
 }

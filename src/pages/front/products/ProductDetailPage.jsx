@@ -12,7 +12,7 @@ import { getProducts, getProductById } from '@slices/productSlice';
 import { postCart } from '@slices/cartSlice';
 import { splitText } from '@helper/stringAndDataHelpers';
 import Icon from '@helper/FontAwesomeIcon';
-import WishMark from '@pages/front/wish/WishMark';
+import WishMark from '@components/front/WishMark';
 
 const ProductDetailPage = () => {
     const { id } = useParams();
@@ -47,7 +47,6 @@ const ProductDetailPage = () => {
     };
 
     useEffect(() => {
-        window.scrollTo(0, 0);
         dispatch(getProductById(id));
     }, [id, dispatch]);
 

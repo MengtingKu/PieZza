@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import ProductCard from '@pages/front/products/ProductCard';
 import { getProducts } from '@slices/productSlice';
+import ProductCard from '@components/front/ProductCard';
 
 const WishList = () => {
     const dispatch = useDispatch();

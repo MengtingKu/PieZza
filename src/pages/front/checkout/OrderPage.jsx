@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { splitText } from '@helper/stringAndDataHelpers';
 import DynamicTable from '@components/common/DynamicTable';
-import OrderForm from '@pages/front/checkout/OrderForm';
+import OrderForm from '@components/front/OrderForm';
 
 const OrderPage = () => {
     const { isCartLoading, carts } = useSelector(state => state.cart);

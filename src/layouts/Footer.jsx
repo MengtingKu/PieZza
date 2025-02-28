@@ -83,10 +83,19 @@ const Footer = () => {
             </div>
             <hr />
             <div className="copyright_text">
-                © 2025 PieZza. All Rights Reserved. Designed by kuku.
+                &copy; 2025 PieZza. All Rights Reserved. Designed by{' '}
+                <Link
+                    to="https://github.com/MengtingKu/PieZza"
+                    className="fw-bold"
+                    style={{ color: '#fff3cd' }}
+                    target="_blank"
+                >
+                    kuku
+                </Link>
+                .
                 <Link to="/login" className="admin_login">
                     <Icon icon="login" />
-                    <span className="ms-1">員工頻道</span>
+                    <span className="ms-2">員工頻道</span>
                 </Link>
             </div>
         </footer>

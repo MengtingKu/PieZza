@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import ProductCard from './ProductCard';
+import ProductCard from '@components/front/ProductCard';
 
 const ProductCategoryPage = () => {
     const { category } = useParams();

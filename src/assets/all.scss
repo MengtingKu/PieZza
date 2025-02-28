@@ -1,11 +1,11 @@
 @import "bootstrap/scss/functions";
-@import "@assets/variables";
+@import "@assets/common/variables";
 
 // 引用UI套件
 @import "bootstrap/scss/bootstrap";
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
 
-// 頁面
+// 前台頁面
 @import "@assets/_mixins.scss";
 @import "@assets/_theme.scss";
 @import "@assets/common/layout.scss";
@@ -13,3 +13,6 @@
 @import "@assets/front/product-detail.scss";
 @import "@assets/front/cart-list.scss";
 @import "@assets/front/checkout.scss";
+@import "@assets/front/blog.scss";
+@import "@assets/front/about.scss";
+@import "@assets/front/home.scss";

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { postCart } from '@slices/cartSlice';
 import { splitText } from '@helper/stringAndDataHelpers';
 import Icon from '@helper/FontAwesomeIcon';
-import WishMark from '@pages/front/wish/WishMark';
+import WishMark from '@components/front/WishMark';
 
 const ProductCard = ({ product }) => {
     const navigate = useNavigate();

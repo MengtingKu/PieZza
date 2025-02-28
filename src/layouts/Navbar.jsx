@@ -16,7 +16,7 @@ const Navbar = ({ children }) => {
     const routes = [
         { path: '/', name: 'Home' },
         { path: 'products', name: 'Menu' },
-        { path: 'articles', name: 'Blog' },
+        { path: 'blog', name: 'Blog' },
         { path: 'about', name: 'About Us' },
         { path: 'wish', name: '私藏' },
     ];
