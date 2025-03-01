@@ -20,8 +20,6 @@ const AnimateImage = ({
     useEffect(() => {
         if (intersection && intersection.intersectionRatio >= 0.1) {
             setIsInView(true);
-        } else {
-            setIsInView(false);
         }
     }, [intersection]);
 

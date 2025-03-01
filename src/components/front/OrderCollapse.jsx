@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types';
+import { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { formatTimestamp } from '@helper/stringAndDataHelpers';
-import { useState } from 'react';
 
 const OrderCollapse = ({ orders }) => {
+    const navigate = useNavigate();
     const [accordionState, setAccordionState] = useState(
         orders.reduce((acc, order) => {
             acc[order.id] = false;
@@ -11,11 +13,26 @@ const OrderCollapse = ({ orders }) => {
         }, {})
     );
 
+    const collapseRefs = useRef({});
+
     const handleState = orderId => {
-        setAccordionState(prevState => ({
-            ...prevState,
-            [orderId]: !prevState[orderId],
-        }));
+        setAccordionState(prev => {
+            const newState = { ...prev, [orderId]: !prev[orderId] };
+
+            if (collapseRefs.current[orderId]) {
+                const collapseElement = collapseRefs.current[orderId];
+
+                if (newState[orderId]) {
+                    collapseElement.classList.add('show');
+                    collapseElement.classList.remove('visually-hidden');
+                } else {
+                    collapseElement.classList.add('visually-hidden');
+                    collapseElement.classList.remove('show');
+                }
+            }
+
+            return newState;
+        });
     };
 
     return (
@@ -57,9 +74,12 @@ const OrderCollapse = ({ orders }) => {
                             </button>
                         </h2>
                         <div
+                            ref={el => (collapseRefs.current[order.id] = el)}
                             id={`flush-collapse-${order.id}`}
                             className={`accordion-collapse collapse ${
-                                accordionState[order.id] ? 'show' : ''
+                                accordionState[order.id]
+                                    ? 'show'
+                                    : 'visually-hidden'
                             }`}
                             data-bs-parent="#accordionFlushExample"
                         >
@@ -125,6 +145,15 @@ const OrderCollapse = ({ orders }) => {
                                         </div>
                                     );
                                 })}
+                                <button
+                                    type="button"
+                                    className="btn btn-link btn-sm"
+                                    onClick={() =>
+                                        navigate(`/payment/${order.id}`)
+                                    }
+                                >
+                                    查看訂單：{order.id} 訂購資訊
+                                </button>
                             </div>
                         </div>
                     </div>

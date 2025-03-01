@@ -16,6 +16,7 @@ const CartsPage = () => {
     const dispatch = useDispatch();
     const { isCartLoading, carts } = useSelector(state => state.cart);
     const [isToggle, setIsToggle] = useState(false);
+
     const cartFields = [
         {
             key: 'product_title',
@@ -91,9 +92,29 @@ const CartsPage = () => {
         {
             key: 'product_price',
             name: '單價',
-            class: 'text-end',
-            type: 'number',
+            class: 'text-end align-middle',
+            type: 'custom',
             width: '10%',
+            render: cart => {
+                return (
+                    <>
+                        {cart.product_origin_price > cart.product_price ? (
+                            <>
+                                <div className="text-danger">
+                                    {cart.product_price.toLocaleString()}
+                                </div>
+                                <small className="text-secondary fw-light">
+                                    <del>
+                                        {cart.product_origin_price.toLocaleString()}
+                                    </del>
+                                </small>
+                            </>
+                        ) : (
+                            <span>{cart.product_price.toLocaleString()}</span>
+                        )}
+                    </>
+                );
+            },
         },
         {
             key: 'total',
