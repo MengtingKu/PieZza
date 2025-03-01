@@ -35,7 +35,7 @@ const cartSlice = createSlice({
                     postCart.fulfilled,
                     putCartItem.fulfilled,
                     deleteCartItem.fulfilled,
-                    deleteCarts.pending
+                    deleteCarts.fulfilled
                 ),
                 (state, action) => {
                     state.isCartLoading = false;

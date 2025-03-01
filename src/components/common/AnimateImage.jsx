@@ -21,7 +21,7 @@ const AnimateImage = ({
         if (intersection && intersection.intersectionRatio >= 0.1) {
             setIsInView(true);
         } else {
-            setIsInView(false); // 如果元素離開視口，則移除動畫
+            setIsInView(false);
         }
     }, [intersection]);
 

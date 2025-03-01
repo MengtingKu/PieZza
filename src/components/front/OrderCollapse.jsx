@@ -1,7 +1,23 @@
 import PropTypes from 'prop-types';
 import { formatTimestamp } from '@helper/stringAndDataHelpers';
+import { useState } from 'react';
 
 const OrderCollapse = ({ orders }) => {
+    const [accordionState, setAccordionState] = useState(
+        orders.reduce((acc, order) => {
+            acc[order.id] = false;
+
+            return acc;
+        }, {})
+    );
+
+    const handleState = orderId => {
+        setAccordionState(prevState => ({
+            ...prevState,
+            [orderId]: !prevState[orderId],
+        }));
+    };
+
     return (
         <div className="accordion accordion-flush" id="accordionFlushExample">
             {orders.map(order => {
@@ -9,12 +25,15 @@ const OrderCollapse = ({ orders }) => {
                     <div className="accordion-item" key={order.id}>
                         <h2 className="accordion-header">
                             <button
-                                className="accordion-button collapsed"
+                                className={`accordion-button ${
+                                    accordionState[order.id] ? '' : 'collapsed'
+                                }`}
                                 type="button"
                                 data-bs-toggle="collapse"
                                 data-bs-target={`#flush-collapse-${order.id}`}
-                                aria-expanded="false"
+                                aria-expanded={accordionState[order.id]}
                                 aria-controls={`flush-collapse-${order.id}`}
+                                onClick={() => handleState(order.id)}
                             >
                                 <span className="" style={{ width: '25%' }}>
                                     {formatTimestamp(
@@ -39,7 +58,9 @@ const OrderCollapse = ({ orders }) => {
                         </h2>
                         <div
                             id={`flush-collapse-${order.id}`}
-                            className="accordion-collapse collapse"
+                            className={`accordion-collapse collapse ${
+                                accordionState[order.id] ? 'show' : ''
+                            }`}
                             data-bs-parent="#accordionFlushExample"
                         >
                             <div className="accordion-body">
@@ -86,7 +107,7 @@ const OrderCollapse = ({ orders }) => {
                                                                     product
                                                                         .product
                                                                         .price
-                                                                }
+                                                                }{' '}
                                                                 x {product.qty}{' '}
                                                                 ={' '}
                                                                 {product.total}
