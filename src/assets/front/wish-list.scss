@@ -1,0 +1,34 @@
+.wish-list {
+    .wih_btn {
+        color: $backup;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            transition: all 0.45s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+        }
+
+        &:hover {
+            color: $reverse-sub-theme;
+        }
+
+        &:hover::before {
+            background: linear-gradient(rgba($shadow, 0.5), 66%, rgba($shadow, 0));
+            width: 100%;
+            z-index: -1;
+        }
+    }
+
+    .btn_bg {
+        position: absolute;
+        top: -20px;
+        left: -25px;
+        z-index: -2;
+
+        @include img_setup(auto, 130%);
+    }
+}

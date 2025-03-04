@@ -3,7 +3,7 @@ import Icon from '@helper/FontAwesomeIcon';
 
 const Footer = () => {
     return (
-        <footer className="footer">
+        <>
             <div className="footer_top_bg">
                 <img src="./customer-top-bg.png" alt="footer-top-bg" />
             </div>
@@ -11,11 +11,13 @@ const Footer = () => {
                 <div className="row gx-5">
                     <div className="col-md-4">
                         <div className="brand_block">
-                            <img
-                                src="./pie-zza.webp"
-                                alt="logo"
-                                className="logo"
-                            />
+                            <Link to="/">
+                                <img
+                                    src="./pie-zza.webp"
+                                    alt="logo"
+                                    className="logo"
+                                />
+                            </Link>
                             <div className="brands_group">
                                 <a href="#" className="facebook_bg">
                                     <Icon icon="facebook" />
@@ -98,7 +100,7 @@ const Footer = () => {
                     <span className="ms-2">員工頻道</span>
                 </Link>
             </div>
-        </footer>
+        </>
     );
 };
 

@@ -28,6 +28,7 @@ import {
     faStar,
     faStarHalf,
     faStarOfLife,
+    faArrowPointer,
     faTags,
     faPlus,
     faMinus,
@@ -37,6 +38,7 @@ import {
     faFireFlameCurved,
     faBasketShopping,
     faCircleInfo,
+    faDownLong,
     faFileInvoice,
 } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -72,6 +74,7 @@ const icons = {
     star: faRegularStar,
     halfStar: faStarHalf,
     required: faStarOfLife,
+    click: faArrowPointer,
     tag: faTags,
     plus: faPlus,
     minus: faMinus,
@@ -80,6 +83,7 @@ const icons = {
     check: faCheck,
     fire: faFireFlameCurved,
     info: faCircleInfo,
+    down: faDownLong,
     order: faFileInvoice,
     regularUser: faRegularUser,
 };

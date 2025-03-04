@@ -80,9 +80,15 @@ const OrderSuccess = () => {
                     <div className="connect_lines">
                         <span className="mx-3 stage_bar"></span>
                         <span className="text-danger">
-                            <Icon icon="fire" className="fa-fade" />
-                            <Icon icon="fire" className="fa-fade" />
-                            <Icon icon="fire" className="fa-fade" />
+                            {new Array(3).fill(0).map((_, index) => {
+                                return (
+                                    <Icon
+                                        key={index}
+                                        icon="fire"
+                                        className="fa-fade"
+                                    />
+                                );
+                            })}
                         </span>
                     </div>
 

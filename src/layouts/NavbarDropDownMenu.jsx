@@ -1,12 +1,13 @@
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Dropdown } from 'bootstrap';
 import { useClickAway } from 'react-use';
-import DynamicTable from '@components/common/DynamicTable';
-import Icon from '@helper/FontAwesomeIcon';
+import { Dropdown } from 'bootstrap';
 import { getCart, deleteCartItem } from '@slices/cartSlice';
 import { splitText } from '@helper/stringAndDataHelpers';
+import LinkButton from '@components/common/LinkButton';
+import DynamicTable from '@components/common/DynamicTable';
+import Icon from '@helper/FontAwesomeIcon';
 
 const NavbarDropDownMenu = () => {
     const dispatch = useDispatch();
@@ -114,6 +115,7 @@ const NavbarDropDownMenu = () => {
     const openDropdown = () => {
         setIsOpenDropdown(!isOpenDropdown);
     };
+
     const closeDropdown = () => {
         setIsOpenDropdown(false);
     };
@@ -135,7 +137,9 @@ const NavbarDropDownMenu = () => {
             </button>
             <div
                 ref={dropdownRef}
-                className="dropdown-menu dropdown-menu-end p-2"
+                className={`dropdown-menu dropdown-menu-end p-2 ${
+                    !carts.carts.length && 'page_bg'
+                }`}
                 style={{ height: '500px', overflow: 'scroll' }}
             >
                 {' '}
@@ -171,7 +175,23 @@ const NavbarDropDownMenu = () => {
                         </div>
                     </>
                 ) : (
-                    <>還沒有商品</>
+                    <>
+                        <div className="text-center my-3 lh-lg">
+                            <img
+                                src="./empty-cart.webp"
+                                alt="空購物車"
+                                className="img-fluid"
+                            />
+                            <p className="my-3 text-light">購物車空的...</p>
+                            <LinkButton
+                                className="btn text-warning animate_on go_shoppingBtn"
+                                to="/products"
+                                onClickCustom={closeDropdown}
+                            >
+                                無論何時 <Icon icon="pizzaSlice" /> 為你而來
+                            </LinkButton>
+                        </div>
+                    </>
                 )}
             </div>
         </>

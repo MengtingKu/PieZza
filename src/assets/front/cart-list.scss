@@ -2,6 +2,7 @@
     color: $font;
     font-family: "Caveat Brush", serif;
     letter-spacing: 1px;
+    padding-top: 32px;
 
     @include respond_to("lg") {
         width: 860px;
@@ -24,6 +25,7 @@
         &:hover {
             font-size: 1.2rem;
             color: $link;
+            text-shadow: none;
             cursor:
                 url("https://i.imgur.com/MGctvOR.png") 0 50,
                 auto;

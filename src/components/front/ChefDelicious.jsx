@@ -5,7 +5,7 @@ const ChefDelicious = () => {
                 <div className="col-md-5 img_group">
                     <div className="layer"></div>
                     <img
-                        src="https://plus.unsplash.com/premium_photo-1661288474987-1e90159ff2ca?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTN8fGNoZWZ8ZW58MHx8MHx8fDA%3D"
+                        src="./chef.avif"
                         alt="chef avatar"
                         className="img-fluid animate__fadeInLeft avatar_chef"
                     />
@@ -17,8 +17,8 @@ const ChefDelicious = () => {
                 </div>
                 <div className="col-md-6">
                     <div className="title_group">
-                        <h6 className="subtitle">Chef&apos;s Delicious</h6>
                         <h3 className="title">廚師堅持的美味秘密</h3>
+                        <h6 className="subtitle">Chef&apos;s Delicious</h6>
                     </div>
                     <blockquote>
                         <p>每一份 PieZza，都是無數次實驗與匠心的結晶。</p>

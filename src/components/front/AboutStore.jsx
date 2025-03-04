@@ -6,15 +6,15 @@ const AboutStore = () => {
             <div className="row g-3 mb-3 justify-content-between">
                 <div className="col-md-5 img_group">
                     <AnimateImage
-                        src="https://images.unsplash.com/photo-1546724867-3b2dabdbc5b0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        alt=""
+                        src="./store.avif"
+                        alt="store"
                         className="img-fluid store_brand"
                     />
                 </div>
                 <div className="col-md-6">
                     <div className="title_group">
-                        <h6 className="subtitle">About PieZza</h6>
                         <h3 className="title">關於 PieZza</h3>
+                        <h6 className="subtitle">About PieZza</h6>
                     </div>
                     <p>
                         從一開始，我們只是一個充滿熱情的想法，想要創造一個讓每一位顧客都能感受到家的溫暖的披薩店。

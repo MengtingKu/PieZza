@@ -5,7 +5,7 @@ export const stories = [
     {
         id: new Date().getTime(),
         tag: '2023',
-        imgUrl: 'https://images.unsplash.com/photo-1500338427510-5deb175987d2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Zm9vZCUyMGNhcnxlbnwwfDB8MHx8fDA%3D',
+        imgUrl: './story/pizza-car.avif',
         title: '創業的第一台披薩車',
         content: [
             '2023年，由於資金有限，我們決定先從最簡單的方式開始：一台披薩車。',
@@ -17,7 +17,7 @@ export const stories = [
     {
         id: new Date().getTime() + 1,
         tag: '2024',
-        imgUrl: 'https://images.unsplash.com/photo-1673865641469-34498379d8af?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        imgUrl: './story/our-dream.avif',
         title: '築夢踏實',
         content: [
             '2024年，我們的計劃不再僅限於披薩車，是的！我們想讓客人有固定的地點可以享受',
@@ -30,7 +30,7 @@ export const stories = [
     {
         id: new Date().getTime() + 2,
         tag: '2025',
-        imgUrl: 'https://images.unsplash.com/photo-1511019075502-c3734f9a7cff?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        imgUrl: './story/our-store.avif',
         title: '夢想起飛',
         content: [
             '2025年，經過不懈的努力，我們的披薩店終於開業了！',

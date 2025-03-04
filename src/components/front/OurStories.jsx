@@ -1,10 +1,6 @@
-// Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
-// import required modules
 import { Pagination } from 'swiper/modules';
 import { stories } from '@helper/ourStoryConfig';
 
@@ -74,8 +70,8 @@ const OurStories = () => {
     return (
         <div className="container">
             <div className="title_group">
-                <h6 className="subtitle text-center">Our Stories</h6>
                 <h3 className="title text-center">我們的故事</h3>
+                <h6 className="subtitle text-center">Our Stories</h6>
             </div>
             <div className="swiper_timeline my-5">
                 <Swiper

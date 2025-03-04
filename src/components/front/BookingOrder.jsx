@@ -19,12 +19,12 @@ const BookingOrder = () => {
     return (
         <div className="container">
             <div className="title_group" style={{ color: '#ffc107' }}>
-                <h6 className="subtitle text-center">
-                    Fresh From PieZzn - Booking Now
-                </h6>
                 <h3 className="title text-center">
                     無論何時，總有一片在等你...
                 </h3>
+                <h6 className="subtitle text-center">
+                    Fresh From PieZzn - Booking Now
+                </h6>
             </div>
 
             <div className="row g-3 mb-3 justify-content-between">

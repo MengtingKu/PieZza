@@ -1,25 +1,44 @@
 import PropTypes from 'prop-types';
+import { useState, useRef, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useClickAway } from 'react-use';
-import Icon from '@helper/FontAwesomeIcon';
-import { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOrder } from '@slices/orderSlice';
+import Icon from '@helper/FontAwesomeIcon';
+
+const routes = [
+    { path: '/', name: 'Home' },
+    { path: 'products', name: 'Menu' },
+    { path: 'blog', name: 'Blog' },
+    { path: 'about', name: 'About' },
+    { path: 'wish', name: 'Wish' },
+];
 
 const Navbar = ({ children }) => {
-    const { orders } = useSelector(state => state.order);
     const dispatch = useDispatch();
+    const { orders } = useSelector(state => state.order);
+    const [scrollY, setScrollY] = useState(0);
     const [isOpen, setIsOpen] = useState(false);
     const navbarCollapse = useRef(null);
     const navbarRef = useRef(null);
+
     useClickAway(navbarRef, () => setIsOpen(false));
-    const routes = [
-        { path: '/', name: 'Home' },
-        { path: 'products', name: 'Menu' },
-        { path: 'blog', name: 'Blog' },
-        { path: 'about', name: 'About Us' },
-        { path: 'wish', name: '私藏' },
-    ];
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (navbarRef.current) {
+                setScrollY(window.scrollY);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [navbarRef]);
+
+    const navbarBackground = scrollY > 70 ? 'rgba(26, 11, 3, 0.8)' : '#1a0b03';
 
     useEffect(() => {
         if (isOpen) {
@@ -34,7 +53,10 @@ const Navbar = ({ children }) => {
     }, [dispatch]);
 
     return (
-        <header className="header">
+        <header
+            className="header"
+            style={{ backgroundColor: navbarBackground }}
+        >
             <nav ref={navbarRef} className="navbar navbar-expand-lg">
                 <div className="container-fluid">
                     <Link className="navbar-brand" to="/">
@@ -89,7 +111,7 @@ const Navbar = ({ children }) => {
                                         to="orders"
                                         onClick={() => setIsOpen(false)}
                                     >
-                                        我的訂單
+                                        Orders
                                     </NavLink>
                                 </li>
                             )}

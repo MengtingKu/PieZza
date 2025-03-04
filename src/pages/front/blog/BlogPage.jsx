@@ -1,5 +1,9 @@
 import { useSelector } from 'react-redux';
 
+/**
+ * Todo...
+ * Loading 還沒測試，規劃用 article api state 處理
+ */
 const BlogPage = () => {
     const { isArticleLoading } = useSelector(state => state.article);
 
@@ -36,7 +40,7 @@ const BlogPage = () => {
                 )}
                 <div className="page_title">
                     <h3>部落格</h3>
-                    <h6>blog</h6>
+                    <h6>Blog</h6>
                 </div>
                 <div className="row my-5">
                     <div className="col-md-12 mb-3">

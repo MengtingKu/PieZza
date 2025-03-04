@@ -8,6 +8,7 @@ const AnimateImage = ({
     alt,
     className,
     animate = 'animate__fadeInLeft',
+    style = {},
 }) => {
     const [isInView, setIsInView] = useState(false);
     const intersectionRef = useRef(null);
@@ -31,6 +32,7 @@ const AnimateImage = ({
             className={`${className} animate__animated ${
                 isInView ? animate : ''
             }`}
+            style={style}
         />
     );
 };
@@ -40,6 +42,7 @@ AnimateImage.propTypes = {
     alt: PropTypes.string,
     className: PropTypes.string,
     animate: PropTypes.string.isRequired,
+    style: PropTypes.object,
 };
 
 export default AnimateImage;

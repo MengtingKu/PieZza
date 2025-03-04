@@ -1,0 +1,294 @@
+@mixin animation-common($name, $duration, $delay) {
+    animation-name: $name;
+    animation-duration: $duration;
+    animation-fill-mode: both;
+    animation-delay: $delay;
+}
+
+.home_page {
+    padding-top: 0;
+
+    .banner_section {
+        .title_group {
+            span,
+            .subtitle {
+                color: #fd9d3e;
+            }
+
+            span {
+                font-size: 3rem;
+            }
+
+            .subtitle {
+                font-family: "Caveat Brush", serif;
+            }
+        }
+
+        .main_image {
+            position: absolute;
+            right: auto;
+            bottom: -10px;
+            z-index: -1;
+            filter: blur(1px);
+            width: 100%;
+            animation-name: fadeInDown;
+
+            @include respond_to("md") {
+                filter: blur(0px);
+            }
+
+            &.house_pizza {
+                bottom: 0;
+                @include respond_to("md") {
+                    bottom: -50px;
+                }
+            }
+
+            &.floating_pizza {
+                bottom: -120px;
+                transform: scaleX(-1);
+                @include respond_to("md") {
+                    filter: blur(0px);
+                }
+            }
+        }
+
+        .swiper-slide-active {
+            .title_group {
+                @include animation-common(fadeInLeft, s, 0.5s);
+            }
+
+            .img_animate {
+                position: absolute;
+
+                &.group1_img1 {
+                    bottom: -5px;
+                    left: -5px;
+                    @include animation-common(zoomInDown, 1s, 0.3s);
+                }
+
+                &.group1_img2 {
+                    bottom: -50px;
+                    left: 20px;
+                    @include animation-common(zoomInDown, 1.5s, 0.6s);
+                }
+
+                &.group2_img1 {
+                    bottom: 15px;
+                    left: -5px;
+                    animation-name: zoomIn;
+                    @include animation-common(zoomIn, 0.6s, 0.8s);
+                }
+
+                &.group2_img2 {
+                    top: 0;
+                    right: 0;
+                    @include animation-common(zoomIn, 0.8s, 0.8s);
+                }
+
+                &.group2_img3 {
+                    top: -150px;
+                    left: 10px;
+                    @include animation-common(zoomIn, 1s, 1s);
+
+                    @include respond_to("md") {
+                        top: -10px;
+                    }
+                }
+
+                &.group2_img4 {
+                    bottom: -10px;
+                    right: 10px;
+                    @include animation-common(zoomIn, 1s, 1s);
+                }
+
+                &.group3_img1 {
+                    top: 10px;
+                    left: 100px;
+                    @include animation-common(bounceInDown, 1s, 0.5s);
+
+                    @include respond_to("md") {
+                        top: 50px;
+                        left: 45px;
+                    }
+
+                    @include respond_to("lg") {
+                        left: 360px;
+                        top: -50px;
+                    }
+                }
+
+                &.group3_img2 {
+                    @include animation-common(bounceInDown, 1.2s, 0.7s);
+                    filter: drop-shadow(2px 4px 6px black);
+
+                    @include respond_to("md") {
+                        top: 110px;
+                        left: 110px;
+                    }
+
+                    @include respond_to("lg") {
+                        filter: blur(1px);
+                    }
+                }
+
+                &.group3_img3 {
+                    @include animation-common(bounceInDown, 1s, 0.9s);
+                    top: 200px;
+                    left: 180px;
+                }
+
+                &.group3_img4 {
+                    right: 130px;
+                    @include animation-common(bounceInDown, 1.3s, 1.2s);
+
+                    @include respond_to("md") {
+                        right: 180px;
+                        bottom: 80px;
+                    }
+                }
+
+                &.group3_img5 {
+                    top: -99px;
+                    left: 120px;
+                    @include animation-common(bounceInDown, 0.8s, 1.3s);
+
+                    @include respond_to("md") {
+                        top: 150px;
+                    }
+
+                    @include respond_to("lg") {
+                        top: 20px;
+                    }
+                }
+            }
+        }
+
+        @include respond_to("sm") {
+            .love_together {
+                position: relative;
+                right: auto;
+                bottom: auto;
+                z-index: 0;
+            }
+
+            .img_animate {
+                width: 50%;
+            }
+        }
+
+        .swiper {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, $bg-theme, 60%, rgba($bg-theme, 0.2));
+        }
+
+        .swiper-slide {
+            font-size: 18px;
+            color: #fff;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 40px 60px;
+        }
+
+        .parallax-bg {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 130%;
+            height: 100%;
+            -webkit-background-size: cover;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .swiper-slide .title {
+            font-size: 41px;
+            font-weight: 800;
+        }
+
+        .swiper-slide .subtitle {
+            font-size: 21px;
+        }
+
+        .swiper-slide .text {
+            font-size: 14px;
+            max-width: 400px;
+            line-height: 1.3;
+        }
+
+        .swiper-pagination-bullet {
+            background: $link;
+            opacity: 0.5;
+
+            &-active {
+                opacity: 1;
+            }
+        }
+    }
+
+    .outstanding_section {
+        color: $reverse-font;
+
+        .block {
+            img {
+                filter: invert(0.8) sepia(0) saturate(0) hue-rotate(175deg);
+            }
+            &:hover {
+                img {
+                    filter: invert(1);
+                    animation: pulse 1s forwards;
+                }
+            }
+        }
+    }
+
+    .sale_section {
+        .lightbox_group > div {
+            @include center;
+        }
+
+        .swiper_image {
+            border-radius: 48% / 48%;
+            transition: transform 0.3s ease;
+            @include img_setup(150px, 100px);
+            filter: drop-shadow(15px 13px 10px rgba($shadow, 0.5));
+
+            @include respond_to("lg") {
+                @include img_setup(200px, 150px);
+            }
+
+            @include respond_to("xl") {
+                @include img_setup(250px, 200px);
+            }
+
+            @include respond_to("xxl") {
+                @include img_setup(300px, 250px);
+            }
+
+            &:hover {
+                transform: scale(1.05);
+            }
+        }
+
+        .go_shoppingBtn {
+            &:hover {
+                font-size: 1rem;
+                color: $link;
+                cursor:
+                    url("https://i.imgur.com/MGctvOR.png") 0 50,
+                    auto;
+            }
+        }
+    }
+
+    .customer_section {
+        .memory_image {
+            @include img_setup(50px);
+
+            @include respond_to("md") {
+                @include img_setup(100px);
+            }
+        }
+    }
+}

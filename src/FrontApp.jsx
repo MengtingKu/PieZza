@@ -10,11 +10,20 @@ const FrontApp = () => {
             <Navbar>
                 <NavbarDropDownMenu />
             </Navbar>
-            <main>
+
+            <main
+                style={{
+                    minHeight: `calc(100vh - 96px)`,
+                    marginTop: '69.38px',
+                }}
+            >
                 <AutoScrollToTop />
                 <Outlet />
             </main>
-            <Footer />
+
+            <footer className="footer">
+                <Footer />
+            </footer>
         </>
     );
 };

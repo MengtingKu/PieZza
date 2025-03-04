@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Icon from '@helper/FontAwesomeIcon';
-import DynamicTable from '@components/common/DynamicTable';
 import {
     getCart,
     putCartItem,
@@ -10,6 +8,9 @@ import {
     deleteCarts,
 } from '@slices/cartSlice';
 import { splitText } from '@helper/stringAndDataHelpers';
+import Icon from '@helper/FontAwesomeIcon';
+import DynamicTable from '@components/common/DynamicTable';
+import LinkButton from '@components/common/LinkButton';
 
 const CartsPage = () => {
     const navigate = useNavigate();
@@ -238,17 +239,13 @@ const CartsPage = () => {
                     />
                     <p className="my-3">
                         購物車空的... <br />
-                        <button
-                            type="button"
-                            className="btn go_shoppingBtn"
-                            onClick={() => navigate('/products')}
-                        >
-                            <span className="ms-2">
-                                {' '}
-                                無論何時 <Icon icon="pizzaSlice" /> 隨時為你而來
-                            </span>
-                        </button>
                     </p>
+                    <LinkButton
+                        className="btn animate_on go_shoppingBtn"
+                        to="/products"
+                    >
+                        無論何時 <Icon icon="pizzaSlice" /> 為你而來
+                    </LinkButton>
                 </div>
             ) : (
                 <>

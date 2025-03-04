@@ -5,19 +5,23 @@ $swiper-pagination-active-color: $reverse-sub-theme;
 $swiper-pagination-bullet-size: 12px;
 
 .about {
+    padding-top: 32px;
     letter-spacing: 1px;
 
     .title_group {
+        text-transform: capitalize;
+
         h3 {
             color: $reverse-theme;
             font-weight: 800;
-            margin-bottom: 30px;
             font-size: $font-size-lg;
         }
         h6 {
             font-family: "Montez", serif;
             color: $reverse-theme;
             font-size: $font-size-md;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
         }
     }
 
