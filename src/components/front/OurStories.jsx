@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Pagination } from 'swiper/modules';
+import { Autoplay, Pagination } from 'swiper/modules';
 import { stories } from '@helper/ourStoryConfig';
 
 const OurStories = () => {
@@ -76,8 +76,13 @@ const OurStories = () => {
             <div className="swiper_timeline my-5">
                 <Swiper
                     pagination={pagination}
-                    modules={[Pagination]}
+                    modules={[Autoplay, Pagination]}
                     className="mySwiper"
+                    speed={600}
+                    autoplay={{
+                        delay: 2800,
+                        disableOnInteraction: true,
+                    }}
                 >
                     {swiperStories()}
                 </Swiper>
