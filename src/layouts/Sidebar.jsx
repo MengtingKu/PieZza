@@ -76,8 +76,10 @@ const Sidebar = () => {
                     );
                     document.cookie =
                         'reactToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PieZza;';
+                    document.cookie = 'reactToken=; path=/PieZza; max-age=0';
                     navigate('/');
                 } catch (error) {
+                    // Todo... 吐司訊息串接 api 回傳結果
                     console.log(error);
                     alert('錯誤');
                 }

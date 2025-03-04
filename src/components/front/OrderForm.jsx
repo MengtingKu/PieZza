@@ -28,6 +28,7 @@ const OrderForm = ({ cartList }) => {
 
             navigate(`/payment/${originalPromiseResult.orderId}`);
         } catch (rejectedValueOrSerializedError) {
+            // Todo... 吐司訊息串接 api 回傳結果
             console.error('Error:', rejectedValueOrSerializedError);
         }
     };
