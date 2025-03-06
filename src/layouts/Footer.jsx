@@ -7,7 +7,7 @@ const Footer = () => {
             <div className="footer_top_bg">
                 <img src="./customer-top-bg.png" alt="footer-top-bg" />
             </div>
-            <div className="container mt-5 mb-3">
+            <div className="container mt-5 mb-3 px-4 overflow-hidden">
                 <div className="row gx-5">
                     <div className="col-md-4">
                         <div className="brand_block">

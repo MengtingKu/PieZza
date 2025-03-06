@@ -144,7 +144,7 @@ const OrderPage = () => {
                     <h5 className="mb-1">
                         聯繫訊息 <small>Order Information</small>
                     </h5>
-                    <p className="fs-6 mb-3 text-secondary">
+                    <p className="fs-6 mb-5 text-secondary">
                         請填寫正確的訊息，好事總是等著你，尤其是這一口！
                     </p>
                     <OrderForm cartList={carts.carts} />

@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useClickAway } from 'react-use';
+import { useClickAway, useWindowSize } from 'react-use';
 import { Dropdown } from 'bootstrap';
 import { getCart, deleteCartItem } from '@slices/cartSlice';
 import { splitText } from '@helper/stringAndDataHelpers';
@@ -10,6 +10,7 @@ import DynamicTable from '@components/common/DynamicTable';
 import Icon from '@helper/FontAwesomeIcon';
 
 const NavbarDropDownMenu = () => {
+    const { width } = useWindowSize();
     const dispatch = useDispatch();
     const { carts } = useSelector(state => state.cart);
     const navigate = useNavigate();
@@ -128,7 +129,13 @@ const NavbarDropDownMenu = () => {
                 data-bs-toggle="dropdown"
                 data-bs-auto-close="outside"
                 aria-expanded="false"
-                onClick={() => openDropdown()}
+                onClick={() => {
+                    if (width > 787) {
+                        openDropdown();
+                    } else {
+                        navigate('/carts');
+                    }
+                }}
             >
                 <Icon icon="basket" />
                 <span className="position-absolute top-0 end-0 shopping_qty">

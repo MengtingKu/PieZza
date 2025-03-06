@@ -23,7 +23,7 @@ const AboutUs = () => {
                 <OurStories />
             </section>
 
-            <section className="mb-5 chef_delicious">
+            <section className="mb-5 chef_delicious overflow-hidden">
                 <ChefDelicious />
             </section>
 

@@ -134,8 +134,9 @@ export const postOrder = createAsyncThunk(
 
 export const postPayById = createAsyncThunk(
     'order/postPayById',
-    async orderId => {
+    async (orderId, { dispatch }) => {
         const res = await frontApi.pay.postPayById(orderId);
+        dispatch(getOrder());
 
         return { success: res.data.success };
     }

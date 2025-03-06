@@ -130,7 +130,7 @@ $swiper-pagination-bullet-size: 12px;
             position: relative;
             .layer {
                 position: absolute;
-                bottom: 10%;
+                bottom: 3%;
                 left: 0;
                 height: 50%;
                 width: 100%;
@@ -142,7 +142,7 @@ $swiper-pagination-bullet-size: 12px;
         .hansom_chef {
             opacity: 0;
             position: absolute;
-            top: 130px;
+            top: 140px;
             left: 10%;
             transform-origin: top;
             z-index: 100;
@@ -172,6 +172,7 @@ $swiper-pagination-bullet-size: 12px;
                 transform: perspective(1200px) translateY(0) rotateX(20deg) translateZ(5px);
                 box-shadow: 2px 35px 32px -8px rgba($bg-theme, 0.75);
                 opacity: 0.8;
+                overflow: hidden;
             }
 
             .avatar_chef {
@@ -185,6 +186,7 @@ $swiper-pagination-bullet-size: 12px;
                     opacity 0.3s ease;
                 transform: translate3d(0%, -51%, 1000px);
                 filter: drop-shadow(10px 0px 10px rgba($shadow, 0.7));
+                overflow: hidden;
             }
         }
     }

@@ -99,7 +99,7 @@ const OrderForm = ({ cartList }) => {
                     rows="10"
                 />
             </div>
-            <div className="text-end mb-2">
+            <div className="text-end mb-5">
                 {cartList.length ? (
                     <button
                         className="btn go_shoppingBtn go_checkoutBtn"
