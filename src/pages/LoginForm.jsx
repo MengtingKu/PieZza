@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import FormInput from '@components/common/FormInput';
@@ -28,10 +29,16 @@ const LoginForm = () => {
             navigate('/admin');
             reset();
         } catch (error) {
-          // Todo... 吐司訊息串接 api 回傳結果
+            // Todo... 吐司訊息串接 api 回傳結果
             console.log(error);
         }
     };
+
+    useEffect(() => {
+        if (localStorage.getItem('isLoggedIn') === 'true') {
+            navigate('/admin');
+        }
+    }, [navigate]);
 
     return (
         <>

@@ -2,20 +2,18 @@ import PropTypes from 'prop-types';
 import { useState, useRef, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useClickAway } from 'react-use';
-import { useDispatch, useSelector } from 'react-redux';
-import { getOrder } from '@slices/orderSlice';
+import { useSelector } from 'react-redux';
 import Icon from '@helper/FontAwesomeIcon';
 
 const routes = [
     { path: '/', name: 'Home' },
-    { path: 'products', name: 'Menu' },
-    { path: 'blog', name: 'Blog' },
-    { path: 'about', name: 'About' },
-    { path: 'wish', name: 'Wish' },
+    { path: '/products', name: 'Menu' },
+    { path: '/blog', name: 'Blog' },
+    { path: '/about', name: 'About' },
+    { path: '/wish', name: 'Wish' },
 ];
 
 const Navbar = ({ children }) => {
-    const dispatch = useDispatch();
     const { orders } = useSelector(state => state.order);
     const [scrollY, setScrollY] = useState(0);
     const [isOpen, setIsOpen] = useState(false);
@@ -47,10 +45,6 @@ const Navbar = ({ children }) => {
             navbarCollapse.current.classList.add('d-none');
         }
     }, [isOpen]);
-
-    useEffect(() => {
-        dispatch(getOrder());
-    }, [dispatch]);
 
     return (
         <header
@@ -108,7 +102,7 @@ const Navbar = ({ children }) => {
                                     <NavLink
                                         className="nav-link"
                                         aria-current="page"
-                                        to="orders"
+                                        to="/orders"
                                         onClick={() => setIsOpen(false)}
                                     >
                                         Orders

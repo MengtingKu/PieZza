@@ -15,14 +15,16 @@ const DynamicTable = ({ data, fields, endActions, tFooter = null }) => {
     };
 
     const renderTableRows = () => {
-        return data?.map(item => (
+        return data?.map((item, dataIndex) => (
             <tr key={item.id} className="text-center">
                 {fields.map((field, index) => {
                     const renderTd = (type, value) => {
                         switch (type) {
+                            case 'dataNo':
+                                return <>{field.render(dataIndex)}</>;
                             case 'number':
                                 return (
-                                    <span>
+                                    <span className="text-end">
                                         {item[field.key] &&
                                             item[field.key].toLocaleString()}
                                     </span>
@@ -39,7 +41,11 @@ const DynamicTable = ({ data, fields, endActions, tFooter = null }) => {
                                 return <>{field.render(item)}</>;
                             }
                             default:
-                                return <span>{item[field.key]}</span>;
+                                return (
+                                    <span className="text-start">
+                                        {item[field.key]}
+                                    </span>
+                                );
                         }
                     };
 
@@ -55,7 +61,7 @@ const DynamicTable = ({ data, fields, endActions, tFooter = null }) => {
                 })}
 
                 {endActions && (
-                    <td className="text-end">
+                    <td className="text-end align-middle">
                         <div className="btn-group btn-group-sm me-2">
                             {endActions.map((action, idx) => (
                                 <button
@@ -90,12 +96,17 @@ const DynamicTable = ({ data, fields, endActions, tFooter = null }) => {
     };
 
     return (
-        <div className="table-responsive dynamic_table">
+        <div
+            className="table-responsive dynamic_table"
+            style={{ fontFamily: '"Montserrat', letterSpacing: 'normal' }}
+        >
             <table className="table table-sm table-hover align-middle">
                 <thead>
                     <tr className="text-center">{renderTableHeader()}</tr>
                 </thead>
-                <tbody>{renderTableRows()}</tbody>
+                <tbody className="table-group-divider">
+                    {renderTableRows()}
+                </tbody>
                 {tFooter}
             </table>
         </div>

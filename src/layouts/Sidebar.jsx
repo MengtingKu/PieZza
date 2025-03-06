@@ -1,7 +1,6 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-
 import Icon from '@helper/FontAwesomeIcon';
 
 const Sidebar = () => {
@@ -77,6 +76,7 @@ const Sidebar = () => {
                     document.cookie =
                         'reactToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PieZza;';
                     document.cookie = 'reactToken=; path=/PieZza; max-age=0';
+                    localStorage.removeItem('isLoggedIn');
                     navigate('/');
                 } catch (error) {
                     // Todo... 吐司訊息串接 api 回傳結果

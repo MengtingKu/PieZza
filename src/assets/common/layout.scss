@@ -1,14 +1,3 @@
 @import "@assets/common/sidebar.scss";
 @import "@assets/common/navbar.scss";
 @import "@assets/common/footer.scss";
-
-.layout {
-    display: flex;
-
-    .content {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-}

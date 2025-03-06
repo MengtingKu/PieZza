@@ -11,6 +11,7 @@ const AutoScrollToTop = () => {
             behavior: 'instant',
         });
     }, [pathname]);
+
     return null;
 };
 

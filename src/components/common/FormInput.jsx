@@ -9,13 +9,13 @@ const FormInput = ({
     type,
     placeholder,
     rules,
-    icon = '',
+    icon = null,
 }) => {
     return (
         <div className="mb-3">
             <label htmlFor={id} className="form-label">
                 <span className="text-danger me-1">*</span> {labelText}{' '}
-                <Icon icon={icon} size="xs" />
+                {icon && <Icon icon={icon} size="xs" />}
             </label>
             <input
                 {...register(id, rules)}

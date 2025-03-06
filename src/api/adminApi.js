@@ -5,10 +5,11 @@ const adminApi = {
         getProductsAll: () => request('get', `/products/all`),
         getProducts: page => request('get', `/products?page=${page}`),
         postProduct: params => request('post', `/product`, { data: params }),
-        putProductById: id => request('put', `/product/${id}`),
+        putProductById: (product_id, params) =>
+            request('put', `/product/${product_id}`, { data: params }),
         deleteProduct: id => request('delete', `/product/${id}`),
     },
-    order: {
+    orders: {
         getOrders: page => request('get', `/orders?page=${page}`),
         putOrderById: (order_id, params) =>
             request('put', `/order/${order_id}`, { data: params }),
@@ -23,7 +24,7 @@ const adminApi = {
         deleteCouponById: coupon_id =>
             request('delete', `/coupon/${coupon_id}`),
     },
-    article: {
+    articles: {
         getArticles: page => request('get', `/articles?page=${page}`),
         getArticleById: article_id => request('get', `/article/${article_id}`),
         postArticle: params => request('post', `/article`, { data: params }),

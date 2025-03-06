@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-escape */
 import axios from 'axios';
 import { useEffect, useCallback } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '@layouts/Navbar';
 import Footer from '@layouts/Footer';
 import Sidebar from '@layouts/Sidebar';
@@ -10,19 +10,24 @@ import AutoScrollToTop from '@components/common/AutoScrollToTop';
 const { VITE_BASE_URL: baseURL } = import.meta.env;
 
 const AdminApp = () => {
+    const { pathname } = useLocation();
     const navigate = useNavigate();
     const checkLogin = useCallback(async () => {
         try {
             await axios.post(`${baseURL}/api/user/check`);
-            navigate('/admin');
+            localStorage.setItem('isLoggedIn', 'true');
+            navigate(pathname);
         } catch (error) {
             // Todo... 吐司訊息串接 api 回傳結果
             console.log('登入驗證錯誤 =>', error, error?.response.data.message);
+            localStorage.removeItem('isLoggedIn');
             navigate('/login');
         }
-    }, [navigate]);
+    }, [navigate, pathname]);
 
     useEffect(() => {
+        if (localStorage.getItem('isLoggedIn') === 'true') return;
+
         const token = document.cookie.replace(
             /(?:(?:^|.*;\s*)reactToken\s*\=\s*([^;]*).*$)|^.*$/,
             '$1'

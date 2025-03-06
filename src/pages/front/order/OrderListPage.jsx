@@ -1,9 +1,11 @@
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { getOrder } from '@slices/orderSlice';
 import OrderCollapse from '@components/front/OrderCollapse';
 import Pagination from '@components/common/Pagination';
 
 const OrderListPage = () => {
+    const dispatch = useDispatch();
     const { isOrderLoading, orders, pagination } = useSelector(
         state => state.order
     );
@@ -15,6 +17,10 @@ const OrderListPage = () => {
             return response.payload;
         };
     };
+
+    useEffect(() => {
+        dispatch(getOrder());
+    }, [dispatch]);
 
     return (
         <div

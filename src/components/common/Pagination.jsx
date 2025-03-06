@@ -18,7 +18,7 @@ const Pagination = ({ pagination, fetchData }) => {
 
         setLoading(true);
         await dispatch(fetchData(page));
-
+        window.scrollTo(0, 0);
         setLoading(false);
     };
 

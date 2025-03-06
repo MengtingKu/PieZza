@@ -56,3 +56,15 @@ a {
         transition: all 2s;
     }
 }
+
+.swal2-actions {
+    .swal2-confirm {
+        border: 1px solid $red;
+        background: transparent;
+        color: $red;
+    }
+
+    .swal2-cancel {
+        background: $red;
+    }
+}
