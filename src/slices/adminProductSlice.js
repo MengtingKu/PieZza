@@ -13,6 +13,10 @@ const adminProductSlice = createSlice({
     reducers: {},
     extraReducers: builder => {
         builder
+            .addCase(getProductsAll.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.products = action.payload.products;
+            })
             .addCase(getProducts.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.products = action.payload.products;
@@ -32,6 +36,7 @@ const adminProductSlice = createSlice({
             )
             .addMatcher(
                 isAnyOf(
+                    getProductsAll.pending,
                     getProducts.pending,
                     postProduct.pending,
                     putProductById.pending,
@@ -44,6 +49,7 @@ const adminProductSlice = createSlice({
             )
             .addMatcher(
                 isAnyOf(
+                    getProductsAll.rejected,
                     getProducts.rejected,
                     postProduct.rejected,
                     putProductById.rejected,
@@ -56,6 +62,17 @@ const adminProductSlice = createSlice({
             );
     },
 });
+
+export const getProductsAll = createAsyncThunk(
+    'adminProduct/getProductsAll',
+    async () => {
+        const res = await adminApi.products.getProductsAll();
+
+        return {
+            products: Object.values(res.data.products),
+        };
+    }
+);
 
 export const getProducts = createAsyncThunk(
     'adminProduct/getProducts',

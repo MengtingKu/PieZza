@@ -1,0 +1,16 @@
+.admin_home {
+    .card {
+        color: $font;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .card_icon {
+        padding: 5%;
+        position: absolute;
+        text-align: end;
+        right: 0;
+        top: 0;
+        border-radius: 0 0 0 100%;
+        background-color: rgba(skyblue, 0.5);
+    }
+}

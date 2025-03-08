@@ -113,6 +113,7 @@ const ArticleList = () => {
         switch (modalType) {
             case 'create':
                 dispatch(postArticle({ params: templateData }));
+                setTemplateData(defaultTemplateData);
                 break;
             case 'read':
                 break;
@@ -123,6 +124,7 @@ const ArticleList = () => {
                         params: templateData,
                     })
                 );
+                setTemplateData(defaultTemplateData);
                 break;
             case 'delete':
                 dispatch(deleteArticle({ id: templateData.id }));

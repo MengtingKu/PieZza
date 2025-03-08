@@ -9,6 +9,7 @@ import {
 import {
     faHome,
     faUser,
+    faUsers,
     faCog,
     faAngleLeft,
     faAngleRight,
@@ -38,12 +39,16 @@ import {
     faFireFlameCurved,
     faBasketShopping,
     faCircleInfo,
+    faListCheck,
+    faBoxArchive,
     faDownLong,
     faFileInvoice,
 } from '@fortawesome/free-solid-svg-icons';
 import {
     faUser as faRegularUser,
     faStar as faRegularStar,
+    faMoneyBill1 as faRegularMoneyBill,
+    faCircleCheck as faRegularCircleCheck,
 } from '@fortawesome/free-regular-svg-icons';
 
 const icons = {
@@ -53,11 +58,13 @@ const icons = {
     line: faLine,
     home: faHome,
     user: faUser,
+    users: faUsers,
     settings: faCog,
     angleLeft: faAngleLeft,
     angleRight: faAngleRight,
     pizzaSlice: faPizzaSlice,
     moneyBills: faMoneyBills,
+    moneyBill: faRegularMoneyBill,
     newspaper: faNewspaper,
     discount: faPercent,
     phone: faMobileScreenButton,
@@ -83,9 +90,12 @@ const icons = {
     check: faCheck,
     fire: faFireFlameCurved,
     info: faCircleInfo,
+    listCheck: faListCheck,
+    box: faBoxArchive,
     down: faDownLong,
     order: faFileInvoice,
     regularUser: faRegularUser,
+    circleCheck: faRegularCircleCheck
 };
 
 const Icon = ({ icon, size = 'lg', color = null, className = '' }) => {

@@ -135,6 +135,21 @@ const ArticleModalContent = ({
                 </div>
 
                 <div className="mb-3">
+                    <label htmlFor="create_at" className="form-label">
+                        時間戳
+                    </label>
+                    <input
+                        name="create_at"
+                        id="create_at"
+                        type="text"
+                        className="form-control"
+                        placeholder="請輸入13位時間戳"
+                        defaultValue={article.create_at}
+                        onChange={handleModalInputChange}
+                    />
+                </div>
+
+                <div className="mb-3">
                     <label htmlFor="description" className="form-label">
                         描述
                     </label>
@@ -147,21 +162,22 @@ const ArticleModalContent = ({
                         onChange={handleModalInputChange}
                     />
                 </div>
+                <div className="mb-3">
+                    <label htmlFor="content" className="form-label">
+                        內容
+                    </label>
+                    <textarea
+                        name="content"
+                        id="content"
+                        className="form-control"
+                        rows={4}
+                        placeholder="請輸入說明內容"
+                        defaultValue={article.content}
+                        onChange={handleModalInputChange}
+                    />
+                </div>
 
-                <label htmlFor="content" className="form-label">
-                    內容
-                </label>
-                <textarea
-                    name="content"
-                    id="content"
-                    className="form-control"
-                    rows={4}
-                    placeholder="請輸入說明內容"
-                    defaultValue={article.content}
-                    onChange={handleModalInputChange}
-                />
-
-                <div className="form-check">
+                <div className="form-check mb-3">
                     <input
                         name="isPublic"
                         type="checkbox"

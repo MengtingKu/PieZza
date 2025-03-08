@@ -26,6 +26,7 @@ const CartsPage = () => {
             type: 'custom',
             render: cart => {
                 const { chineseText, engText } = splitText(cart.product_title);
+
                 return (
                     <>
                         <div className="row justify-content-around align-items-center gx-3">
@@ -119,7 +120,7 @@ const CartsPage = () => {
         },
         {
             key: 'total',
-            name: '總價',
+            name: '總計',
             class: 'text-end',
             type: 'number',
             width: '10%',

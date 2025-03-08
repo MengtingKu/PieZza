@@ -38,7 +38,7 @@ const ProductsPage = () => {
                             <p className="page_banner">Hello Welcome</p>
                         </div>
                     </div>
-                    <div className="container">
+                    <div className="container overflow-hidden">
                         <div className="menu_filter my-4">
                             <ul className="nav justify-content-center">
                                 {categories.map(cat => {
@@ -70,41 +70,6 @@ const ProductsPage = () => {
                 </>
             )}
         </div>
-        // <div className="container product_list">
-        //     {isLoading ? (
-        //         <p>Loading...</p>
-        //     ) : (
-        //         <>
-        //             <div className="menu_filter my-4">
-        //                 <ul className="nav justify-content-center">
-        //                     {categories.map(cat => {
-        //                         return (
-        //                             <li
-        //                                 className="nav-item filter_item"
-        //                                 key={cat}
-        //                             >
-        //                                 <Link
-        //                                     className={`nav-link ${getActiveClass(
-        //                                         cat
-        //                                     )}`}
-        //                                     aria-current="page"
-        //                                     to={
-        //                                         cat === 'all'
-        //                                             ? '/products'
-        //                                             : `/products/${cat}`
-        //                                     }
-        //                                 >
-        //                                     {cat}
-        //                                 </Link>
-        //                             </li>
-        //                         );
-        //                     })}
-        //                 </ul>
-        //             </div>
-        //             <Outlet />
-        //         </>
-        //     )}
-        //  </div>
     );
 };
 
