@@ -17,20 +17,15 @@ const OrderCollapse = ({ orders }) => {
 
     const handleState = orderId => {
         setAccordionState(prev => {
-            const newState = { ...prev, [orderId]: !prev[orderId] };
+            const newState = { ...prev };
 
-            if (collapseRefs.current[orderId]) {
-                const collapseElement = collapseRefs.current[orderId];
-
-                if (newState[orderId]) {
-                    collapseElement.classList.add('show');
-                    collapseElement.classList.remove('visually-hidden');
-                } else {
-                    collapseElement.classList.add('visually-hidden');
-                    collapseElement.classList.remove('show');
-                }
+            if (!prev[orderId]) {
+                Object.keys(newState).forEach(key => {
+                    newState[key] = false;
+                });
             }
 
+            newState[orderId] = !prev[orderId];
             return newState;
         });
     };

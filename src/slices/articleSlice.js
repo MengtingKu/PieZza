@@ -62,7 +62,6 @@ export const getArticleById = createAsyncThunk(
     'article/getArticleById',
     async articleId => {
         const res = await frontApi.article.getArticleById(articleId);
-        console.log('getArticleById=>', res);
 
         return {
             success: res.data.success,

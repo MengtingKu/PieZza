@@ -107,7 +107,10 @@ const ArticleList = () => {
         };
     };
 
-    const closeModal = () => setShowModal(false);
+    const closeModal = () => {
+        setShowModal(false);
+        setTemplateData(defaultTemplateData);
+    };
 
     const handleTarget = () => {
         switch (modalType) {
@@ -200,6 +203,7 @@ const ArticleList = () => {
                     topic="文章"
                     handleTarget={handleTarget}
                     setTemplateData={setTemplateData}
+                    showModal={showModal}
                 >
                     {renderContent()}
                 </DialogBasic>

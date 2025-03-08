@@ -98,7 +98,6 @@ const NavbarDropDownMenu = () => {
         dropdownInstance.current = new Dropdown(dropdownRef.current, {
             backdrop: true,
         });
-        console.log('test=>', isOpenDropdown);
 
         if (isOpenDropdown) {
             dropdownInstance.current.show();

@@ -142,7 +142,7 @@ $swiper-pagination-bullet-size: 12px;
         .hansom_chef {
             opacity: 0;
             position: absolute;
-            top: 140px;
+            top: 150px;
             left: 10%;
             transform-origin: top;
             z-index: 100;
@@ -150,11 +150,17 @@ $swiper-pagination-bullet-size: 12px;
             pointer-events: none;
             transform: translateY(-80px) translateZ(0px);
 
-            @include respond_to("xl") {
-                top: 140px;
+            @include respond_to("sm") {
+                top: 155px;
             }
             @include respond_to("md") {
-                top: 70px;
+                top: 80px;
+            }
+            @include respond_to("lg") {
+                top: 110px;
+            }
+            @include respond_to("xl") {
+                top: 160px;
             }
         }
 

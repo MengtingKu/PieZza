@@ -10,7 +10,6 @@ const BlogDetail = () => {
     const { isArticleLoading, article } = useSelector(state => state.article);
 
     useEffect(() => {
-        console.log(id);
         dispatch(getArticleById(id));
     }, [dispatch, id]);
 

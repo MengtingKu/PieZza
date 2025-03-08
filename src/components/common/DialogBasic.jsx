@@ -15,26 +15,10 @@ const DialogBasic = ({
     closeModal,
     handleTarget,
     children,
+    showModal,
 }) => {
     const modalRef = useRef(null);
     const modalInstance = useRef(null);
-
-    useEffect(() => {
-        modalInstance.current = new Modal(modalRef.current, {
-            backdrop: false,
-        });
-        if (modalType) {
-            modalInstance.current.show();
-        } else {
-            modalInstance.current.hide();
-        }
-
-        return () => {
-            if (modalInstance.current) {
-                modalInstance.current.dispose();
-            }
-        };
-    }, [modalType]);
 
     const getModalButtonClass = () => {
         switch (modalType) {
@@ -47,6 +31,37 @@ const DialogBasic = ({
             default:
                 return 'btn btn-success';
         }
+    };
+
+    useEffect(() => {
+        if (!modalInstance.current) {
+            modalInstance.current = new Modal(modalRef.current, {
+                backdrop: false,
+            });
+        }
+    }, []);
+
+    useEffect(() => {
+        if (!modalInstance.current) return;
+
+        if (showModal) {
+            modalInstance.current.show();
+        } else {
+            modalInstance.current.hide();
+        }
+    }, [showModal]);
+
+    const handleClose = () => {
+        if (modalInstance.current) {
+            modalInstance.current.hide();
+        }
+
+        closeModal();
+    };
+
+    const handleSubmit = () => {
+        handleTarget();
+        handleClose();
     };
 
     return (
@@ -67,7 +82,7 @@ const DialogBasic = ({
                             className="btn-close"
                             data-bs-dismiss="modal"
                             aria-label="Close"
-                            onClick={closeModal}
+                            onClick={handleClose}
                         />
                     </div>
                     <div className="modal-body p-4">{children}</div>
@@ -83,7 +98,7 @@ const DialogBasic = ({
                         <button
                             type="button"
                             className={getModalButtonClass()}
-                            onClick={() => handleTarget()}
+                            onClick={() => handleSubmit()}
                         >
                             確認{`${modalTitles[modalType]}${topic}`}
                         </button>
@@ -100,6 +115,7 @@ DialogBasic.propTypes = {
     closeModal: PropTypes.func.isRequired,
     handleTarget: PropTypes.func.isRequired,
     children: PropTypes.node.isRequired,
+    showModal: PropTypes.bool.isRequired,
 };
 
 export default DialogBasic;

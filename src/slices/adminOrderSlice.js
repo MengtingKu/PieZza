@@ -72,12 +72,12 @@ export const getOrders = createAsyncThunk(
 
 export const putOrderById = createAsyncThunk(
     'adminOrder/putOrderById',
-    async ({ id, params }, { dispatch }) => {
+    async ({ id, params, currentPage }, { dispatch }) => {
         const body = {
             data: params,
         };
         const res = await adminApi.orders.putOrderById(id, body);
-        dispatch(getOrders());
+        dispatch(getOrders(currentPage));
 
         return {
             success: res.data.success,

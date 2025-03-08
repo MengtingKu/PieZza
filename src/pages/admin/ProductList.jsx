@@ -118,7 +118,10 @@ const ProductList = () => {
         };
     };
 
-    const closeModal = () => setShowModal(false);
+    const closeModal = () => {
+        setShowModal(false);
+        setTemplateData(defaultTemplateData);
+    };
 
     const handleTarget = () => {
         switch (modalType) {
@@ -254,6 +257,7 @@ const ProductList = () => {
                     closeModal={closeModal}
                     handleTarget={handleTarget}
                     setTemplateData={setTemplateData}
+                    showModal={showModal}
                 >
                     {renderContent()}
                 </DialogBasic>

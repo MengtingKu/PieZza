@@ -179,7 +179,10 @@ const OrderList = () => {
         };
     };
 
-    const closeModal = () => setShowModal(false);
+    const closeModal = () => {
+        setShowModal(false);
+        setTemplateData(defaultTemplateData);
+    };
 
     const handleModalInputChange = e => {
         const { id, value, type, checked } = e.target;
@@ -196,9 +199,9 @@ const OrderList = () => {
                     putOrderById({
                         id: templateData.id,
                         params: templateData,
+                        currentPage,
                     })
                 );
-                dispatch(getOrders(currentPage));
                 break;
             case 'delete':
                 dispatch(deleteOrderById({ id: templateData.id }));
@@ -263,6 +266,7 @@ const OrderList = () => {
                     topic="訂單"
                     handleTarget={handleTarget}
                     setTemplateData={setTemplateData}
+                    showModal={showModal}
                 >
                     {renderContent()}
                 </DialogBasic>
