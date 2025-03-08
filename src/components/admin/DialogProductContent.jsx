@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const ProductModalContent = ({
+const DialogProductContent = ({
     modalType,
     templateData,
     handleModalInputChange,
@@ -236,7 +236,7 @@ const ProductModalContent = ({
     );
 };
 
-ProductModalContent.propTypes = {
+DialogProductContent.propTypes = {
     modalType: PropTypes.string.isRequired,
     templateData: PropTypes.object.isRequired,
     handleModalInputChange: PropTypes.func.isRequired,
@@ -246,4 +246,4 @@ ProductModalContent.propTypes = {
     handleRemoveImages: PropTypes.func.isRequired,
 };
 
-export default ProductModalContent;
+export default DialogProductContent;

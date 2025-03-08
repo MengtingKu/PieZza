@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { formatTimestamp } from '@helper/stringAndDataHelpers';
 
-const ArticleModalContent = ({
+const DialogArticleContent = ({
     modalType,
     templateData,
     handleModalInputChange,
@@ -195,10 +195,10 @@ const ArticleModalContent = ({
     );
 };
 
-ArticleModalContent.propTypes = {
+DialogArticleContent.propTypes = {
     modalType: PropTypes.string.isRequired,
     templateData: PropTypes.object.isRequired,
     handleModalInputChange: PropTypes.func.isRequired,
 };
 
-export default ArticleModalContent;
+export default DialogArticleContent;

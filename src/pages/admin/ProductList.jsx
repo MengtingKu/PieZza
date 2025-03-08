@@ -11,7 +11,7 @@ import { splitText } from '@helper/stringAndDataHelpers';
 import DynamicTable from '@components/common/DynamicTable';
 import Pagination from '@components/common/Pagination';
 import DialogBasic from '@components/common/DialogBasic';
-import ProductModalContent from '@components/admin/ProductModalContent';
+import DialogProductContent from '@components/admin/DialogProductContent';
 
 const defaultTemplateData = {
     id: '',
@@ -199,7 +199,7 @@ const ProductList = () => {
 
     const renderContent = () => {
         return (
-            <ProductModalContent
+            <DialogProductContent
                 modalType={modalType}
                 templateData={templateData}
                 handleModalInputChange={handleModalInputChange}

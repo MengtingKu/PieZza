@@ -7,6 +7,7 @@ import articleReducer from '@slices/articleSlice';
 import adminProductReducer from '@slices/adminProductSlice';
 import adminOrderReducer from '@slices/adminOrderSlice';
 import adminArticleReducer from '@slices/adminArticleSlice';
+import adminCouponReducer from '@slices/adminCouponSlice';
 
 export const store = configureStore({
     reducer: {
@@ -18,5 +19,6 @@ export const store = configureStore({
         adminProduct: adminProductReducer,
         adminOrder: adminOrderReducer,
         adminArticle: adminArticleReducer,
+        adminCoupon: adminCouponReducer,
     },
 });

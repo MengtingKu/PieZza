@@ -11,7 +11,7 @@ import { formatTimestamp } from '@helper/stringAndDataHelpers';
 import DynamicTable from '@components/common/DynamicTable';
 import Pagination from '@components/common/Pagination';
 import DialogBasic from '@components/common/DialogBasic';
-import ArticleModalContent from '@components/admin/ArticleModalContent';
+import DialogArticleContent from '@components/admin/DialogArticleContent';
 
 const defaultTemplateData = {
     id: '',
@@ -116,7 +116,6 @@ const ArticleList = () => {
         switch (modalType) {
             case 'create':
                 dispatch(postArticle({ params: templateData }));
-                setTemplateData(defaultTemplateData);
                 break;
             case 'read':
                 break;
@@ -127,7 +126,6 @@ const ArticleList = () => {
                         params: templateData,
                     })
                 );
-                setTemplateData(defaultTemplateData);
                 break;
             case 'delete':
                 dispatch(deleteArticle({ id: templateData.id }));
@@ -150,7 +148,7 @@ const ArticleList = () => {
 
     const renderContent = () => {
         return (
-            <ArticleModalContent
+            <DialogArticleContent
                 modalType={modalType}
                 templateData={templateData}
                 handleModalInputChange={handleModalInputChange}

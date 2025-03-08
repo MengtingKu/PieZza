@@ -15,7 +15,7 @@ import DynamicTable from '@components/common/DynamicTable';
 import Pagination from '@components/common/Pagination';
 import DialogDelete from '@components/common/DialogDelete';
 import DialogBasic from '@components/common/DialogBasic';
-import OrderModalContent from '@components/admin/OrderModalContent';
+import DialogOrderContent from '@components/admin/DialogOrderContent';
 
 const defaultTemplateData = {
     create_at: null,
@@ -184,14 +184,6 @@ const OrderList = () => {
         setTemplateData(defaultTemplateData);
     };
 
-    const handleModalInputChange = e => {
-        const { id, value, type, checked } = e.target;
-        setTemplateData(prevData => ({
-            ...prevData,
-            [id]: type === 'checkbox' ? checked : value,
-        }));
-    };
-
     const handleTarget = () => {
         switch (modalType) {
             case 'edit':
@@ -215,9 +207,17 @@ const OrderList = () => {
         closeModal();
     };
 
+    const handleModalInputChange = e => {
+        const { id, value, type, checked } = e.target;
+        setTemplateData(prevData => ({
+            ...prevData,
+            [id]: type === 'checkbox' ? checked : value,
+        }));
+    };
+
     const renderContent = () => {
         return (
-            <OrderModalContent
+            <DialogOrderContent
                 modalType={modalType}
                 templateData={templateData}
                 handleModalInputChange={handleModalInputChange}

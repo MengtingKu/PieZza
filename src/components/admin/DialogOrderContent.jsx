@@ -5,7 +5,7 @@ import {
     transformTableData,
 } from '@helper/stringAndDataHelpers';
 
-const OrderModalContent = ({
+const DialogOrderContent = ({
     modalType,
     templateData,
     handleModalInputChange,
@@ -219,10 +219,10 @@ const OrderModalContent = ({
     );
 };
 
-OrderModalContent.propTypes = {
+DialogOrderContent.propTypes = {
     modalType: PropTypes.string.isRequired,
     templateData: PropTypes.object.isRequired,
     handleModalInputChange: PropTypes.func.isRequired,
 };
 
-export default OrderModalContent;
+export default DialogOrderContent;

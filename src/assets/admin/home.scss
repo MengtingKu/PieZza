@@ -14,3 +14,12 @@
         background-color: rgba(skyblue, 0.5);
     }
 }
+
+.react-datepicker-wrapper {
+    input {
+        padding: 5px 2px;
+        border: 1px solid #80808052;
+        text-align: center;
+        color: $font;
+    }
+}
