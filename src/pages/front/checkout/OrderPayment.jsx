@@ -6,6 +6,7 @@ import { getOrderById, postPayById } from '@slices/orderSlice';
 import { splitText } from '@helper/stringAndDataHelpers';
 import Icon from '@helper/FontAwesomeIcon';
 import DynamicTable from '@components/common/DynamicTable';
+import Loading from '@components/common/Loading';
 
 const OrderPayment = () => {
     const navigate = useNavigate();
@@ -119,23 +120,7 @@ const OrderPayment = () => {
                     : {}
             }
         >
-            {isOrderLoading && (
-                <div
-                    className="d-flex justify-content-center align-items-center"
-                    style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '100vw',
-                        height: '100vh',
-                        backgroundColor: 'rgba(255,255,255,0.3)',
-                        zIndex: 999,
-                    }}
-                >
-                    {' '}
-                    loading...
-                </div>
-            )}
+            {isOrderLoading && <Loading />}
             <nav className="my-3" aria-label="breadcrumb">
                 <ol className="breadcrumb">
                     <li className="breadcrumb-item">

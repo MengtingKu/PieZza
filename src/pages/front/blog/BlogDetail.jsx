@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getArticleById } from '@slices/articleSlice';
 import { formatTimestamp } from '@helper/stringAndDataHelpers';
+import Loading from '@components/common/Loading';
 
 const BlogDetail = () => {
     const { id } = useParams();
@@ -29,23 +30,7 @@ const BlogDetail = () => {
                           }
                 }
             >
-                {isArticleLoading && (
-                    <div
-                        className="d-flex justify-content-center align-items-center"
-                        style={{
-                            position: 'absolute',
-                            top: 0,
-                            left: 0,
-                            width: '100vw',
-                            height: '100vh',
-                            backgroundColor: 'rgba(255,255,255,0.3)',
-                            zIndex: 999,
-                        }}
-                    >
-                        {' '}
-                        loading...
-                    </div>
-                )}
+                {isArticleLoading && <Loading />}
                 {article && (
                     <div
                         className="card mb-3 rounded-0"

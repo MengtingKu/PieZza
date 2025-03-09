@@ -12,6 +12,7 @@ import DynamicTable from '@components/common/DynamicTable';
 import Pagination from '@components/common/Pagination';
 import DialogBasic from '@components/common/DialogBasic';
 import DialogProductContent from '@components/admin/DialogProductContent';
+import Loading from '@components/common/Loading';
 
 const defaultTemplateData = {
     id: '',
@@ -29,7 +30,9 @@ const defaultTemplateData = {
 
 const ProductList = () => {
     const dispatch = useDispatch();
-    const { products, pagination } = useSelector(state => state.adminProduct);
+    const { products, pagination, isProductLoading } = useSelector(
+        state => state.adminProduct
+    );
     const [modalType, setModalType] = useState('');
     const [templateData, setTemplateData] = useState(defaultTemplateData);
     const [showModal, setShowModal] = useState(false);
@@ -212,14 +215,26 @@ const ProductList = () => {
     };
 
     useEffect(() => {
-        if (products.length === 0) {
+        if (!products.length) {
             dispatch(getProducts());
         }
     }, [products.length, dispatch]);
 
     return (
         <>
-            <div className="container cart_list">
+            <div
+                className="container cart_list"
+                style={
+                    isProductLoading
+                        ? {
+                              width: '100vw',
+                              height: '100vh',
+                              overflow: 'hidden',
+                          }
+                        : {}
+                }
+            >
+                {isProductLoading && <Loading />}
                 <div className="header_group d-flex justify-content-between align-items-end">
                     <div className="page_title">
                         <h3>產品管理列表</h3>

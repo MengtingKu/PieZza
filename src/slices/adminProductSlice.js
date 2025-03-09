@@ -4,21 +4,21 @@ import adminApi from '@api/adminApi';
 const adminProductSlice = createSlice({
     name: 'adminProduct',
     initialState: {
-        products: [],
-        isLoading: false,
+        isProductLoading: false,
         message: null,
         success: null,
+        products: [],
         pagination: {},
     },
     reducers: {},
     extraReducers: builder => {
         builder
             .addCase(getProductsAll.fulfilled, (state, action) => {
-                state.isLoading = false;
+                state.isProductLoading = false;
                 state.products = action.payload.products;
             })
             .addCase(getProducts.fulfilled, (state, action) => {
-                state.isLoading = false;
+                state.isProductLoading = false;
                 state.products = action.payload.products;
                 state.pagination = action.payload.pagination;
             })
@@ -29,7 +29,7 @@ const adminProductSlice = createSlice({
                     deleteProduct.fulfilled
                 ),
                 (state, action) => {
-                    state.isLoading = false;
+                    state.isProductLoading = false;
                     state.success = action.payload.success;
                     state.message = action.payload.message;
                 }
@@ -43,7 +43,7 @@ const adminProductSlice = createSlice({
                     deleteProduct.pending
                 ),
                 state => {
-                    state.isLoading = true;
+                    state.isProductLoading = true;
                     state.message = null;
                 }
             )
@@ -56,7 +56,7 @@ const adminProductSlice = createSlice({
                     deleteProduct.rejected
                 ),
                 (state, action) => {
-                    state.isLoading = false;
+                    state.isProductLoading = false;
                     state.message = action.error.message;
                 }
             );

@@ -5,9 +5,12 @@
 @import "bootstrap/scss/bootstrap";
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
 
-// 前台頁面
+// 共用
 @import "@assets/_mixins.scss";
 @import "@assets/_theme.scss";
+@import "@assets/common/loading.scss";
+
+// 前台頁面
 @import "@assets/common/link-button.scss";
 @import "@assets/common/layout.scss";
 @import "@assets/front/product-list.scss";
@@ -23,4 +26,4 @@
 @import "@assets/admin/login.scss";
 
 // 後台頁面
-@import "@assets/admin/home.scss";
+@import "@assets/admin/all-admin.scss";

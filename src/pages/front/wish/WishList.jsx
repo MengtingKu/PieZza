@@ -5,13 +5,15 @@ import { getProducts } from '@slices/productSlice';
 import ProductCard from '@components/front/ProductCard';
 import Icon from '@helper/FontAwesomeIcon';
 import LinkButton from '@components/common/LinkButton';
+import Loading from '@components/common/Loading';
 
 const WishList = () => {
     const dispatch = useDispatch();
-    const { products } = useSelector(state => state.product);
+    const { products, isProductLoading } = useSelector(state => state.product);
     const { wishList } = useSelector(state => state.wishList);
     const [filteredWishList, setFilteredWishList] = useState([]);
     const [currentIcon, setCurrentIcon] = useState('star');
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         if (products.length === 0) {
@@ -20,7 +22,9 @@ const WishList = () => {
     }, [dispatch, products.length]);
 
     useEffect(() => {
+        setIsLoading(true);
         setFilteredWishList(products.filter(product => wishList[product.id]));
+        setIsLoading(false);
     }, [dispatch, products, wishList]);
 
     useEffect(() => {
@@ -30,7 +34,19 @@ const WishList = () => {
     }, []);
 
     return (
-        <div className="container my-4 product_list product_detail wish-list">
+        <div
+            className="container my-4 product_list product_detail wish-list"
+            style={
+                isProductLoading || isLoading
+                    ? {
+                          width: '100vw',
+                          height: '100vh',
+                          overflow: 'hidden',
+                      }
+                    : {}
+            }
+        >
+            {(isProductLoading || isLoading) && <Loading />}
             <div className="page_title">
                 <h3>私藏美味</h3>
                 <h6>A Taste That Belongs to Me</h6>

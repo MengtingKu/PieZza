@@ -11,6 +11,7 @@ import { splitText } from '@helper/stringAndDataHelpers';
 import Icon from '@helper/FontAwesomeIcon';
 import DynamicTable from '@components/common/DynamicTable';
 import LinkButton from '@components/common/LinkButton';
+import Loading from '@components/common/Loading';
 
 const CartsPage = () => {
     const navigate = useNavigate();
@@ -212,25 +213,7 @@ const CartsPage = () => {
                     : {}
             }
         >
-            {/* 全面 loading */}
-            {isCartLoading && (
-                <div
-                    className="d-flex justify-content-center align-items-center"
-                    style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '100vw',
-                        height: '100vh',
-                        backgroundColor: 'rgba(255,255,255,0.3)',
-                        zIndex: 999,
-                    }}
-                >
-                    {' '}
-                    loading...
-                </div>
-            )}
-            {/* 訂單列表 */}
+            {isCartLoading && <Loading />}
             {carts.total === 0 ? (
                 <div className="text-center my-3 lh-lg">
                     <img

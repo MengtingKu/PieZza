@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Icon from '@helper/FontAwesomeIcon';
+import Loading from '@components/common/Loading';
 
 const OrderSuccess = () => {
     const navigate = useNavigate();
@@ -20,23 +21,7 @@ const OrderSuccess = () => {
                     : {}
             }
         >
-            {isOrderLoading && (
-                <div
-                    className="d-flex justify-content-center align-items-center"
-                    style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '100vw',
-                        height: '100vh',
-                        backgroundColor: 'rgba(255,255,255,0.3)',
-                        zIndex: 999,
-                    }}
-                >
-                    {' '}
-                    loading...
-                </div>
-            )}
+            {isOrderLoading && <Loading />}
             <nav className="my-3" aria-label="breadcrumb">
                 <ol className="breadcrumb">
                     <li className="breadcrumb-item">

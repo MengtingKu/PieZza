@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getArticle } from '@slices/articleSlice';
 import { formatTimestamp } from '@helper/stringAndDataHelpers';
+import Loading from '@components/common/Loading';
 
 const BlogPage = () => {
     const dispatch = useDispatch();
@@ -26,23 +27,7 @@ const BlogPage = () => {
                         : {}
                 }
             >
-                {isArticleLoading && (
-                    <div
-                        className="d-flex justify-content-center align-items-center"
-                        style={{
-                            position: 'absolute',
-                            top: 0,
-                            left: 0,
-                            width: '100vw',
-                            height: '100vh',
-                            backgroundColor: 'rgba(255,255,255,0.3)',
-                            zIndex: 999,
-                        }}
-                    >
-                        {' '}
-                        loading...
-                    </div>
-                )}
+                {isArticleLoading && <Loading />}
                 <div className="page_title">
                     <h3>部落格</h3>
                     <h6>Blog</h6>

@@ -11,6 +11,7 @@ import DynamicTable from '@components/common/DynamicTable';
 import Pagination from '@components/common/Pagination';
 import DialogBasic from '@components/common/DialogBasic';
 import DialogCouponContent from '@components/admin/DialogCouponContent';
+import Loading from '@components/common/Loading';
 
 const defaultTemplateData = {
     title: '',
@@ -22,7 +23,9 @@ const defaultTemplateData = {
 
 const CouponList = () => {
     const dispatch = useDispatch();
-    const { coupons, pagination } = useSelector(state => state.adminCoupon);
+    const { coupons, pagination, isCouponLoading } = useSelector(
+        state => state.adminCoupon
+    );
     const [currentPage, setCurrentPage] = useState(0);
     const [modalType, setModalType] = useState('');
     const [templateData, setTemplateData] = useState(defaultTemplateData);
@@ -204,8 +207,19 @@ const CouponList = () => {
 
     return (
         <>
-            <div className="container cart_list">
-                {' '}
+            <div
+                className="container cart_list"
+                style={
+                    isCouponLoading
+                        ? {
+                              width: '100vw',
+                              height: '100vh',
+                              overflow: 'hidden',
+                          }
+                        : {}
+                }
+            >
+                {isCouponLoading && <Loading />}
                 <div className="header_group d-flex justify-content-between align-items-end">
                     <div className="page_title">
                         <h3>優惠券管理列表</h3>

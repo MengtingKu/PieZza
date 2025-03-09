@@ -12,6 +12,7 @@ import DynamicTable from '@components/common/DynamicTable';
 import Pagination from '@components/common/Pagination';
 import DialogBasic from '@components/common/DialogBasic';
 import DialogArticleContent from '@components/admin/DialogArticleContent';
+import Loading from '@components/common/Loading';
 
 const defaultTemplateData = {
     id: '',
@@ -28,7 +29,9 @@ const defaultTemplateData = {
 
 const ArticleList = () => {
     const dispatch = useDispatch();
-    const { articles, pagination } = useSelector(state => state.adminArticle);
+    const { articles, pagination, isArticleLoading } = useSelector(
+        state => state.adminArticle
+    );
     const [modalType, setModalType] = useState('');
     const [templateData, setTemplateData] = useState(defaultTemplateData);
     const [showModal, setShowModal] = useState(false);
@@ -157,12 +160,26 @@ const ArticleList = () => {
     };
 
     useEffect(() => {
-        dispatch(getArticles());
-    }, [dispatch]);
+        if (!articles.length) {
+            dispatch(getArticles());
+        }
+    }, [dispatch, articles]);
 
     return (
         <>
-            <div className="container cart_list">
+            <div
+                className="container cart_list"
+                style={
+                    isArticleLoading
+                        ? {
+                              width: '100vw',
+                              height: '100vh',
+                              overflow: 'hidden',
+                          }
+                        : {}
+                }
+            >
+                {isArticleLoading && <Loading />}
                 <div className="header_group d-flex justify-content-between align-items-end">
                     <div className="page_title">
                         <h3>文章管理列表</h3>

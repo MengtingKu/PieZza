@@ -4,10 +4,10 @@ import adminApi from '@api/adminApi';
 const adminCouponSlice = createSlice({
     name: 'adminCoupon',
     initialState: {
-        coupons: [],
         isCouponLoading: false,
         message: null,
         success: null,
+        coupons: [],
         pagination: {},
     },
     reducers: {},

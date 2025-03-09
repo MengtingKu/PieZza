@@ -4,12 +4,12 @@ import adminApi from '@api/adminApi';
 const adminArticleSlice = createSlice({
     name: 'adminArticle',
     initialState: {
-        articles: [],
-        article: {},
         isArticleLoading: false,
         message: null,
         success: null,
+        articles: [],
         pagination: {},
+        article: {},
     },
     reducers: {},
     extraReducers: builder => {

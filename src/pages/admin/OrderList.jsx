@@ -16,6 +16,7 @@ import Pagination from '@components/common/Pagination';
 import DialogDelete from '@components/common/DialogDelete';
 import DialogBasic from '@components/common/DialogBasic';
 import DialogOrderContent from '@components/admin/DialogOrderContent';
+import Loading from '@components/common/Loading';
 
 const defaultTemplateData = {
     create_at: null,
@@ -30,7 +31,9 @@ const defaultTemplateData = {
 
 const OrderList = () => {
     const dispatch = useDispatch();
-    const { orders, pagination } = useSelector(state => state.adminOrder);
+    const { orders, pagination, isOrderLoading } = useSelector(
+        state => state.adminOrder
+    );
     const [currentPage, setCurrentPage] = useState(0);
     const [modalType, setModalType] = useState('');
     const [templateData, setTemplateData] = useState(defaultTemplateData);
@@ -231,7 +234,19 @@ const OrderList = () => {
 
     return (
         <>
-            <div className="container cart_list">
+            <div
+                className="container cart_list"
+                style={
+                    isOrderLoading
+                        ? {
+                              width: '100vw',
+                              height: '100vh',
+                              overflow: 'hidden',
+                          }
+                        : {}
+                }
+            >
+                {isOrderLoading && <Loading />}
                 <div className="header_group d-flex justify-content-between align-items-end">
                     <div className="page_title">
                         <h3>訂單管理列表</h3>

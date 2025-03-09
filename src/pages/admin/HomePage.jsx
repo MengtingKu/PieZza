@@ -8,17 +8,21 @@ import OperationSummary from '@components/admin/OperationSummary';
 import PerformanceChart from '@components/admin/PerformanceChart';
 import LatestOrder from '@components/admin/LatestOrder';
 import RecentActivities from '@components/admin/RecentActivities';
+import Loading from '@components/common/Loading';
 
 const HomePage = () => {
     const dispatch = useDispatch();
-    const { isLoading, products } = useSelector(state => state.adminProduct);
+    const { isProductLoading, products } = useSelector(
+        state => state.adminProduct
+    );
+    const [isLoading, setIsLoading] = useState(false);
     const [pieData, setPieData] = useState([]);
     const [allOrdersData, setAllOrdersData] = useState([]);
     const [allOrders, setAllOrders] = useState({});
     const [incomeData, setIncomeData] = useState([]);
     const isFetching = useRef(false);
 
-    const calcCategory = products => {
+    const calcProductCategory = products => {
         const grouped = Object.groupBy(products, pro => pro.category);
 
         return Object.entries(grouped).map(([key, value]) => {
@@ -39,6 +43,8 @@ const HomePage = () => {
 
             return acc;
         }, {});
+
+        setIsLoading(false);
 
         return Object.entries(incomeByDate).map(([date, income]) => ({
             date,
@@ -76,14 +82,15 @@ const HomePage = () => {
     }, [dispatch]);
 
     useEffect(() => {
+        setIsLoading(true);
         Promise.all([dispatch(getProductsAll()), dispatch(getArticles())]);
     }, [dispatch]);
 
     useEffect(() => {
-        if (!isLoading) {
-            setPieData(calcCategory(products));
+        if (!isProductLoading) {
+            setPieData(calcProductCategory(products));
         }
-    }, [products, isLoading]);
+    }, [products, isProductLoading]);
 
     useEffect(() => {
         fetchOrders();
@@ -97,7 +104,19 @@ const HomePage = () => {
     }, [allOrders]);
 
     return (
-        <div className="container px-5 pb-5 admin_home">
+        <div
+            className="container px-5 pb-5 admin_home"
+            style={
+                isLoading
+                    ? {
+                          width: '100vw',
+                          height: '100vh',
+                          overflow: 'hidden',
+                      }
+                    : {}
+            }
+        >
+            {isLoading && <Loading />}
             <div className="header_group mb-3 d-flex justify-content-between align-items-end cart_list">
                 <div className="page_title">
                     <h3>經營總覽</h3>

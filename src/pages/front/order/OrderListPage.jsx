@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getOrder } from '@slices/orderSlice';
 import OrderCollapse from '@components/front/OrderCollapse';
 import Pagination from '@components/common/Pagination';
+import Loading from '@components/common/Loading';
 
 const OrderListPage = () => {
     const dispatch = useDispatch();
@@ -35,23 +36,7 @@ const OrderListPage = () => {
                     : {}
             }
         >
-            {isOrderLoading && (
-                <div
-                    className="d-flex justify-content-center align-items-center"
-                    style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '100vw',
-                        height: '100vh',
-                        backgroundColor: 'rgba(255,255,255,0.3)',
-                        zIndex: 999,
-                    }}
-                >
-                    {' '}
-                    loading...
-                </div>
-            )}
+            {isOrderLoading && <Loading />}
             <div className="page_title my-4">
                 <h3>我的訂單</h3>
                 <h6>My orders</h6>

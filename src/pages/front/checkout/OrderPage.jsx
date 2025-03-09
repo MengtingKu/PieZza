@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { splitText } from '@helper/stringAndDataHelpers';
 import DynamicTable from '@components/common/DynamicTable';
 import OrderForm from '@components/front/OrderForm';
+import Loading from '@components/common/Loading';
 
 const OrderPage = () => {
     const { isCartLoading, carts } = useSelector(state => state.cart);
@@ -91,23 +92,7 @@ const OrderPage = () => {
                     : {}
             }
         >
-            {isCartLoading && (
-                <div
-                    className="d-flex justify-content-center align-items-center"
-                    style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '100vw',
-                        height: '100vh',
-                        backgroundColor: 'rgba(255,255,255,0.3)',
-                        zIndex: 999,
-                    }}
-                >
-                    {' '}
-                    loading...
-                </div>
-            )}
+            {isCartLoading && <Loading />}
             <nav className="my-3" aria-label="breadcrumb">
                 <ol className="breadcrumb">
                     <li className="breadcrumb-item">

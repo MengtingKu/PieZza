@@ -4,36 +4,36 @@ import frontApi from '@api/frontApi';
 const productSlice = createSlice({
     name: 'product',
     initialState: {
-        products: [],
-        product: null,
-        isLoading: false,
+        isProductLoading: false,
         message: null,
         success: null,
+        products: [],
+        product: null,
     },
     reducers: {},
     extraReducers: builder => {
         builder
             .addCase(getProducts.fulfilled, (state, action) => {
-                state.isLoading = false;
+                state.isProductLoading = false;
                 state.products = action.payload.products;
                 state.message = action.payload.message;
                 state.success = action.payload.success;
             })
             .addCase(getProductById.fulfilled, (state, action) => {
-                state.isLoading = false;
+                state.isProductLoading = false;
                 state.product = action.payload;
             })
             .addMatcher(
                 isAnyOf(getProducts.pending, getProductById.pending),
                 state => {
-                    state.isLoading = true;
+                    state.isProductLoading = true;
                     state.message = null;
                 }
             )
             .addMatcher(
                 isAnyOf(getProducts.rejected, getProductById.rejected),
                 (state, action) => {
-                    state.isLoading = false;
+                    state.isProductLoading = false;
                     state.message = action.error.message;
                 }
             );

@@ -4,10 +4,10 @@ import adminApi from '@api/adminApi';
 const adminOrderSlice = createSlice({
     name: 'adminOrder',
     initialState: {
-        orders: [],
         isOrderLoading: false,
         message: null,
         success: null,
+        orders: [],
         pagination: {},
     },
     reducers: {},

@@ -1,27 +1,13 @@
+import PropTypes from 'prop-types';
 import ModalImage from 'react-modal-image';
-import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useWindowSize } from 'react-use';
-import { useDispatch, useSelector } from 'react-redux';
-import { getProducts } from '@slices/productSlice';
 import Icon from '@helper/FontAwesomeIcon';
 import LinkButton from '@components/common/LinkButton';
 
-const SaleSection = () => {
+const SaleSection = ({ specialProducts }) => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const { products } = useSelector(state => state.product);
     const { width } = useWindowSize();
-    const [specialProducts, setSpecialProducts] = useState([]);
-
-    useEffect(() => {
-        if (!products.length) {
-            dispatch(getProducts());
-        }
-        setSpecialProducts(
-            products.filter(product => product.origin_price > product.price)
-        );
-    }, [dispatch, products]);
 
     return (
         <div className="container px-5">
@@ -72,6 +58,10 @@ const SaleSection = () => {
             </div>
         </div>
     );
+};
+
+SaleSection.propTypes = {
+    specialProducts: PropTypes.array,
 };
 
 export default SaleSection;
