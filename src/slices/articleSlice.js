@@ -5,8 +5,6 @@ const articleSlice = createSlice({
     name: 'article',
     initialState: {
         isArticleLoading: false,
-        message: null,
-        success: null,
         articles: null,
         article: null,
         pagination: {},
@@ -18,26 +16,21 @@ const articleSlice = createSlice({
                 state.isArticleLoading = false;
                 state.articles = action.payload.articles;
                 state.pagination = action.payload.pagination;
-                state.message = action.payload.message;
-                state.success = action.payload.success;
             })
             .addCase(getArticleById.fulfilled, (state, action) => {
                 state.isArticleLoading = false;
                 state.article = action.payload.article;
-                state.success = action.payload.success;
             })
             .addMatcher(
                 isAnyOf(getArticle.pending, getArticleById.pending),
                 state => {
                     state.isArticleLoading = true;
-                    state.message = null;
                 }
             )
             .addMatcher(
                 isAnyOf(getArticle.rejected, getArticleById.rejected),
-                (state, action) => {
+                state => {
                     state.isArticleLoading = false;
-                    state.message = action.error.message;
                 }
             );
     },
@@ -51,8 +44,6 @@ export const getArticle = createAsyncThunk('article/getArticle', async () => {
     );
 
     return {
-        success: res.data.success,
-        message: res.data.message,
         articles: { ...grouped },
         pagination: res.data.pagination,
     };
@@ -64,7 +55,6 @@ export const getArticleById = createAsyncThunk(
         const res = await frontApi.article.getArticleById(articleId);
 
         return {
-            success: res.data.success,
             article: res.data.article,
         };
     }

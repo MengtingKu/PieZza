@@ -1,12 +1,11 @@
 import { createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit';
 import adminApi from '@api/adminApi';
+import { createMessage } from '@helper/stringAndDataHelpers';
 
 const adminOrderSlice = createSlice({
     name: 'adminOrder',
     initialState: {
-        isOrderLoading: false,
-        message: null,
-        success: null,
+        isOrderLoading: true,
         orders: [],
         pagination: {},
     },
@@ -14,7 +13,7 @@ const adminOrderSlice = createSlice({
     extraReducers: builder => {
         builder
             .addCase(getOrders.fulfilled, (state, action) => {
-                state.isLoading = false;
+                state.isOrderLoading = false;
                 state.orders = action.payload.orders;
                 state.pagination = action.payload.pagination;
             })
@@ -25,10 +24,8 @@ const adminOrderSlice = createSlice({
                     deleteOrderById.fulfilled,
                     deleteOrders.fulfilled
                 ),
-                (state, action) => {
-                    state.isLoading = false;
-                    state.success = action.payload.success;
-                    state.message = action.payload.message;
+                state => {
+                    state.isOrderLoading = false;
                 }
             )
             .addMatcher(
@@ -39,8 +36,7 @@ const adminOrderSlice = createSlice({
                     deleteOrders.pending
                 ),
                 state => {
-                    state.isLoading = true;
-                    state.message = null;
+                    state.isOrderLoading = true;
                 }
             )
             .addMatcher(
@@ -50,9 +46,8 @@ const adminOrderSlice = createSlice({
                     deleteOrderById.rejected,
                     deleteOrders.rejected
                 ),
-                (state, action) => {
-                    state.isLoading = false;
-                    state.message = action.error.message;
+                state => {
+                    state.isOrderLoading = false;
                 }
             );
     },
@@ -76,39 +71,42 @@ export const putOrderById = createAsyncThunk(
         const body = {
             data: params,
         };
-        const res = await adminApi.orders.putOrderById(id, body);
-        dispatch(getOrders(currentPage));
+        try {
+            const res = await adminApi.orders.putOrderById(id, body);
+            createMessage(dispatch, res.data.success, res.data.message);
 
-        return {
-            success: res.data.success,
-            message: res.data.message,
-        };
+            dispatch(getOrders(currentPage));
+        } catch (error) {
+            createMessage(dispatch, false, error?.response?.data?.message);
+        }
     }
 );
 
 export const deleteOrderById = createAsyncThunk(
     'adminOrder/deleteOrderById',
     async (id, { dispatch }) => {
-        const res = await adminApi.orders.deleteOrderById(id);
-        dispatch(getOrders());
+        try {
+            const res = await adminApi.orders.deleteOrderById(id);
+            createMessage(dispatch, res.data.success, res.data.message);
 
-        return {
-            success: res.data.success,
-            message: res.data.message,
-        };
+            dispatch(getOrders());
+        } catch (error) {
+            createMessage(dispatch, false, error?.response?.data?.message);
+        }
     }
 );
 
 export const deleteOrders = createAsyncThunk(
     'adminOrder/deleteOrders',
     async (_, { dispatch }) => {
-        const res = await adminApi.orders.deleteOrders();
-        dispatch(getOrders());
+        try {
+            const res = await adminApi.orders.deleteOrders();
+            createMessage(dispatch, res.data.success, res.data.message);
 
-        return {
-            success: res.data.success,
-            message: res.data.message,
-        };
+            dispatch(getOrders());
+        } catch (error) {
+            createMessage(dispatch, false, error?.response?.data?.message);
+        }
     }
 );
 

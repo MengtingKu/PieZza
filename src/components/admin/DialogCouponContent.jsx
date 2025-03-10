@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import DatePicker from 'react-datepicker';
+import { useSelector } from 'react-redux';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const DialogCouponContent = ({
@@ -9,6 +10,7 @@ const DialogCouponContent = ({
     handleModalInputChange,
     handleDatePickerChange,
 }) => {
+    const { isCouponLoading } = useSelector(state => state.adminCoupon);
     if (modalType === 'delete') {
         return (
             <>
@@ -59,7 +61,21 @@ const DialogCouponContent = ({
                                             ).format('YYYY-MM-DD')}
                                         </span>
                                     ) : (
-                                        templateData[item.key]
+                                        <>
+                                            {item.key === 'is_enabled' ? (
+                                                templateData[item.key] ? (
+                                                    <span className="text-success">
+                                                        啟用
+                                                    </span>
+                                                ) : (
+                                                    <span className="text-danger">
+                                                        停用
+                                                    </span>
+                                                )
+                                            ) : (
+                                                templateData[item.key]
+                                            )}
+                                        </>
                                     )}
                                 </span>
                             </div>
@@ -72,71 +88,85 @@ const DialogCouponContent = ({
 
     return (
         <div className="container">
-            <div className="mb-3">
-                <label htmlFor="title" className="form-label">
-                    活動名稱
-                </label>
-                <input
-                    name="title"
-                    id="title"
-                    type="text"
-                    className="form-control"
-                    placeholder="請輸入活動名稱"
-                    defaultValue={templateData.title}
-                    onChange={handleModalInputChange}
-                />
-            </div>
-            <div className="mb-3">
-                <label htmlFor="percent" className="form-label">
-                    折扣 (%)
-                </label>
-                <input
-                    name="percent"
-                    id="percent"
-                    type="number"
-                    className="form-control"
-                    placeholder="請輸入折扣"
-                    defaultValue={templateData.percent}
-                    onChange={handleModalInputChange}
-                />
-            </div>
-            <div className="mb-3">
-                <label htmlFor="code" className="form-label">
-                    優惠碼設定
-                </label>
-                <input
-                    name="code"
-                    id="code"
-                    type="text"
-                    className="form-control"
-                    placeholder="請設定優惠碼"
-                    defaultValue={templateData.code}
-                    onChange={handleModalInputChange}
-                />
-            </div>
-            <div className="mb-3">
-                <label htmlFor="code" className="me-2">
-                    到期日期
-                </label>
-                <DatePicker
-                    selected={templateData.due_date}
-                    onChange={date => handleDatePickerChange(date)}
-                    dateFormat="yyyy-MM-dd"
-                />
-            </div>
-            <div className="form-check">
-                <input
-                    name="is_enabled"
-                    type="checkbox"
-                    className="form-check-input"
-                    id="is_enabled"
-                    defaultChecked={templateData.is_enabled}
-                    onChange={handleModalInputChange}
-                />
-                <label className="form-check-label" htmlFor="is_enabled">
-                    是否啟用
-                </label>
-            </div>
+            {isCouponLoading ? (
+                <div className="d-flex justify-content-center">
+                    <div className="spinner-border text-warning" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            ) : (
+                <>
+                    <div className="mb-3">
+                        <label htmlFor="title" className="form-label">
+                            活動名稱
+                        </label>
+                        <input
+                            name="title"
+                            id="title"
+                            type="text"
+                            className="form-control"
+                            placeholder="請輸入活動名稱"
+                            defaultValue={templateData.title}
+                            onChange={handleModalInputChange}
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="percent" className="form-label">
+                            折扣 (%)
+                        </label>
+                        <input
+                            name="percent"
+                            id="percent"
+                            type="number"
+                            className="form-control"
+                            placeholder="請輸入折扣"
+                            defaultValue={templateData.percent}
+                            onChange={handleModalInputChange}
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="code" className="form-label">
+                            優惠碼設定
+                        </label>
+                        <input
+                            name="code"
+                            id="code"
+                            type="text"
+                            className="form-control"
+                            placeholder="請設定優惠碼"
+                            defaultValue={templateData.code}
+                            onChange={handleModalInputChange}
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="code" className="me-2">
+                            到期日期
+                        </label>
+                        <DatePicker
+                            selected={templateData.due_date}
+                            onChange={date => handleDatePickerChange(date)}
+                            dateFormat="yyyy-MM-dd"
+                        />
+                    </div>
+                    <div className="form-check">
+                        <input
+                            name="is_enabled"
+                            type="checkbox"
+                            className="form-check-input"
+                            id="is_enabled"
+                            role="switch"
+                            defaultChecked={templateData.is_enabled}
+                            onChange={handleModalInputChange}
+                        />
+                        <label
+                            className="form-check-label"
+                            htmlFor="is_enabled"
+                        >
+                            是否啟用
+                        </label>
+                    </div>
+                </>
+            )}
         </div>
     );
 };

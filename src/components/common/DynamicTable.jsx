@@ -78,13 +78,16 @@ const DynamicTable = ({ data, fields, endActions, tFooter = null }) => {
                                     {action.disabled &&
                                     action.disabled(item.id) ? (
                                         <>
-                                            {action.render()}
-                                            <span className="d-inline-flex align-items-center ms-2">
-                                                loading...
+                                            <span role="status">
+                                                {action.render(item)}
                                             </span>
+                                            <span
+                                                className="spinner-border spinner-border-sm"
+                                                aria-hidden="true"
+                                            ></span>
                                         </>
                                     ) : (
-                                        <>{action.render()}</>
+                                        <>{action.render(item)}</>
                                     )}
                                 </button>
                             ))}

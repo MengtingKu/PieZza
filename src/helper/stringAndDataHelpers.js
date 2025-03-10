@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import { createAsyncMessage } from '@slices/messageSlice';
 
 /**
  * 中英文本分割
@@ -33,10 +34,45 @@ export const transformTableData = arrayData => {
 };
 
 /**
- * 把時間戳轉換城需要的格式
+ * 打亂陣列並且依照需求取出指定數量
+ * 參考：JS 中打亂陣列 by Hyno
+ * @param {Array} arr
+ * @param {Number} num
+ * @returns
+ */
+export const getRandomItems = (arr, num) => {
+    const shuffled = [...arr];
+
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+
+    return shuffled.slice(0, num);
+};
+
+/**
+ * 把 unix 時間戳轉換城需要的格式 (其他的用 dayjs 直接轉)
  * @param {Number} timestamp
  * @param {String} type
  * @returns {String} - 時間依照需求轉換的樣式
  */
 export const formatTimestamp = (timestamp, type = 'YYYY-MM-DD HH:mm:ss') =>
     dayjs.unix(timestamp).format(type);
+
+/**
+ * api 回傳訊息統一架構
+ * @param {Function} dispatch
+ * @param {Boolean} success
+ * @param {String, Array} message
+ */
+export const createMessage = (dispatch, success, message) => {
+    dispatch(
+        createAsyncMessage({
+            id: new Date().getTime(),
+            type: success ? 'success' : 'danger',
+            text: Array.isArray(message) ? message.join(', ') : message,
+            icon: success ? 'circleCheck' : 'circleXmark',
+        })
+    );
+};

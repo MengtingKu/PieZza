@@ -1,13 +1,14 @@
 import { createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit';
 import frontApi from '@api/frontApi';
-import { transformTableData } from '@helper/stringAndDataHelpers';
+import {
+    transformTableData,
+    createMessage,
+} from '@helper/stringAndDataHelpers';
 
 const cartSlice = createSlice({
     name: 'cart',
     initialState: {
         isCartLoading: false,
-        message: null,
-        success: null,
         carts: { carts: [] },
     },
     reducers: {},
@@ -27,7 +28,6 @@ const cartSlice = createSlice({
                 ),
                 state => {
                     state.isCartLoading = true;
-                    state.message = null;
                 }
             )
             .addMatcher(
@@ -37,10 +37,8 @@ const cartSlice = createSlice({
                     deleteCartItem.fulfilled,
                     deleteCarts.fulfilled
                 ),
-                (state, action) => {
+                state => {
                     state.isCartLoading = false;
-                    state.success = action.payload.success;
-                    state.message = action.payload.message;
                 }
             )
             .addMatcher(
@@ -50,9 +48,8 @@ const cartSlice = createSlice({
                     putCartItem.rejected,
                     deleteCarts.rejected
                 ),
-                (state, action) => {
+                state => {
                     state.isCartLoading = false;
-                    state.message = action.error.message;
                 }
             );
     },
@@ -69,13 +66,14 @@ export const postCart = createAsyncThunk(
     'cart/postCart',
     async ({ product_id, qty = 1 }, { dispatch }) => {
         const body = { data: { product_id, qty } };
-        const res = await frontApi.cart.postCart(body);
-        dispatch(getCart());
+        try {
+            const res = await frontApi.cart.postCart(body);
+            createMessage(dispatch, res.data.success, res.data.message);
 
-        return {
-            success: res.data.success,
-            message: res.data.message,
-        };
+            dispatch(getCart());
+        } catch (error) {
+            createMessage(dispatch, false, error?.response?.data?.message);
+        }
     }
 );
 
@@ -83,39 +81,42 @@ export const putCartItem = createAsyncThunk(
     'cart/putCartItem',
     async ({ id, product_id, qty }, { dispatch }) => {
         const body = { data: { product_id, qty } };
-        const res = await frontApi.cart.putCartById(id, body);
-        dispatch(getCart());
+        try {
+            const res = await frontApi.cart.putCartById(id, body);
+            createMessage(dispatch, res.data.success, res.data.message);
 
-        return {
-            success: res.data.success,
-            message: res.data.message,
-        };
+            dispatch(getCart());
+        } catch (error) {
+            createMessage(dispatch, false, error?.response?.data?.message);
+        }
     }
 );
 
 export const deleteCartItem = createAsyncThunk(
     'cart/deleteCartItem',
-    async ({ id }, { dispatch }) => {
-        const res = await frontApi.cart.deleteCartById(id);
-        dispatch(getCart());
+    async (id, { dispatch }) => {
+        try {
+            const res = await frontApi.cart.deleteCartById(id);
+            createMessage(dispatch, res.data.success, res.data.message);
 
-        return {
-            success: res.data.success,
-            message: res.data.message,
-        };
+            dispatch(getCart());
+        } catch (error) {
+            createMessage(dispatch, false, error?.response?.data?.message);
+        }
     }
 );
 
 export const deleteCarts = createAsyncThunk(
     'cart/deleteCarts',
     async (_, { dispatch }) => {
-        const res = await frontApi.cart.deleteCarts();
-        dispatch(getCart());
+        try {
+            const res = await frontApi.cart.deleteCarts();
+            createMessage(dispatch, res.data.success, res.data.message);
 
-        return {
-            success: res.data.success,
-            message: res.data.message,
-        };
+            dispatch(getCart());
+        } catch (error) {
+            createMessage(dispatch, false, error?.response?.data?.message);
+        }
     }
 );
 

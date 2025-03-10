@@ -199,7 +199,7 @@ const OrderList = () => {
                 );
                 break;
             case 'delete':
-                dispatch(deleteOrderById({ id: templateData.id }));
+                dispatch(deleteOrderById(templateData.id));
                 break;
             case 'read':
                 break;
@@ -252,7 +252,7 @@ const OrderList = () => {
                         <h3>訂單管理列表</h3>
                         <h6>Order Management List</h6>
                     </div>
-                    <div>
+                    <div className="remove_all">
                         <DialogDelete
                             fetchDeleteData={fetchDeleteOrders}
                             className="btn btn-outline-danger rounded-0"

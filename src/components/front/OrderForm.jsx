@@ -20,17 +20,12 @@ const OrderForm = ({ cartList }) => {
 
     const onSubmit = async data => {
         const { message, ...user } = data;
-        try {
-            const resultAction = await dispatch(postOrder({ user, message }));
-            const originalPromiseResult = unwrapResult(resultAction);
-            dispatch(getCart());
-            reset();
+        const resultAction = await dispatch(postOrder({ user, message }));
+        const originalPromiseResult = unwrapResult(resultAction);
+        dispatch(getCart());
+        reset();
 
-            navigate(`/payment/${originalPromiseResult.orderId}`);
-        } catch (rejectedValueOrSerializedError) {
-            // Todo... 吐司訊息串接 api 回傳結果
-            console.error('Error:', rejectedValueOrSerializedError);
-        }
+        navigate(`/payment/${originalPromiseResult.orderId}`);
     };
 
     return (

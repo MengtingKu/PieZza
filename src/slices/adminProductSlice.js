@@ -1,12 +1,11 @@
 import { createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit';
 import adminApi from '@api/adminApi';
+import { createMessage } from '@helper/stringAndDataHelpers';
 
 const adminProductSlice = createSlice({
     name: 'adminProduct',
     initialState: {
         isProductLoading: false,
-        message: null,
-        success: null,
         products: [],
         pagination: {},
     },
@@ -28,10 +27,8 @@ const adminProductSlice = createSlice({
                     putProductById.fulfilled,
                     deleteProduct.fulfilled
                 ),
-                (state, action) => {
+                state => {
                     state.isProductLoading = false;
-                    state.success = action.payload.success;
-                    state.message = action.payload.message;
                 }
             )
             .addMatcher(
@@ -44,7 +41,6 @@ const adminProductSlice = createSlice({
                 ),
                 state => {
                     state.isProductLoading = true;
-                    state.message = null;
                 }
             )
             .addMatcher(
@@ -55,9 +51,8 @@ const adminProductSlice = createSlice({
                     putProductById.rejected,
                     deleteProduct.rejected
                 ),
-                (state, action) => {
+                state => {
                     state.isProductLoading = false;
-                    state.message = action.error.message;
                 }
             );
     },
@@ -97,13 +92,14 @@ export const postProduct = createAsyncThunk(
                 is_enabled: params.is_enabled ? 1 : 0,
             },
         };
-        const res = await adminApi.products.postProduct(body);
-        dispatch(getProducts());
+        try {
+            const res = await adminApi.products.postProduct(body);
+            createMessage(dispatch, res.data.success, res.data.message);
 
-        return {
-            success: res.data.success,
-            message: res.data.message,
-        };
+            dispatch(getProducts());
+        } catch (error) {
+            createMessage(dispatch, false, error?.response?.data?.message);
+        }
     }
 );
 
@@ -118,26 +114,28 @@ export const putProductById = createAsyncThunk(
                 is_enabled: params.is_enabled ? 1 : 0,
             },
         };
-        const res = await adminApi.products.putProductById(id, body);
-        dispatch(getProducts());
+        try {
+            const res = await adminApi.products.putProductById(id, body);
+            createMessage(dispatch, res.data.success, res.data.message);
 
-        return {
-            success: res.data.success,
-            message: res.data.message,
-        };
+            dispatch(getProducts());
+        } catch (error) {
+            createMessage(dispatch, false, error?.response?.data?.message);
+        }
     }
 );
 
 export const deleteProduct = createAsyncThunk(
     'adminProduct/deleteProduct',
     async ({ id }, { dispatch }) => {
-        const res = await adminApi.products.deleteProduct(id);
-        dispatch(getProducts());
+        try {
+            const res = await adminApi.products.deleteProduct(id);
+            createMessage(dispatch, res.data.success, res.data.message);
 
-        return {
-            success: res.data.success,
-            message: res.data.message,
-        };
+            dispatch(getProducts());
+        } catch (error) {
+            createMessage(dispatch, false, error?.response?.data?.message);
+        }
     }
 );
 

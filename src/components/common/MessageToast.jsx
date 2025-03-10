@@ -1,8 +1,14 @@
-import { useSelector } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeMessage } from '@slices/messageSlice';
+import Icon from '@helper/FontAwesomeIcon';
 
 const MessageToast = () => {
     const messages = useSelector(state => state.message);
+    const dispatch = useDispatch();
+
+    const handleRemoveMessage = id => {
+        dispatch(removeMessage(id));
+    };
 
     return (
         <div
@@ -17,14 +23,11 @@ const MessageToast = () => {
                         role="alert"
                         aria-live="assertive"
                         aria-atomic="true"
-                        data-delay="3000"
+                        data-delay="1000"
                     >
                         <div className={`d-flex text-${msg.type}`}>
                             <div className="toast-body">
-                                <FontAwesomeIcon
-                                    icon={msg.icon}
-                                    className="me-3"
-                                />
+                                <Icon icon={msg.icon} className="me-3" />
                                 {msg.text}
                             </div>
                             <button
@@ -32,6 +35,7 @@ const MessageToast = () => {
                                 className="btn-close me-2 m-auto"
                                 data-bs-dismiss="toast"
                                 aria-label="Close"
+                                onClick={() => handleRemoveMessage(msg.id)}
                             />
                         </div>
                     </div>

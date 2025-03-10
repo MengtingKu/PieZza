@@ -8,6 +8,7 @@ const DialogDelete = ({
     className,
     id = null,
     itemName = '全部資料',
+    disabled = false,
 }) => {
     const dispatch = useDispatch();
     const handleDelete = () => {
@@ -41,6 +42,7 @@ const DialogDelete = ({
             type="button"
             className={`btn dialog_delete ${className}`}
             onClick={handleDelete}
+            disabled={disabled}
         >
             {children}
         </button>
@@ -53,6 +55,7 @@ DialogDelete.propTypes = {
     className: PropTypes.string,
     id: PropTypes.string.isRequired,
     itemName: PropTypes.string.isRequired,
+    disabled: PropTypes.bool,
 };
 
 export default DialogDelete;

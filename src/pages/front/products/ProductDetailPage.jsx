@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { getProducts, getProductById } from '@slices/productSlice';
 import { postCart } from '@slices/cartSlice';
-import { splitText } from '@helper/stringAndDataHelpers';
+import { splitText, getRandomItems } from '@helper/stringAndDataHelpers';
 import Icon from '@helper/FontAwesomeIcon';
 import WishMark from '@components/front/WishMark';
 
@@ -21,18 +21,6 @@ const ProductDetailPage = () => {
     const { products, product } = useSelector(state => state.product);
     const [selectItemNum, setSelectItemNum] = useState(1);
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
-
-    // 參考：JS 中打亂陣列 by Hyno
-    const getRandomItems = (arr, num) => {
-        const shuffled = [...arr];
-
-        for (let i = shuffled.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-        }
-
-        return shuffled.slice(0, num);
-    };
 
     const swiperImgs = () => {
         if (!product) return null;
@@ -55,10 +43,6 @@ const ProductDetailPage = () => {
             dispatch(getProducts());
         }
     }, [dispatch, products.length]);
-
-    // if (isLoading) {
-    //     return <>想睡...休息一下 ¯﹃¯</>;
-    // }
 
     return (
         <div className="container my-3 product_list product_detail">

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -12,12 +12,13 @@ import Icon from '@helper/FontAwesomeIcon';
 import DynamicTable from '@components/common/DynamicTable';
 import LinkButton from '@components/common/LinkButton';
 import Loading from '@components/common/Loading';
+import DialogDelete from '@components/common/DialogDelete';
+import DialogCouponContent from '@components/front/DialogCouponContent';
 
 const CartsPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { isCartLoading, carts } = useSelector(state => state.cart);
-    const [isToggle, setIsToggle] = useState(false);
 
     const cartFields = [
         {
@@ -126,6 +127,30 @@ const CartsPage = () => {
             type: 'number',
             width: '10%',
         },
+        {
+            key: 'operation',
+            name: '刪除',
+            class: 'text-center align-middle',
+            type: 'custom',
+            width: '10%',
+            render: cart => {
+                const { chineseText } = splitText(cart.product_title);
+
+                return (
+                    <div className="remove_item">
+                        <DialogDelete
+                            fetchDeleteData={fetchRemoveItem}
+                            id={cart.id}
+                            className="border-0 text-danger"
+                            itemName={chineseText}
+                            disabled={isCartLoading}
+                        >
+                            <Icon icon="remove" size="sm" />
+                        </DialogDelete>
+                    </div>
+                );
+            },
+        },
     ];
     const cartTableFooter = () => {
         const colSpan = cartFields.findIndex(
@@ -136,6 +161,18 @@ const CartsPage = () => {
                 key: 'total',
                 name: '總計',
                 class: 'text-secondary text-decoration-line-through',
+            },
+            {
+                key: 'coupon',
+                name: '優惠碼',
+                class: 'text-success align-middle fs-6',
+                render: () => {
+                    return (
+                        <div className="container">
+                            <DialogCouponContent />
+                        </div>
+                    );
+                },
             },
             {
                 key: 'final_total',
@@ -150,12 +187,16 @@ const CartsPage = () => {
                     return (
                         <tr key={field.key}>
                             <td
-                                colSpan={colSpan + 1}
+                                colSpan={colSpan}
                                 className={`text-end ${field.class}`}
                             >
                                 {field.name}
                             </td>
-                            <td className={`text-end ${field.class}`}>
+                            <td
+                                colSpan={`${cartFields.length - colSpan}`}
+                                className={`text-end ${field.class}`}
+                            >
+                                {field.render && <>{field.render()}</>}
                                 {carts[field.key] &&
                                     carts[field.key].toLocaleString()}
                             </td>
@@ -165,26 +206,6 @@ const CartsPage = () => {
             </tfoot>
         );
     };
-    const cartActions = [
-        {
-            class: `btn btn-sm text-danger ${isToggle && 'fa-shake'}`,
-            handler: cart => {
-                setIsToggle(true);
-                dispatch(deleteCartItem({ id: cart.id }));
-
-                setTimeout(() => {
-                    setIsToggle(false);
-                }, 1000);
-            },
-            render: () => {
-                return (
-                    <>
-                        <Icon icon="remove" />
-                    </>
-                );
-            },
-        },
-    ];
 
     const updateItemQty = (cart, qty) => {
         dispatch(
@@ -196,13 +217,25 @@ const CartsPage = () => {
         );
     };
 
+    const fetchRemoveItem = id => {
+        return async dispatch => {
+            await dispatch(deleteCartItem(id));
+        };
+    };
+
+    const fetchRemoveCartItems = () => {
+        return async dispatch => {
+            await dispatch(deleteCarts());
+        };
+    };
+
     useEffect(() => {
         dispatch(getCart());
     }, [dispatch]);
 
     return (
         <div
-            className="container my-5 cart_list"
+            className="container my-5 cart_list coupon"
             style={
                 isCartLoading
                     ? {
@@ -238,22 +271,21 @@ const CartsPage = () => {
                             <h3>購物車清單</h3>
                             <h6>pizza cart</h6>
                         </div>
-                        <button
-                            className="btn btn-outline-danger border-0"
-                            type="button"
-                            onClick={() => {
-                                dispatch(deleteCarts());
-                            }}
-                            disabled={isCartLoading}
-                        >
-                            <span className="me-2">清空購物車</span>
-                            <Icon icon="remove" />
-                        </button>
+                        <div className="remove_all">
+                            <DialogDelete
+                                fetchDeleteData={fetchRemoveCartItems}
+                                className="btn btn-outline-danger border-0"
+                                itemName="所有美食"
+                                disabled={isCartLoading}
+                            >
+                                <span className="me-2">清空購物車</span>
+                                <Icon icon="remove" />
+                            </DialogDelete>
+                        </div>
                     </div>
                     <DynamicTable
                         data={carts.carts || []}
                         fields={cartFields}
-                        endActions={cartActions}
                         tFooter={cartTableFooter()}
                     />
                     <div className="d-flex justify-content-end align-items-center mb-2">

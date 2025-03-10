@@ -43,12 +43,14 @@ import {
     faBoxArchive,
     faDownLong,
     faFileInvoice,
+    faHandPointRight,
 } from '@fortawesome/free-solid-svg-icons';
 import {
     faUser as faRegularUser,
     faStar as faRegularStar,
     faMoneyBill1 as faRegularMoneyBill,
     faCircleCheck as faRegularCircleCheck,
+    faCircleXmark as faRegularCircleXmark,
 } from '@fortawesome/free-regular-svg-icons';
 
 const icons = {
@@ -94,8 +96,10 @@ const icons = {
     box: faBoxArchive,
     down: faDownLong,
     order: faFileInvoice,
+    handRight: faHandPointRight,
     regularUser: faRegularUser,
-    circleCheck: faRegularCircleCheck
+    circleCheck: faRegularCircleCheck,
+    circleXmark: faRegularCircleXmark,
 };
 
 const Icon = ({ icon, size = 'lg', color = null, className = '' }) => {

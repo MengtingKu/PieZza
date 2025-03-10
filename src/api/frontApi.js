@@ -15,7 +15,7 @@ const frontApi = {
         deleteCarts: () => request('delete', `/carts`),
     },
     coupon: {
-        postCoupon: params => request('post', `/coupon`, params),
+        postCoupon: params => request('post', `/coupon`, { data: params }),
     },
     order: {
         getOrder: page => request('get', `/orders?page=${page}`),

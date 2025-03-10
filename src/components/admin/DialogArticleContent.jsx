@@ -7,7 +7,9 @@ const DialogArticleContent = ({
     templateData,
     handleModalInputChange,
 }) => {
-    const { article } = useSelector(state => state.adminArticle);
+    const { article, isArticleLoading } = useSelector(
+        state => state.adminArticle
+    );
 
     if (modalType === 'delete') {
         return (
@@ -64,133 +66,189 @@ const DialogArticleContent = ({
     }
 
     return (
-        <div className="row g-4">
-            <div className="col-md-4">
-                <div className="mb-4">
-                    <label htmlFor="imageUrl" className="form-label">
-                        主圖
-                    </label>
-                    <div className="input-group">
-                        <input
-                            name="image"
-                            type="text"
-                            id="image"
-                            className="form-control"
-                            placeholder="請輸入圖片連結"
-                            defaultValue={article.image}
-                            onChange={handleModalInputChange}
-                        />
+        <div className="container">
+            {isArticleLoading ? (
+                <div className="d-flex justify-content-center">
+                    <div className="spinner-border text-warning" role="status">
+                        <span className="visually-hidden">Loading...</span>
                     </div>
-                    <img
-                        src={article.image}
-                        alt={article.title}
-                        className="img-fluid"
-                    />
                 </div>
-            </div>
+            ) : (
+                <div className="row g-4">
+                    <div className="col-md-4">
+                        <div className="mb-4">
+                            <label htmlFor="imageUrl" className="form-label">
+                                主圖
+                            </label>
+                            <div className="input-group">
+                                <input
+                                    name="image"
+                                    type="text"
+                                    id="image"
+                                    className="form-control"
+                                    placeholder="請輸入圖片連結"
+                                    defaultValue={
+                                        modalType === 'create'
+                                            ? templateData.image
+                                            : article.image
+                                    }
+                                    onChange={handleModalInputChange}
+                                />
+                            </div>
+                            <img
+                                src={
+                                    modalType === 'create'
+                                        ? templateData.image
+                                        : article.image
+                                }
+                                alt={
+                                    modalType === 'create'
+                                        ? templateData.title
+                                        : article.title
+                                }
+                                className="img-fluid"
+                            />
+                        </div>
+                    </div>
 
-            <div className="col-md-8">
-                <div className="mb-3">
-                    <label htmlFor="title" className="form-label">
-                        標題
-                    </label>
-                    <input
-                        name="title"
-                        id="title"
-                        type="text"
-                        className="form-control"
-                        placeholder="請輸入標題"
-                        defaultValue={article.title}
-                        onChange={handleModalInputChange}
-                    />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="author" className="form-label">
-                        作者
-                    </label>
-                    <input
-                        name="author"
-                        id="author"
-                        type="text"
-                        className="form-control"
-                        placeholder="請輸入作者"
-                        defaultValue={article.author}
-                        onChange={handleModalInputChange}
-                    />
-                </div>
+                    <div className="col-md-8">
+                        <div className="mb-3">
+                            <label htmlFor="title" className="form-label">
+                                標題
+                            </label>
+                            <input
+                                name="title"
+                                id="title"
+                                type="text"
+                                className="form-control"
+                                placeholder="請輸入標題"
+                                defaultValue={
+                                    modalType === 'create'
+                                        ? templateData.title
+                                        : article.title
+                                }
+                                onChange={handleModalInputChange}
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="author" className="form-label">
+                                作者
+                            </label>
+                            <input
+                                name="author"
+                                id="author"
+                                type="text"
+                                className="form-control"
+                                placeholder="請輸入作者"
+                                defaultValue={
+                                    modalType === 'create'
+                                        ? templateData.author
+                                        : article.author
+                                }
+                                onChange={handleModalInputChange}
+                            />
+                        </div>
 
-                <div className="mb-3">
-                    <label htmlFor="category" className="form-label">
-                        分類
-                    </label>
-                    <input
-                        name="category"
-                        id="category"
-                        type="text"
-                        className="form-control"
-                        placeholder="請輸入分類"
-                        defaultValue={article.category}
-                        onChange={handleModalInputChange}
-                    />
-                </div>
+                        <div className="mb-3">
+                            <label htmlFor="category" className="form-label">
+                                分類
+                            </label>
+                            <input
+                                name="category"
+                                id="category"
+                                type="text"
+                                className="form-control"
+                                placeholder="請輸入分類"
+                                defaultValue={
+                                    modalType === 'create'
+                                        ? templateData.category
+                                        : article.category
+                                }
+                                onChange={handleModalInputChange}
+                            />
+                        </div>
 
-                <div className="mb-3">
-                    <label htmlFor="create_at" className="form-label">
-                        時間戳
-                    </label>
-                    <input
-                        name="create_at"
-                        id="create_at"
-                        type="text"
-                        className="form-control"
-                        placeholder="請輸入13位時間戳"
-                        defaultValue={article.create_at}
-                        onChange={handleModalInputChange}
-                    />
-                </div>
+                        <div className="mb-3">
+                            <label htmlFor="create_at" className="form-label">
+                                時間戳
+                            </label>
+                            <input
+                                name="create_at"
+                                id="create_at"
+                                type="text"
+                                className="form-control"
+                                placeholder="請輸入13位時間戳"
+                                defaultValue={
+                                    modalType === 'create'
+                                        ? templateData.create_at
+                                        : article.create_at
+                                }
+                                onChange={handleModalInputChange}
+                            />
+                        </div>
 
-                <div className="mb-3">
-                    <label htmlFor="description" className="form-label">
-                        描述
-                    </label>
-                    <textarea
-                        name="description"
-                        id="description"
-                        className="form-control"
-                        rows={4}
-                        defaultValue={article.description}
-                        onChange={handleModalInputChange}
-                    />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="content" className="form-label">
-                        內容
-                    </label>
-                    <textarea
-                        name="content"
-                        id="content"
-                        className="form-control"
-                        rows={4}
-                        placeholder="請輸入說明內容"
-                        defaultValue={article.content}
-                        onChange={handleModalInputChange}
-                    />
-                </div>
+                        <div className="mb-3">
+                            <label htmlFor="description" className="form-label">
+                                描述
+                            </label>
+                            <textarea
+                                name="description"
+                                id="description"
+                                className="form-control"
+                                rows={4}
+                                defaultValue={
+                                    modalType === 'create'
+                                        ? templateData.description
+                                        : article.description
+                                }
+                                onChange={handleModalInputChange}
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="content" className="form-label">
+                                內容
+                            </label>
+                            <textarea
+                                name="content"
+                                id="content"
+                                className="form-control"
+                                rows={4}
+                                placeholder="請輸入說明內容"
+                                defaultValue={
+                                    modalType === 'create'
+                                        ? templateData.content
+                                        : article.content
+                                }
+                                onChange={handleModalInputChange}
+                            />
+                            <small className="mb-3 text-danger">
+                                溫馨提醒：請務必變更內容才能送交
+                            </small>
+                        </div>
 
-                <div className="form-check mb-3">
-                    <input
-                        name="isPublic"
-                        type="checkbox"
-                        className="form-check-input"
-                        id="isPublic"
-                        defaultChecked={article.isPublic}
-                        onChange={handleModalInputChange}
-                    />
-                    <label className="form-check-label" htmlFor="isPublic">
-                        是否發布
-                    </label>
+                        <div className="form-check mb-3">
+                            <input
+                                name="isPublic"
+                                type="checkbox"
+                                className="form-check-input"
+                                id="isPublic"
+                                defaultChecked={
+                                    modalType === 'create'
+                                        ? templateData.isPublic
+                                        : article.isPublic
+                                }
+                                onChange={handleModalInputChange}
+                            />
+                            <label
+                                className="form-check-label"
+                                htmlFor="isPublic"
+                            >
+                                是否發布
+                            </label>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 };

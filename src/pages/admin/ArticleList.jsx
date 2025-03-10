@@ -115,10 +115,12 @@ const ArticleList = () => {
         setTemplateData(defaultTemplateData);
     };
 
-    const handleTarget = () => {
+    const handleTarget = async () => {
         switch (modalType) {
             case 'create':
                 dispatch(postArticle({ params: templateData }));
+                setTemplateData(defaultTemplateData);
+
                 break;
             case 'read':
                 break;
@@ -129,9 +131,13 @@ const ArticleList = () => {
                         params: templateData,
                     })
                 );
+                setTemplateData(defaultTemplateData);
+
                 break;
             case 'delete':
-                dispatch(deleteArticle({ id: templateData.id }));
+                dispatch(deleteArticle(templateData.id));
+                setTemplateData(defaultTemplateData);
+
                 break;
             default:
                 alert('操作失敗');
@@ -217,7 +223,6 @@ const ArticleList = () => {
                     closeModal={closeModal}
                     topic="文章"
                     handleTarget={handleTarget}
-                    setTemplateData={setTemplateData}
                     showModal={showModal}
                 >
                     {renderContent()}

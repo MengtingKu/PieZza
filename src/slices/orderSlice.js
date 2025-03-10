@@ -3,6 +3,7 @@ import frontApi from '@api/frontApi';
 import {
     transformTableData,
     formatTimestamp,
+    createMessage,
 } from '@helper/stringAndDataHelpers';
 
 const orderTitle = {
@@ -18,8 +19,6 @@ const orderSlice = createSlice({
     name: 'order',
     initialState: {
         isOrderLoading: false,
-        message: null,
-        success: null,
         orders: [],
         pagination: {},
         order: {},
@@ -35,17 +34,13 @@ const orderSlice = createSlice({
             .addCase(getOrderById.fulfilled, (state, action) => {
                 state.isOrderLoading = false;
                 state.order = action.payload.order;
-                state.success = action.payload.success;
             })
-            .addCase(postOrder.fulfilled, (state, action) => {
-                state.isOrderLoading = false;
-                state.success = action.payload.success;
-                state.message = action.payload.message;
-            })
-            .addCase(postPayById.fulfilled, (state, action) => {
-                state.isOrderLoading = false;
-                state.success = action.payload.success;
-            })
+            .addMatcher(
+                isAnyOf(postOrder.fulfilled, postPayById.fulfilled),
+                state => {
+                    state.isOrderLoading = false;
+                }
+            )
             .addMatcher(
                 isAnyOf(
                     getOrder.pending,
@@ -55,7 +50,6 @@ const orderSlice = createSlice({
                 ),
                 state => {
                     state.isOrderLoading = true;
-                    state.message = null;
                 }
             )
             .addMatcher(
@@ -65,9 +59,8 @@ const orderSlice = createSlice({
                     postOrder.rejected,
                     postPayById.rejected
                 ),
-                (state, action) => {
+                state => {
                     state.isOrderLoading = false;
-                    state.message = action.error.message;
                 }
             );
     },
@@ -112,7 +105,6 @@ export const getOrderById = createAsyncThunk(
                 products: transformCartTableData,
                 info: orderInf,
             },
-            success: res.data.success,
         };
     }
 );
@@ -121,24 +113,32 @@ export const postOrder = createAsyncThunk(
     'order/postOrder',
     async ({ user, message }, { dispatch }) => {
         const body = { data: { user, message } };
-        const res = await frontApi.order.postOrder(body);
-        dispatch(getOrder());
+        try {
+            const res = await frontApi.order.postOrder(body);
+            createMessage(dispatch, res.data.success, res.data.message);
 
-        return {
-            orderId: res.data.orderId,
-            success: res.data.success,
-            message: res.data.message,
-        };
+            dispatch(getOrder());
+
+            return {
+                orderId: res.data.orderId,
+            };
+        } catch (error) {
+            createMessage(dispatch, false, error?.response?.data?.message);
+        }
     }
 );
 
 export const postPayById = createAsyncThunk(
     'order/postPayById',
     async (orderId, { dispatch }) => {
-        const res = await frontApi.pay.postPayById(orderId);
-        dispatch(getOrder());
+        try {
+            const res = await frontApi.pay.postPayById(orderId);
+            createMessage(dispatch, res.data.success, res.data.message);
 
-        return { success: res.data.success };
+            dispatch(getOrder());
+        } catch (error) {
+            createMessage(dispatch, false, error?.response?.data?.message);
+        }
     }
 );
 

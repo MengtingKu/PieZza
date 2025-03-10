@@ -1,12 +1,11 @@
 import { createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit';
 import adminApi from '@api/adminApi';
+import { createMessage } from '@helper/stringAndDataHelpers';
 
 const adminArticleSlice = createSlice({
     name: 'adminArticle',
     initialState: {
         isArticleLoading: false,
-        message: null,
-        success: null,
         articles: [],
         pagination: {},
         article: {},
@@ -15,14 +14,13 @@ const adminArticleSlice = createSlice({
     extraReducers: builder => {
         builder
             .addCase(getArticles.fulfilled, (state, action) => {
-                state.isLoading = false;
+                state.isArticleLoading = false;
                 state.articles = action.payload.articles;
                 state.pagination = action.payload.pagination;
             })
             .addCase(getArticleById.fulfilled, (state, action) => {
-                state.isLoading = false;
+                state.isArticleLoading = false;
                 state.article = action.payload.article;
-                state.success = action.payload.success;
             })
             .addMatcher(
                 isAnyOf(
@@ -30,10 +28,8 @@ const adminArticleSlice = createSlice({
                     putArticleById.fulfilled,
                     deleteArticle.fulfilled
                 ),
-                (state, action) => {
-                    state.isLoading = false;
-                    state.success = action.payload.success;
-                    state.message = action.payload.message;
+                state => {
+                    state.isArticleLoading = false;
                 }
             )
             .addMatcher(
@@ -45,8 +41,7 @@ const adminArticleSlice = createSlice({
                     deleteArticle.pending
                 ),
                 state => {
-                    state.isLoading = true;
-                    state.message = null;
+                    state.isArticleLoading = true;
                 }
             )
             .addMatcher(
@@ -57,9 +52,8 @@ const adminArticleSlice = createSlice({
                     putArticleById.rejected,
                     deleteArticle.rejected
                 ),
-                (state, action) => {
-                    state.isLoading = false;
-                    state.message = action.error.message;
+                state => {
+                    state.isArticleLoading = false;
                 }
             );
     },
@@ -84,7 +78,6 @@ export const getArticleById = createAsyncThunk(
 
         return {
             article: res.data.article,
-            success: res.data.success,
         };
     }
 );
@@ -93,13 +86,14 @@ export const postArticle = createAsyncThunk(
     'adminOrder/postArticle',
     async ({ params }, { dispatch }) => {
         const body = { data: params };
-        const res = await adminApi.articles.postArticle(body);
-        dispatch(getArticles());
+        try {
+            const res = await adminApi.articles.postArticle(body);
+            createMessage(dispatch, res.data.success, res.data.message);
 
-        return {
-            success: res.data.success,
-            message: res.data.message,
-        };
+            dispatch(getArticles());
+        } catch (error) {
+            createMessage(dispatch, false, error?.response?.data?.message);
+        }
     }
 );
 
@@ -107,26 +101,28 @@ export const putArticleById = createAsyncThunk(
     'adminOrder/putArticleById',
     async ({ id, params }, { dispatch }) => {
         const body = { data: params };
-        const res = await adminApi.articles.putArticleById(id, body);
-        dispatch(getArticles());
+        try {
+            const res = await adminApi.articles.putArticleById(id, body);
+            createMessage(dispatch, res.data.success, res.data.message);
 
-        return {
-            success: res.data.success,
-            message: res.data.message,
-        };
+            dispatch(getArticles());
+        } catch (error) {
+            createMessage(dispatch, false, error?.response?.data?.message);
+        }
     }
 );
 
 export const deleteArticle = createAsyncThunk(
     'adminOrder/deleteArticle',
     async (id, { dispatch }) => {
-        const res = await adminApi.articles.deleteArticle(id);
-        dispatch(getArticles());
+        try {
+            const res = await adminApi.articles.deleteArticle(id);
+            createMessage(dispatch, res.data.success, res.data.message);
 
-        return {
-            success: res.data.success,
-            message: res.data.message,
-        };
+            dispatch(getArticles());
+        } catch (error) {
+            createMessage(dispatch, false, error?.response?.data?.message);
+        }
     }
 );
 

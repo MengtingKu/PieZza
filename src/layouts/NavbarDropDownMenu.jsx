@@ -8,16 +8,16 @@ import { splitText } from '@helper/stringAndDataHelpers';
 import LinkButton from '@components/common/LinkButton';
 import DynamicTable from '@components/common/DynamicTable';
 import Icon from '@helper/FontAwesomeIcon';
+import DialogDelete from '@components/common/DialogDelete';
 
 const NavbarDropDownMenu = () => {
     const { width } = useWindowSize();
     const dispatch = useDispatch();
-    const { carts } = useSelector(state => state.cart);
+    const { carts, isCartLoading } = useSelector(state => state.cart);
     const navigate = useNavigate();
     const dropdownRef = useRef(null);
     const dropdownInstance = useRef(null);
     const [isOpenDropdown, setIsOpenDropdown] = useState(false);
-    const [isToggle, setIsToggle] = useState(false);
     useClickAway(dropdownRef, () => setIsOpenDropdown(false));
 
     const dropdownCartFields = [
@@ -47,6 +47,29 @@ const NavbarDropDownMenu = () => {
                 );
             },
         },
+        {
+            key: 'operation',
+            name: '刪除',
+            class: 'text-center align-middle',
+            type: 'custom',
+            render: cart => {
+                const { chineseText } = splitText(cart.product_title);
+
+                return (
+                    <div className="remove_item">
+                        <DialogDelete
+                            fetchDeleteData={fetchRemoveItem}
+                            id={cart.id}
+                            className="border-0 text-danger"
+                            itemName={chineseText}
+                            disabled={isCartLoading}
+                        >
+                            <Icon icon="remove" size="sm" />
+                        </DialogDelete>
+                    </div>
+                );
+            },
+        },
     ];
     const dropdownCartFooter = () => {
         return (
@@ -69,26 +92,12 @@ const NavbarDropDownMenu = () => {
             </tfoot>
         );
     };
-    const dropdownCartActions = [
-        {
-            class: `btn btn-sm text-danger ${isToggle && 'fa-shake'}`,
-            handler: cart => {
-                setIsToggle(true);
-                dispatch(deleteCartItem({ id: cart.id }));
 
-                setTimeout(() => {
-                    setIsToggle(false);
-                }, 1000);
-            },
-            render: () => {
-                return (
-                    <>
-                        <Icon icon="remove" />
-                    </>
-                );
-            },
-        },
-    ];
+    const fetchRemoveItem = id => {
+        return async dispatch => {
+            await dispatch(deleteCartItem(id));
+        };
+    };
 
     useEffect(() => {
         dispatch(getCart());
@@ -129,10 +138,11 @@ const NavbarDropDownMenu = () => {
                 data-bs-auto-close="outside"
                 aria-expanded="false"
                 onClick={() => {
-                    if (width > 787) {
+                    if (width > 991) {
                         openDropdown();
                     } else {
                         navigate('/carts');
+                        closeDropdown();
                     }
                 }}
             >
@@ -154,7 +164,6 @@ const NavbarDropDownMenu = () => {
                         <DynamicTable
                             data={carts.carts || []}
                             fields={dropdownCartFields}
-                            endActions={dropdownCartActions}
                             tFooter={dropdownCartFooter()}
                         />
                         <div className="d-flex">

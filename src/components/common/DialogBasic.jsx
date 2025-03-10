@@ -10,12 +10,14 @@ const modalTitles = {
 };
 
 const DialogBasic = ({
-    modalType,
+    modalType = '',
     topic = '商品',
     closeModal,
     handleTarget,
     children,
     showModal,
+    className,
+    modalTitle,
 }) => {
     const modalRef = useRef(null);
     const modalInstance = useRef(null);
@@ -28,8 +30,10 @@ const DialogBasic = ({
                 return 'btn btn-warning';
             case 'create':
                 return 'btn btn-primary';
-            default:
+            case 'read':
                 return 'btn btn-success';
+            default:
+                return `btn ${className}`;
         }
     };
 
@@ -75,7 +79,9 @@ const DialogBasic = ({
                 <div className="modal-content border-0 shadow">
                     <div className="modal-header border-bottom">
                         <h5 className="modal-title fs-4">
-                            {`${modalTitles[modalType]}${topic}`}
+                            {modalTitles[modalType]
+                                ? `${modalTitles[modalType]}${topic}`
+                                : modalTitle}
                         </h5>
                         <button
                             type="button"
@@ -86,7 +92,7 @@ const DialogBasic = ({
                         />
                     </div>
                     <div className="modal-body p-4">{children}</div>
-                    <div className="modal-footer border-top bg-light">
+                    <div className="modal-footer border-top">
                         <button
                             type="button"
                             className="btn btn-outline-secondary"
@@ -100,7 +106,9 @@ const DialogBasic = ({
                             className={getModalButtonClass()}
                             onClick={() => handleSubmit()}
                         >
-                            確認{`${modalTitles[modalType]}${topic}`}
+                            {modalTitles[modalType]
+                                ? `確認${modalTitles[modalType]}${topic}`
+                                : modalTitle}
                         </button>
                     </div>
                 </div>
@@ -116,6 +124,8 @@ DialogBasic.propTypes = {
     handleTarget: PropTypes.func.isRequired,
     children: PropTypes.node.isRequired,
     showModal: PropTypes.bool.isRequired,
+    className: PropTypes.string,
+    modalTitle: PropTypes.string,
 };
 
 export default DialogBasic;

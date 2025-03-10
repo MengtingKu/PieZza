@@ -1,12 +1,11 @@
 import { createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit';
 import adminApi from '@api/adminApi';
+import { createMessage } from '@helper/stringAndDataHelpers';
 
 const adminCouponSlice = createSlice({
     name: 'adminCoupon',
     initialState: {
-        isCouponLoading: false,
-        message: null,
-        success: null,
+        isCouponLoading: true,
         coupons: [],
         pagination: {},
     },
@@ -14,7 +13,7 @@ const adminCouponSlice = createSlice({
     extraReducers: builder => {
         builder
             .addCase(getCoupons.fulfilled, (state, action) => {
-                state.isLoading = false;
+                state.isCouponLoading = false;
                 state.coupons = action.payload.coupons;
                 state.pagination = action.payload.pagination;
             })
@@ -24,10 +23,8 @@ const adminCouponSlice = createSlice({
                     putCouponsById.fulfilled,
                     deleteCouponById.fulfilled
                 ),
-                (state, action) => {
-                    state.isLoading = false;
-                    state.success = action.payload.success;
-                    state.message = action.payload.message;
+                state => {
+                    state.isCouponLoading = false;
                 }
             )
             .addMatcher(
@@ -37,8 +34,7 @@ const adminCouponSlice = createSlice({
                     deleteCouponById.pending
                 ),
                 state => {
-                    state.isLoading = true;
-                    state.message = null;
+                    state.isCouponLoading = true;
                 }
             )
             .addMatcher(
@@ -47,9 +43,8 @@ const adminCouponSlice = createSlice({
                     putCouponsById.rejected,
                     deleteCouponById.rejected
                 ),
-                (state, action) => {
-                    state.isLoading = false;
-                    state.message = action.error.message;
+                state => {
+                    state.isCouponLoading = false;
                 }
             );
     },
@@ -70,41 +65,56 @@ export const getCoupons = createAsyncThunk(
 export const postCoupon = createAsyncThunk(
     'adminOrder/postCoupon',
     async ({ params }, { dispatch }) => {
-        const body = { data: params };
-        const res = await adminApi.coupon.postCoupon(body);
-        dispatch(getCoupons());
-
-        return {
-            success: res.data.success,
-            message: res.data.message,
+        const body = {
+            data: {
+                ...params,
+                percent: Number(params.percent),
+                is_enabled: params.is_enabled ? 1 : 0,
+            },
         };
+        try {
+            const res = await adminApi.coupon.postCoupon(body);
+            createMessage(dispatch, res.data.success, res.data.message);
+
+            dispatch(getCoupons());
+        } catch (error) {
+            createMessage(dispatch, false, error?.response?.data?.message);
+        }
     }
 );
 
 export const putCouponsById = createAsyncThunk(
     'adminOrder/putCouponsById',
     async ({ id, params }, { dispatch }) => {
-        const body = { data: params };
-        const res = await adminApi.coupon.putCouponsById(id, body);
-        dispatch(getCoupons());
-
-        return {
-            success: res.data.success,
-            message: res.data.message,
+        const body = {
+            data: {
+                ...params,
+                person: Number(params.percent),
+                is_enabled: params.is_enabled ? 1 : 0,
+            },
         };
+        try {
+            const res = await adminApi.coupon.putCouponsById(id, body);
+            createMessage(dispatch, res.data.success, res.data.message);
+
+            dispatch(getCoupons());
+        } catch (error) {
+            createMessage(dispatch, false, error?.response?.data?.message);
+        }
     }
 );
 
 export const deleteCouponById = createAsyncThunk(
     'adminOrder/deleteCouponById',
     async (id, { dispatch }) => {
-        const res = await adminApi.coupon.deleteCouponById(id);
-        dispatch(getCoupons());
+        try {
+            const res = await adminApi.coupon.deleteCouponById(id);
+            createMessage(dispatch, res.data.success, res.data.message);
 
-        return {
-            success: res.data.success,
-            message: res.data.message,
-        };
+            dispatch(getCoupons());
+        } catch (error) {
+            createMessage(dispatch, false, error?.response?.data?.message);
+        }
     }
 );
 

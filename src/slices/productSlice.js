@@ -5,8 +5,6 @@ const productSlice = createSlice({
     name: 'product',
     initialState: {
         isProductLoading: false,
-        message: null,
-        success: null,
         products: [],
         product: null,
     },
@@ -16,8 +14,6 @@ const productSlice = createSlice({
             .addCase(getProducts.fulfilled, (state, action) => {
                 state.isProductLoading = false;
                 state.products = action.payload.products;
-                state.message = action.payload.message;
-                state.success = action.payload.success;
             })
             .addCase(getProductById.fulfilled, (state, action) => {
                 state.isProductLoading = false;
@@ -27,14 +23,12 @@ const productSlice = createSlice({
                 isAnyOf(getProducts.pending, getProductById.pending),
                 state => {
                     state.isProductLoading = true;
-                    state.message = null;
                 }
             )
             .addMatcher(
                 isAnyOf(getProducts.rejected, getProductById.rejected),
-                (state, action) => {
+                state => {
                     state.isProductLoading = false;
-                    state.message = action.error.message;
                 }
             );
     },
@@ -49,8 +43,6 @@ export const getProducts = createAsyncThunk('product/getProducts', async () => {
 
     return {
         products: [...sale, ...normal],
-        message: res.data.message,
-        success: res.data.success,
     };
 });
 

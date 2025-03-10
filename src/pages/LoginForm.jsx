@@ -1,12 +1,15 @@
 import axios from 'axios';
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import FormInput from '@components/common/FormInput';
+import { createMessage } from '@helper/stringAndDataHelpers';
 
 const { VITE_BASE_URL: baseURL } = import.meta.env;
 
 const LoginForm = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const {
         register,
@@ -26,11 +29,12 @@ const LoginForm = () => {
             document.cookie = `reactToken=${token}; expires=${new Date(
                 expired
             )}`;
+
             navigate('/admin');
+
             reset();
         } catch (error) {
-            // Todo... 吐司訊息串接 api 回傳結果
-            console.log(error);
+            createMessage(dispatch, false, error?.response?.data?.message);
         }
     };
 
