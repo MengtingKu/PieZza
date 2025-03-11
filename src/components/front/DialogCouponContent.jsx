@@ -1,85 +1,167 @@
-import { useState } from 'react';
+import PropTypes from 'prop-types';
+import Swal from 'sweetalert2';
+import dayjs from 'dayjs';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getCart } from '@slices/cartSlice';
-import { createMessage } from '@helper/stringAndDataHelpers';
+import { createMessage, getRandomItems } from '@helper/stringAndDataHelpers';
 import DialogBasic from '@components/common/DialogBasic';
 import frontApi from '@api/frontApi';
-import Icon from '../../helper/FontAwesomeIcon';
+import Icon from '@helper/FontAwesomeIcon';
 
-const DialogCouponContent = () => {
+const DialogCouponContent = ({ setTotalCost }) => {
+    const coupons = getRandomItems(
+        ['wewin60', 'justyou10', 'lucky80', 'lucky80', 'always90', 'coupon50'],
+        3
+    );
     const dispatch = useDispatch();
+    const [showModal, setShowModal] = useState(false);
     const [code, setCode] = useState('');
-    const [coupons] = useState(['折價券10元', '折價券20元', '折價券50元']);
     const [selectedCouponIndex, setSelectedCouponIndex] = useState(null);
     const [disabled, setDisabled] = useState(false);
-    const [showModal, setShowModal] = useState(false);
+    const [message, setMessage] = useState({});
+    const [canDraw, setCanDraw] = useState(true);
+
+    const openModal = () => {
+        setMessage({});
+        setShowModal(true);
+        setDisabled(false);
+    };
 
     const handleInputChange = e => {
         setCode(e.target.value);
     };
+
     const selectCoupon = async index => {
         if (!disabled) {
-            setSelectedCouponIndex(index);
             setDisabled(true);
-            await handlePostCoupon();
+            setSelectedCouponIndex(index);
+            setCode(coupons[index]);
+
+            await handlePostCoupon(coupons[index]);
+        }
+    };
+
+    const handlePostCoupon = async code => {
+        try {
+            const res = await frontApi.coupon.postCoupon({
+                data: { code },
+            });
+
+            dispatch(getCart());
+            setTotalCost(res.data.data.final_total);
+            setMessage(res.data);
+
+            localStorage.setItem('couponCode', code);
+            const endOfDay = dayjs().endOf('day');
+            localStorage.setItem('resetTime', endOfDay.toISOString());
+
+            setTimeout(() => {
+                Swal.fire({
+                    title: `中獎啦！
+                    恭喜獲得 ${code} 優惠券`,
+                    width: 600,
+                    padding: '3em',
+                    timer: 3000,
+                    showConfirmButton: false,
+                    showClass: {
+                        popup: `
+                          animate__animated
+                          animate__fadeInUp
+                          animate__faster
+                        `,
+                    },
+                    hideClass: {
+                        popup: `
+                          animate__animated
+                          animate__fadeOutDown
+                          animate__faster
+                        `,
+                    },
+                    color: '#716add',
+                    background: '#fff',
+                    backdrop: `
+                    rgba(0,0,123,0.4) url(https://i.imgur.com/o1y3ui3.png)
+                    left top
+                    no-repeat
+                  `,
+                });
+            }, 500);
+        } catch (error) {
+            setMessage(error?.response?.data);
+            createMessage(dispatch, false, error?.response?.data?.message);
         }
     };
 
     const closeModal = () => {
         setShowModal(false);
+        setSelectedCouponIndex(null);
     };
 
-    const handlePostCoupon = async () => {
-        if (selectedCouponIndex !== null) {
-            const selectedCoupon = coupons[selectedCouponIndex];
-            setCode(selectedCoupon);
-            try {
-                const res = await frontApi.coupon.postCoupon({
-                    data: { code: 'testCode' },
-                });
-                createMessage(dispatch, res.data.success, res.data.message);
-                dispatch(getCart());
-            } catch (error) {
-                createMessage(dispatch, false, error?.response?.data?.message);
+    useEffect(() => {
+        const storedCouponCode = localStorage.getItem('couponCode');
+        const resetTime = localStorage.getItem('resetTime');
+
+        if (storedCouponCode) {
+            setCanDraw(false);
+            setCode(storedCouponCode);
+        }
+
+        if (resetTime) {
+            setCanDraw(false);
+            if (dayjs().isAfter(dayjs(resetTime))) {
+                localStorage.removeItem('couponCode');
+                localStorage.removeItem('resetTime');
+                setCanDraw(true);
             }
         }
-        closeModal();
-    };
+    }, []);
 
     return (
         <>
-            <div className="input-group input-group-sm my-1">
+            <div className="input-group input-group-sm my-1 coupon_code">
                 <input
                     type="text"
-                    className="form-control"
+                    className="form-control rounded-0 py-2"
                     aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-sm"
                     value={code}
                     onChange={handleInputChange}
+                    readOnly
                 />
             </div>
-            <button
-                type="button"
-                className="btn btn-link btn-sm text-success text-decoration-none"
-                onClick={() => {
-                    setShowModal(true);
-                    setSelectedCouponIndex(null);
-                    setDisabled(false);
-                }}
-            >
-                <Icon icon="handRight" className="fa-bounce" />
-                點我抽優惠券
-            </button>
+            {Object.keys(message).length ? (
+                <small className="text-warning">
+                    {message.message}{' '}
+                    <Icon icon="cheers" className="fa-shake ms-1" />
+                </small>
+            ) : canDraw ? (
+                <button
+                    type="button"
+                    className="btn btn-link btn-sm text-success text-decoration-none"
+                    onClick={() => openModal()}
+                >
+                    <Icon icon="handRight" className="fa-bounce me-1" />
+                    點我抽優惠券
+                </button>
+            ) : (
+                <small className="text-danger">
+                    每天一次抽獎，券用過就沒了
+                </small>
+            )}
 
             {showModal && (
                 <DialogBasic
-                    modalTitle="抽獎時刻"
+                    modalTitle="抽獎就在這一刻"
                     closeModal={closeModal}
                     handleTarget={handlePostCoupon}
                     showModal={showModal}
                 >
-                    <div className="container">
+                    <div className="container pb-5">
                         <div className="row">
+                            <span className="d-block text-center mb-5 text-light">
+                                每天有一次抽獎機會！ ๑• . •๑
+                            </span>
                             {coupons.map((coupon, index) => (
                                 <div
                                     className="col-md-4"
@@ -103,9 +185,6 @@ const DialogCouponContent = () => {
                                             cursor: disabled
                                                 ? 'not-allowed'
                                                 : 'pointer',
-                                            transform: disabled
-                                                ? 'none'
-                                                : 'scale(1.07)',
                                         }}
                                     >
                                         <div className="light"></div>
@@ -113,7 +192,7 @@ const DialogCouponContent = () => {
                                             <h5 className="card-title">
                                                 <img
                                                     src="https://i.imgur.com/Fg3i4QW.png"
-                                                    className=""
+                                                    className="img-fluid"
                                                     alt="pizza-coupon"
                                                 />
                                             </h5>
@@ -127,6 +206,10 @@ const DialogCouponContent = () => {
             )}
         </>
     );
+};
+
+DialogCouponContent.propTypes = {
+    setTotalCost: PropTypes.func.isRequired,
 };
 
 export default DialogCouponContent;

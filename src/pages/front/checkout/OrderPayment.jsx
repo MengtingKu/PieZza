@@ -100,6 +100,7 @@ const OrderPayment = () => {
 
     const handlePay = orderId => {
         dispatch(postPayById(orderId));
+        localStorage.removeItem('couponCode');
         navigate(`/finish/${order.id}`);
     };
 

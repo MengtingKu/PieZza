@@ -1,11 +1,14 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { createMessage } from '@helper/stringAndDataHelpers';
 import Icon from '@helper/FontAwesomeIcon';
 
 const Sidebar = () => {
-    const [isOpenSidebar, setIsOpenSidebar] = useState(false);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [isOpenSidebar, setIsOpenSidebar] = useState(false);
 
     const sidebarItems = [
         {
@@ -79,9 +82,11 @@ const Sidebar = () => {
                     localStorage.removeItem('isLoggedIn');
                     navigate('/');
                 } catch (error) {
-                    // Todo... 吐司訊息串接 api 回傳結果
-                    console.log(error);
-                    alert('錯誤');
+                    createMessage(
+                        dispatch,
+                        false,
+                        error?.response?.data?.message
+                    );
                 }
             },
             isToggle: false,

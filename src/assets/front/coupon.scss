@@ -1,6 +1,25 @@
 .coupon {
+    .coupon_code {
+        .form-control {
+            text-align: end;
+        }
+    }
+
+    .modal-dialog {
+        max-width: 800px;
+    }
+
+    .modal-header {
+        h5 {
+            margin-left: auto;
+            color: $backup;
+        }
+    }
+
     .modal-content {
-        background: url("https://i.imgur.com/Cy8xTPU.jpeg");
+        background: url(https://i.imgur.com/ssd8G5I.png);
+        @include bgi_size;
+        @include bgi_color($gray-700);
     }
 
     .modal-footer {
@@ -8,7 +27,7 @@
     }
 
     .card {
-        padding: 10px 15px 15px 10px;
+        padding: 60px 15px;
         background: rgba($white, 0);
         box-shadow:
             0px -10px 10px rgba($white, 0.2),
@@ -27,6 +46,7 @@
             transform: scale(1.07);
         }
     }
+
     .light {
         position: absolute;
         width: 110%;
@@ -36,5 +56,9 @@
         z-index: 9;
         pointer-events: none;
         transform: translate(-8.1px, -58.3px);
+    }
+
+    .swal2-container .swal2-backdrop-show {
+        @include bgi_size;
     }
 }

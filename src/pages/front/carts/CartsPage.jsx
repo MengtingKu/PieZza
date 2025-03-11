@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -19,6 +19,7 @@ const CartsPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { isCartLoading, carts } = useSelector(state => state.cart);
+    const [totalCost, setTotalCost] = useState(0);
 
     const cartFields = [
         {
@@ -169,15 +170,18 @@ const CartsPage = () => {
                 render: () => {
                     return (
                         <div className="container">
-                            <DialogCouponContent />
+                            <DialogCouponContent setTotalCost={setTotalCost} />
                         </div>
                     );
                 },
             },
             {
-                key: 'final_total',
+                key: 'totalCost',
                 name: '折扣價',
                 class: 'text-success lh-lg fs-5',
+                render: () => {
+                    return <span>{totalCost}</span>;
+                },
             },
         ];
 
@@ -233,6 +237,10 @@ const CartsPage = () => {
         dispatch(getCart());
     }, [dispatch]);
 
+    useEffect(() => {
+        setTotalCost(carts.final_total);
+    }, [carts]);
+
     return (
         <div
             className="container my-5 cart_list coupon"
@@ -248,7 +256,7 @@ const CartsPage = () => {
         >
             {isCartLoading && <Loading />}
             {carts.total === 0 ? (
-                <div className="text-center my-3 lh-lg">
+                <div className="text-center mt-3 mb-5 lh-lg">
                     <img
                         src="./empty-cart.webp"
                         alt="空購物車"
