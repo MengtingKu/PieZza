@@ -49,7 +49,6 @@ const NavbarDropDownMenu = () => {
         },
         {
             key: 'operation',
-            name: '刪除',
             class: 'text-center align-middle',
             type: 'custom',
             render: cart => {
