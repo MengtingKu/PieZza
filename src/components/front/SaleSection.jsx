@@ -3,7 +3,7 @@ import ModalImage from 'react-modal-image';
 import { useNavigate } from 'react-router-dom';
 import { useWindowSize } from 'react-use';
 import Icon from '@helper/FontAwesomeIcon';
-import LinkButton from '@components/common/LinkButton';
+import ButtonLink from '@components/common/ButtonLink';
 
 const SaleSection = ({ specialProducts }) => {
     const navigate = useNavigate();
@@ -49,12 +49,12 @@ const SaleSection = ({ specialProducts }) => {
                 })}
             </div>
             <div className="text-center mt-3" style={{ marginBottom: '5rem' }}>
-                <LinkButton
+                <ButtonLink
                     className="btn-sm btn-warning opacity-75 border-0 rounded-0"
                     to="/products"
                 >
                     更多美食
-                </LinkButton>
+                </ButtonLink>
             </div>
         </div>
     );

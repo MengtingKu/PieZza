@@ -5,7 +5,7 @@ import 'swiper/css/navigation';
 import { Autoplay, Parallax, Pagination, Navigation } from 'swiper/modules';
 import { Link } from 'react-router-dom';
 import arrow from '@assets/common/arrow.svg';
-import LinkButton from '@components/common/LinkButton';
+import ButtonLink from '@components/common/ButtonLink';
 
 const BannerSection = () => {
     return (
@@ -151,13 +151,13 @@ const BannerSection = () => {
                             what excites you most? ๑• ‿ •๑
                         </div>
                         <div className="text mt-2" data-swiper-parallax="-100">
-                            <LinkButton
+                            <ButtonLink
                                 className="btn btn-link text-warning p-0 animate_on"
                                 to="/blog"
                                 target="blank"
                             >
                                 10% OFF Coupon <img src={arrow} alt="arrow" />
-                            </LinkButton>
+                            </ButtonLink>
                         </div>
                     </div>
                     <div

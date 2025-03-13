@@ -9,6 +9,7 @@ import Footer from '@layouts/Footer';
 import Sidebar from '@layouts/Sidebar';
 import AutoScrollToTop from '@components/common/AutoScrollToTop';
 import MessageToast from '@components/common/MessageToast';
+import ButtonBackToTop from '@components/common/ButtonBackToTop';
 
 const { VITE_BASE_URL: baseURL } = import.meta.env;
 
@@ -73,6 +74,7 @@ const AdminApp = () => {
             <footer className="footer">
                 <Footer />
             </footer>
+            <ButtonBackToTop />
         </>
     );
 };

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import LinkButton from '@components/common/LinkButton';
+import ButtonLink from '@components/common/ButtonLink';
 
 const NotFount = () => {
     const navigate = useNavigate();
@@ -16,12 +16,12 @@ const NotFount = () => {
             <div className="text-center my-3 content">
                 <h2>Oops!</h2>
                 <p>為什麼找不到 PieZza...</p>
-                <LinkButton
+                <ButtonLink
                     className="btn btn-link text-warning p-3 my-3 animate_on"
                     to="/"
                 >
                     Back To Home
-                </LinkButton>
+                </ButtonLink>
             </div>
             <img
                 className="img-fluid only_cheesePie"

@@ -5,7 +5,7 @@ import { useClickAway, useWindowSize } from 'react-use';
 import { Dropdown } from 'bootstrap';
 import { getCart, deleteCartItem } from '@slices/cartSlice';
 import { splitText } from '@helper/stringAndDataHelpers';
-import LinkButton from '@components/common/LinkButton';
+import ButtonLink from '@components/common/ButtonLink';
 import DynamicTable from '@components/common/DynamicTable';
 import Icon from '@helper/FontAwesomeIcon';
 import DialogDelete from '@components/common/DialogDelete';
@@ -197,13 +197,13 @@ const NavbarDropDownMenu = () => {
                                 className="img-fluid"
                             />
                             <p className="my-3 text-light">購物車空的...</p>
-                            <LinkButton
+                            <ButtonLink
                                 className="btn text-warning animate_on go_shoppingBtn"
                                 to="/products"
                                 onClickCustom={closeDropdown}
                             >
                                 無論何時 <Icon icon="pizzaSlice" /> 為你而來
-                            </LinkButton>
+                            </ButtonLink>
                         </div>
                     </>
                 )}

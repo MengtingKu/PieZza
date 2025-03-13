@@ -10,7 +10,7 @@ import {
 import { splitText } from '@helper/stringAndDataHelpers';
 import Icon from '@helper/FontAwesomeIcon';
 import DynamicTable from '@components/common/DynamicTable';
-import LinkButton from '@components/common/LinkButton';
+import ButtonLink from '@components/common/ButtonLink';
 import Loading from '@components/common/Loading';
 import DialogDelete from '@components/common/DialogDelete';
 import DialogCouponContent from '@components/front/DialogCouponContent';
@@ -265,12 +265,12 @@ const CartsPage = () => {
                     <p className="my-3">
                         購物車空的... <br />
                     </p>
-                    <LinkButton
+                    <ButtonLink
                         className="btn animate_on go_shoppingBtn"
                         to="/products"
                     >
                         無論何時 <Icon icon="pizzaSlice" /> 為你而來
-                    </LinkButton>
+                    </ButtonLink>
                 </div>
             ) : (
                 <>

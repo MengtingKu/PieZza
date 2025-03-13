@@ -1,0 +1,59 @@
+.back_toTop,
+.icon_group {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba($link, 0.5);
+    background-image: linear-gradient(to top, #accbeeec 0%, #e7f0fdd0 100%);
+    border: none;
+    cursor: pointer;
+
+    .plane {
+        position: absolute;
+        top: 15px;
+        left: 18px;
+        border-radius: 50%;
+        background-blend-mode: multiply, multiply;
+        animation: animateRocket 0.5s linear infinite;
+    }
+
+    @keyframes animateRocket {
+        0% {
+            transform: translateY(76px);
+        }
+        50% {
+            transform: translateY(6px);
+        }
+        100% {
+            transform: translateY(-55px);
+        }
+    }
+
+    .cloud {
+        position: absolute;
+        color: #fff;
+        top: 30px;
+        left: 20px;
+        -webkit-text-stroke: 2px $black;
+        animation: animateCloud 1s linear infinite;
+        animation-delay: -0.5s;
+
+        &:first-of-type {
+            top: 10px;
+            left: 10px;
+            animation-delay: -1s;
+        }
+    }
+
+    @keyframes animateCloud {
+        0% {
+            transform: translateY(calc(-35 * 5px));
+        }
+        100% {
+            transform: translateY(calc(35 * 5px));
+        }
+    }
+}

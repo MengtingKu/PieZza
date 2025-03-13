@@ -4,6 +4,7 @@ import Footer from '@layouts/Footer';
 import NavbarDropDownMenu from '@layouts/NavbarDropDownMenu';
 import AutoScrollToTop from '@components/common/AutoScrollToTop';
 import MessageToast from '@components/common/MessageToast';
+import ButtonBackToTop from '@components/common/ButtonBackToTop';
 
 const FrontApp = () => {
     return (
@@ -26,6 +27,7 @@ const FrontApp = () => {
             <footer className="footer">
                 <Footer />
             </footer>
+            <ButtonBackToTop />
         </>
     );
 };

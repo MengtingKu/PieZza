@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { getProducts } from '@slices/productSlice';
 import ProductCard from '@components/front/ProductCard';
 import Icon from '@helper/FontAwesomeIcon';
-import LinkButton from '@components/common/LinkButton';
+import ButtonLink from '@components/common/ButtonLink';
 import Loading from '@components/common/Loading';
 
 const WishList = () => {
@@ -75,7 +75,7 @@ const WishList = () => {
                         點擊商品的星星加入收藏，把她保存在畫面上。
                     </h6>
                     <div className="my-5">
-                        <LinkButton
+                        <ButtonLink
                             className="btn btn-link animate_on position-relative wih_btn"
                             to="/products"
                         >
@@ -85,7 +85,7 @@ const WishList = () => {
                                 src="./btn-bg.png"
                                 alt="btn background"
                             />
-                        </LinkButton>
+                        </ButtonLink>
                     </div>
                 </div>
             ) : (

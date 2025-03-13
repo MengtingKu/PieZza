@@ -1,7 +1,7 @@
 import ModalImage from 'react-modal-image';
 import { memoryImages } from '@helper/homePageConfig';
 import AnimateImage from '@components/common/AnimateImage';
-import LinkButton from '@components/common/LinkButton';
+import ButtonLink from '@components/common/ButtonLink';
 
 const CustomerSection = () => {
     return (
@@ -62,13 +62,13 @@ const CustomerSection = () => {
                     </div>
                 </div>
                 <div className="text-center my-3">
-                    <LinkButton
+                    <ButtonLink
                         className="btn-sm btn-warning opacity-75 border-0 rounded-0"
                         to="/about"
                         target="blank"
                     >
                         認識 PieZza
-                    </LinkButton>
+                    </ButtonLink>
                 </div>
             </div>
         </div>

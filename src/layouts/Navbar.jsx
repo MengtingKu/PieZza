@@ -4,6 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { useClickAway } from 'react-use';
 import { useSelector } from 'react-redux';
 import Icon from '@helper/FontAwesomeIcon';
+import useScroll from '@hook/useScroll';
 
 const routes = [
     { path: '/', name: 'Home' },
@@ -15,26 +16,12 @@ const routes = [
 
 const Navbar = ({ children }) => {
     const { orders } = useSelector(state => state.order);
-    const [scrollY, setScrollY] = useState(0);
     const [isOpen, setIsOpen] = useState(false);
     const navbarCollapse = useRef(null);
     const navbarRef = useRef(null);
+    const scrollY = useScroll();
 
     useClickAway(navbarRef, () => setIsOpen(false));
-
-    useEffect(() => {
-        const handleScroll = () => {
-            if (navbarRef.current) {
-                setScrollY(window.scrollY);
-            }
-        };
-
-        window.addEventListener('scroll', handleScroll);
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, [navbarRef]);
 
     const navbarBackground = scrollY > 70 ? 'rgba(26, 11, 3, 0.8)' : '#1a0b03';
 

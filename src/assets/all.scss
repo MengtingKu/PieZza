@@ -9,9 +9,10 @@
 @import "@assets/_mixins.scss";
 @import "@assets/_theme.scss";
 @import "@assets/common/loading.scss";
+@import "@assets/common/button-back-to-top.scss";
 
 // 前台頁面
-@import "@assets/common/link-button.scss";
+@import "@assets/common/button-link.scss";
 @import "@assets/common/layout.scss";
 @import "@assets/front/product-list.scss";
 @import "@assets/front/product-detail.scss";

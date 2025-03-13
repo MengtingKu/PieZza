@@ -45,6 +45,9 @@ import {
     faFileInvoice,
     faHandPointRight,
     faChampagneGlasses,
+    faPlaneUp,
+    faArrowUp,
+    faCloud,
 } from '@fortawesome/free-solid-svg-icons';
 import {
     faUser as faRegularUser,
@@ -99,6 +102,9 @@ const icons = {
     order: faFileInvoice,
     handRight: faHandPointRight,
     cheers: faChampagneGlasses,
+    planeUp: faPlaneUp,
+    arrowUp: faArrowUp,
+    cloud: faCloud,
     regularUser: faRegularUser,
     circleCheck: faRegularCircleCheck,
     circleXmark: faRegularCircleXmark,

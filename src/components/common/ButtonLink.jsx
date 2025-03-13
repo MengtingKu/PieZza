@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const LinkButton = ({
+const ButtonLink = ({
     className,
     children,
     to,
@@ -27,7 +27,7 @@ const LinkButton = ({
     );
 };
 
-LinkButton.propTypes = {
+ButtonLink.propTypes = {
     target: PropTypes.string,
     className: PropTypes.string,
     children: PropTypes.node.isRequired,
@@ -35,4 +35,4 @@ LinkButton.propTypes = {
     onClickCustom: PropTypes.func,
 };
 
-export default LinkButton;
+export default ButtonLink;
