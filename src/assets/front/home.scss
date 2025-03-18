@@ -27,28 +27,67 @@
         .main_image {
             position: absolute;
             right: auto;
-            bottom: -10px;
             z-index: -1;
             filter: blur(1px);
             width: 100%;
+
             animation-name: fadeInDown;
 
             @include respond_to("md") {
                 filter: blur(0px);
             }
 
-            &.house_pizza {
-                bottom: 0;
+            &.love_together {
+                position: relative;
+                z-index: -1;
+
+                @include respond_to("xs") {
+                    bottom: 20%;
+                }
+
+                @include respond_to("sm") {
+                    bottom: 30%;
+                }
+
                 @include respond_to("md") {
-                    bottom: -50px;
+                    top: 50%;
+                }
+
+                @include respond_to("lg") {
+                    top: 0%;
+                }
+            }
+
+            &.house_pizza {
+                bottom: 10%;
+
+                @include respond_to("sm") {
+                    bottom: -55%;
+                }
+
+                @include respond_to("xxl") {
+                    bottom: -100%;
                 }
             }
 
             &.floating_pizza {
                 bottom: -120px;
                 transform: scaleX(-1);
+
+                @include respond_to("xs") {
+                    bottom: 0%;
+                }
+
                 @include respond_to("md") {
                     filter: blur(0px);
+                }
+
+                @include respond_to("xl") {
+                    bottom: -50%;
+                }
+
+                @include respond_to("xxl") {
+                    bottom: -150%;
                 }
             }
         }
@@ -64,6 +103,8 @@
                 &.group1_img1 {
                     bottom: -5px;
                     left: -5px;
+                    bottom: 50%;
+                    width: 50%;
                     @include animation-common(zoomInDown, 1s, 0.3s);
                 }
 
@@ -71,28 +112,56 @@
                     bottom: -50px;
                     left: 20px;
                     @include animation-common(zoomInDown, 1.5s, 0.6s);
+
+                    @include respond_to("xs") {
+                        bottom: 40%;
+                    }
+
+                    @include respond_to("sm") {
+                        bottom: 50%;
+                    }
+
+                    @include respond_to("md") {
+                        bottom: 35%;
+                    }
+
+                    @include respond_to("lg") {
+                        bottom: 10%;
+                    }
                 }
 
                 &.group2_img1 {
-                    bottom: 15px;
+                    bottom: 60%;
                     left: -5px;
                     animation-name: zoomIn;
                     @include animation-common(zoomIn, 0.6s, 0.8s);
+
+                    @include respond_to("md") {
+                        bottom: 30%;
+                    }
                 }
 
                 &.group2_img2 {
-                    top: 0;
                     right: 0;
+
                     @include animation-common(zoomIn, 0.8s, 0.8s);
+
+                    @include respond_to("xs") {
+                        bottom: 100%;
+                    }
+
+                    @include respond_to("md") {
+                        bottom: 70%;
+                    }
                 }
 
                 &.group2_img3 {
-                    top: -150px;
-                    left: 10px;
+                    left: 20px;
+
                     @include animation-common(zoomIn, 1s, 1s);
 
-                    @include respond_to("md") {
-                        top: -10px;
+                    @include respond_to("xs") {
+                        bottom: 115%;
                     }
                 }
 
@@ -100,32 +169,29 @@
                     bottom: -10px;
                     right: 10px;
                     @include animation-common(zoomIn, 1s, 1s);
+
+                    @include respond_to("xs") {
+                        bottom: 150%;
+                    }
+
+                    @include respond_to("sm") {
+                        bottom: 150%;
+                    }
+
+                    @include respond_to("md") {
+                        bottom: 0%;
+                    }
                 }
 
                 &.group3_img1 {
-                    top: 10px;
                     left: 100px;
+
                     @include animation-common(bounceInDown, 1s, 0.5s);
-
-                    @include respond_to("md") {
-                        top: 50px;
-                        left: 45px;
-                    }
-
-                    @include respond_to("lg") {
-                        left: 360px;
-                        top: -50px;
-                    }
                 }
 
                 &.group3_img2 {
                     @include animation-common(bounceInDown, 1.2s, 0.7s);
                     filter: drop-shadow(2px 4px 6px black);
-
-                    @include respond_to("md") {
-                        top: 110px;
-                        left: 110px;
-                    }
 
                     @include respond_to("lg") {
                         filter: blur(1px);
@@ -149,37 +215,23 @@
                 }
 
                 &.group3_img5 {
-                    top: -99px;
-                    left: 120px;
+                    right: 5%;
                     @include animation-common(bounceInDown, 0.8s, 1.3s);
 
-                    @include respond_to("md") {
-                        top: 150px;
+                    @include respond_to("xs") {
+                        bottom: 150%;
                     }
 
-                    @include respond_to("lg") {
-                        top: 20px;
+                    @include respond_to("md") {
+                        bottom: 50%;
                     }
                 }
             }
         }
 
-        @include respond_to("sm") {
-            .love_together {
-                position: relative;
-                right: auto;
-                bottom: auto;
-                z-index: 0;
-            }
-
-            .img_animate {
-                width: 50%;
-            }
-        }
-
         .swiper {
             width: 100%;
-            height: 100%;
+            height: 100vh;
             background: linear-gradient(to bottom, $bg-theme, 60%, rgba($bg-theme, 0.2));
         }
 
