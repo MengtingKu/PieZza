@@ -1,0 +1,135 @@
+// footer 的變數表
+$footer-padding: 10px;
+$block-title-line-width: 90%;
+$item-title-width: (
+    contact: 8%,
+    opening: 20%
+);
+
+$footer_top_bg_positions: (
+    sm: -30px,
+    md: -37px,
+    lg: -45px,
+    xl: -53px,
+    xxl: -70px
+);
+
+// footer 頁面的所有樣式設定
+.footer {
+    background-color: $bg-theme;
+    color: $reverse-font;
+    padding: $footer-padding;
+    position: relative;
+
+    .footer_top_bg {
+        position: absolute;
+        top: -70px;
+
+        @each $breakpoint, $top-value in $footer_top_bg_positions {
+            @include respond_to($breakpoint) {
+                top: $top-value;
+            }
+        }
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .brand_block {
+        margin-left: 20%;
+    }
+
+    .item_title {
+        display: inline-block;
+    }
+
+    .contact_block .item_title {
+        width: map-get($item-title-width, contact);
+    }
+
+    .opening_block .item_title {
+        width: map-get($item-title-width, opening);
+    }
+
+    .block_title span {
+        position: relative;
+        display: inline-block;
+        margin: 0 0 20px 20%;
+
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            height: 1px;
+            background-color: $reverse-font;
+            width: $block-title-line-width;
+            top: 50%;
+        }
+
+        &::before {
+            left: -100%;
+        }
+
+        &::after {
+            right: -100%;
+        }
+    }
+
+    .logo {
+        width: 200px;
+        height: auto;
+        object-fit: contain;
+    }
+
+    .brands_group {
+        a {
+            height: 36px;
+            width: 36px;
+            text-align: center;
+            line-height: 36px;
+            border-radius: 50%;
+            display: inline-block;
+            color: $reverse-font;
+            font-size: 16px;
+            margin: 0 15px;
+
+            @each $platform, $color in $social-colors {
+                &.#{$platform}_bg {
+                    background: $color;
+                }
+            }
+        }
+    }
+
+    ul {
+        padding: 0;
+    }
+
+    .contact_text {
+        font-size: 14px;
+        color: $reverse-font;
+        padding-left: 5px;
+        text-transform: lowercase;
+        line-height: 2;
+
+        a {
+            color: $link;
+            text-decoration: none;
+            font-weight: 800;
+            margin: 10px;
+        }
+    }
+
+    .copyright_text {
+        font-size: 0.8rem;
+        text-align: center;
+        color: $gray-200;
+
+        .admin_login {
+            margin: 2px 5px;
+            padding: 5px;
+            color: $link;
+        }
+    }
+}

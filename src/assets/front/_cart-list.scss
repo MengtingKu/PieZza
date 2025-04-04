@@ -1,0 +1,48 @@
+.cart_list {
+    color: $font;
+    font-family: "Caveat Brush", serif;
+    letter-spacing: 1px;
+    padding-top: 32px;
+
+    @include respond_to("lg") {
+        width: 860px;
+    }
+    @include respond_to("xl") {
+        width: 1150px;
+    }
+
+    .select_qtyBtn {
+        font-size: 0.8rem;
+        margin: 0;
+    }
+
+    .go_shoppingBtn {
+        font-size: 1.1rem;
+        letter-spacing: 1px;
+        color: $remind;
+        text-shadow: 1px 1px 3px $orange-100;
+
+        &:hover {
+            font-size: 1.2rem;
+            color: $link;
+            text-shadow: none;
+            cursor:
+                url("/pizza-hover.png") 0 50,
+                auto;
+        }
+    }
+
+    img {
+        @include img_setup(100px, 100px);
+        border-radius: 50%;
+        filter: drop-shadow(5px 5px 8px rgba($shadow, 0.5));
+    }
+
+    .go_checkoutBtn {
+        &:hover {
+            cursor:
+                url("/pizza-hover.png") 0 50,
+                auto;
+        }
+    }
+}

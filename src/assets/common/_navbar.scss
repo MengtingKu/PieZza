@@ -1,0 +1,94 @@
+@import "@assets/common/logo.scss";
+
+.shopping_qty {
+    @include center();
+    font-size: 0.6rem;
+    background: linear-gradient(to bottom right, $red, 66%, $backup);
+    border: 1px solid rgba($reverse-sub-theme, 0.3);
+    box-sizing: border-box;
+    box-shadow:
+        rgba($reverse-sub-theme, 0.63) 2px 1.2px 7.2px,
+        rgba($reverse-sub-theme, 0.31) 0px 0.8px 1.8px;
+    border-radius: 16px;
+    width: 16px;
+    height: 16px;
+    color: $reverse-font;
+}
+
+.header {
+    background-color: $bg-theme;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+
+    .navbar-toggler,
+    .dropdown_cartBtn {
+        color: $link;
+
+        &:focus {
+            box-shadow: none;
+        }
+
+        &.show {
+            border-color: transparent;
+        }
+    }
+
+    .nav-link {
+        color: $link;
+        letter-spacing: 1px;
+
+        &.active {
+            color: $remind;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-shadow:
+                -0.5px 0 $reverse-sub-theme,
+                0 1px $reverse-sub-theme,
+                1px 0 $reverse-sub-theme,
+                0 -1px $reverse-sub-theme;
+        }
+    }
+
+    .dropdown-menu {
+        font-family: "Caveat Brush", serif;
+        font-weight: 400;
+        border-top: 6px solid $link;
+
+        img {
+            @include img_setup(100px);
+            aspect-ratio: 1;
+            border-radius: 50%;
+        }
+
+        td {
+            color: $font;
+        }
+
+        .final_total {
+            font-size: 1.2rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            line-height: 1.7;
+            color: $money;
+        }
+
+        .to_cartBtn,
+        .to_payBtn {
+            letter-spacing: 1px;
+            line-height: 1.7;
+
+            &.to_cartBtn {
+                color: $remind;
+                border-bottom: 1px solid $remind;
+            }
+
+            &.to_payBtn {
+                color: $money;
+                border-bottom: 1px solid $money;
+            }
+        }
+    }
+}

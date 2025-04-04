@@ -112,7 +112,8 @@ const icons = {
 
 const Icon = ({ icon, size = 'lg', color = null, className = '' }) => {
     if (!icons[icon]) {
-        console.error(`Font Awesome icon "${icon}" does not exist.`);
+        alert (`Font Awesome icon "${icon}" does not exist.`);
+
         return null;
     }
 

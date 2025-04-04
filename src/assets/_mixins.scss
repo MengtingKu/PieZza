@@ -17,6 +17,9 @@ $breakpoints: (
     ),
     "xxl": (
         min-width: 1500px
+    ),
+    "3xl": (
+        min-width: 1980px
     )
 );
 
@@ -64,7 +67,6 @@ $breakpoints: (
 @mixin bgi_size($size: cover, $position: center center) {
     background-size: $size;
     background-position: $position;
-    background-attachment: fixed;
 }
 
 @mixin bgi_color($color: #000, $repeat: no-repeat) {

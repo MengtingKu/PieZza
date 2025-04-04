@@ -13,7 +13,6 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.response.use(
     response => response,
     error => {
-        console.error('API 錯誤：', error);
         return Promise.reject(error);
     }
 );

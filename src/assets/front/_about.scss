@@ -1,0 +1,238 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Lavishly+Yours&family=Marck+Script&family=Montez&display=swap");
+
+$swiper-pagination-color: rgba($black, 0.1);
+$swiper-pagination-active-color: $reverse-sub-theme;
+$swiper-pagination-bullet-size: 12px;
+
+.about {
+    padding-top: 32px;
+    letter-spacing: 1px;
+
+    .title_group {
+        color: #ffc107;
+        text-transform: capitalize;
+
+        h3 {
+            color: $reverse-theme;
+            font-weight: 800;
+            font-size: $font-size-lg;
+        }
+        h6 {
+            font-family: "Montez", serif;
+            color: $reverse-theme;
+            font-size: $font-size-md;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+        }
+    }
+
+    .about_store {
+        .img_group {
+            @include respond_to("xl") {
+                position: relative;
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 80px;
+                    left: 50px;
+                    max-width: 300px;
+                    width: 300px;
+                    height: 200px;
+                    background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+                }
+
+                .store_brand {
+                    position: absolute;
+                    right: 100px;
+                    bottom: 0;
+                    max-width: 360px;
+                    height: auto;
+                    object-fit: cover;
+                }
+            }
+        }
+    }
+
+    .our_stories {
+        .card {
+            font-family: "Caveat Brush";
+            letter-spacing: 1px;
+        }
+
+        .swiper {
+            width: 100%;
+            height: 100%;
+            padding-bottom: 70px;
+
+            .swiper-slide {
+                font-size: 18px;
+                background: $reverse-font;
+
+                img {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            .swiper-pagination {
+                .swiper-pagination-bullet {
+                    position: relative;
+                    bottom: 20px;
+                    margin: 0 35px;
+                    width: $swiper-pagination-bullet-size;
+                    height: $swiper-pagination-bullet-size;
+                    text-align: center;
+                    line-height: $swiper-pagination-bullet-size;
+                    color: $font;
+                    opacity: 1;
+                    background: $swiper-pagination-color;
+
+                    &::before,
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        top: 5px;
+                        width: 400%;
+                        height: 2px;
+                        background-color: $swiper-pagination-color;
+                        z-index: 0;
+                    }
+
+                    &::before {
+                        right: 0;
+                    }
+
+                    &::after {
+                        left: 0;
+                    }
+
+                    &-active {
+                        background: $swiper-pagination-active-color;
+
+                        span {
+                            color: $swiper-pagination-active-color;
+                        }
+                    }
+                }
+
+                .page_year {
+                    position: absolute;
+                    color: #343a40;
+                    bottom: -25px;
+                    left: -5px;
+                    font-size: $font-size-base;
+                }
+            }
+        }
+
+        .swiper_timeline {
+            .story_tag {
+                position: absolute;
+                right: 0;
+                top: 26px;
+            }
+        }
+    }
+
+    .chef_delicious {
+        position: relative;
+
+        .img_group {
+            position: relative;
+            .layer {
+                position: absolute;
+                bottom: 3%;
+                left: 0;
+                height: 50%;
+                width: 100%;
+                transition: all 0.35s ease-in-out;
+                opacity: 0;
+            }
+        }
+
+        .hansom_chef {
+            opacity: 0;
+            position: absolute;
+            top: 150px;
+            left: 10%;
+            transform-origin: top;
+            z-index: 100;
+            transition: 400ms;
+            pointer-events: none;
+            transform: translateY(-80px) translateZ(0px);
+
+            @include respond_to("sm") {
+                top: 155px;
+            }
+            @include respond_to("md") {
+                top: 80px;
+            }
+            @include respond_to("lg") {
+                top: 110px;
+            }
+            @include respond_to("xl") {
+                top: 160px;
+            }
+        }
+
+        &:hover {
+            .layer {
+                background-color: rgba($shadow, 0.12);
+                -webkit-backdrop-filter: blur(4.6px);
+                backdrop-filter: blur(4.6px);
+                background-image: linear-gradient(
+                    to top,
+                    transparent 46%,
+                    rgba($shadow, 0.3) 68%,
+                    rgba($shadow, 0.8) 97%
+                );
+                transform: perspective(1200px) translateY(0) rotateX(20deg) translateZ(5px);
+                box-shadow: 2px 35px 32px -8px rgba($bg-theme, 0.75);
+                opacity: 0.8;
+                overflow: hidden;
+            }
+
+            .avatar_chef {
+                opacity: 0.1;
+            }
+
+            .hansom_chef {
+                opacity: 1;
+                transition:
+                    transform 0.3s ease,
+                    opacity 0.3s ease;
+                transform: translate3d(0%, -51%, 1000px);
+                filter: drop-shadow(10px 0px 10px rgba($shadow, 0.7));
+                overflow: hidden;
+            }
+        }
+    }
+
+    .call_meBtn {
+        font-size: $font-size-md;
+        letter-spacing: 1px;
+        border: 10px solid $link;
+
+        &:hover {
+            background-color: $reverse-bg-theme;
+            color: $font;
+        }
+    }
+
+    .order_form {
+        label {
+            color: rgba($shadow, 0.6);
+        }
+        .form-control,
+        .form-select {
+            color: rgba($font, 0.8);
+            font-family: "Montserrat", serif;
+            &::placeholder {
+                color: rgba($font, 0.3);
+            }
+        }
+    }
+}

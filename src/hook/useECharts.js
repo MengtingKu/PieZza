@@ -1,41 +1,41 @@
-import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
+import { useEffect, useRef } from 'react';
 
 const useECharts = (options, events) => {
-    const chartRef = useRef(null);
-    const chartInstanceRef = useRef(null);
+	const chartRef = useRef(null);
+	const chartInstanceRef = useRef(null);
 
-    useEffect(() => {
-        if (!chartRef.current) return;
+	useEffect(() => {
+		if (!chartRef.current) return;
 
-        const myChart = echarts.init(chartRef.current);
-        chartInstanceRef.current = myChart;
+		const myChart = echarts.init(chartRef.current);
+		chartInstanceRef.current = myChart;
 
-        myChart.setOption(options);
+		myChart.setOption(options);
 
-        if (events) {
-            Object.keys(events).forEach(eventName => {
-                myChart.on(eventName, events[eventName]);
-            });
-        }
+		if (events) {
+			Object.keys(events).forEach(eventName => {
+				myChart.on(eventName, events[eventName]);
+			});
+		}
 
-        const handleResize = () => {
-            if (chartInstanceRef.current) {
-                chartInstanceRef.current.resize();
-            }
-        };
+		const handleResize = () => {
+			if (chartInstanceRef.current) {
+				chartInstanceRef.current.resize();
+			}
+		};
 
-        window.addEventListener('resize', handleResize);
+		window.addEventListener('resize', handleResize);
 
-        return () => {
-            window.removeEventListener('resize', handleResize);
-            if (chartInstanceRef.current) {
-                chartInstanceRef.current.dispose();
-            }
-        };
-    }, [options, events]);
+		return () => {
+			window.removeEventListener('resize', handleResize);
+			if (chartInstanceRef.current) {
+				chartInstanceRef.current.dispose();
+			}
+		};
+	}, [options, events]);
 
-    return chartRef;
+	return chartRef;
 };
 
 export default useECharts;

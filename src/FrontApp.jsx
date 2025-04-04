@@ -7,29 +7,24 @@ import MessageToast from '@components/common/MessageToast';
 import ButtonBackToTop from '@components/common/ButtonBackToTop';
 
 const FrontApp = () => {
-    return (
-        <>
-            <Navbar>
-                <NavbarDropDownMenu />
-            </Navbar>
+	return (
+		<>
+			<Navbar>
+				<NavbarDropDownMenu />
+			</Navbar>
 
-            <main
-                style={{
-                    minHeight: `calc(100vh - 96px)`,
-                    marginTop: '69.38px',
-                }}
-            >
-                <AutoScrollToTop />
-                <MessageToast />
-                <Outlet />
-            </main>
+			<main className="main_height">
+				<AutoScrollToTop />
+				<MessageToast />
+				<Outlet />
+			</main>
 
-            <footer className="footer">
-                <Footer />
-            </footer>
-            <ButtonBackToTop />
-        </>
-    );
+			<footer className="footer">
+				<Footer />
+			</footer>
+			<ButtonBackToTop />
+		</>
+	);
 };
 
 export default FrontApp;
