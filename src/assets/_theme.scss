@@ -84,3 +84,7 @@ a {
         background: $red;
     }
 }
+
+div:where(.swal2-icon).swal2-warning.swal2-icon-show {
+    width: 100%;
+}

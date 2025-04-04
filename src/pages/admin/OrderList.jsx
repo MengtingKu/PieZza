@@ -245,14 +245,12 @@ const OrderList = () => {
 						<h3>訂單管理列表</h3>
 						<h6>Order Management List</h6>
 					</div>
-					<div className="remove_all">
-						<DialogDelete
-							fetchDeleteData={fetchDeleteOrders}
-							className="btn btn-outline-danger rounded-0"
-						>
-							刪除全部訂單
-						</DialogDelete>
-					</div>
+					<DialogDelete
+						fetchDeleteData={fetchDeleteOrders}
+						className="btn btn-outline-danger rounded-0"
+					>
+						刪除全部訂單
+					</DialogDelete>
 				</div>
 				<div className="my-5">
 					<DynamicTable

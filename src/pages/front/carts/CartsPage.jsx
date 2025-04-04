@@ -138,17 +138,15 @@ const CartsPage = () => {
 				const { chineseText } = splitText(cart.product_title);
 
 				return (
-					<div className="remove_item">
-						<DialogDelete
-							fetchDeleteData={fetchRemoveItem}
-							id={cart.id}
-							className="border-0 text-danger"
-							itemName={chineseText}
-							disabled={isCartLoading}
-						>
-							<Icon icon="remove" size="sm" />
-						</DialogDelete>
-					</div>
+					<DialogDelete
+						fetchDeleteData={fetchRemoveItem}
+						id={cart.id}
+						className="border-0 text-danger"
+						itemName={chineseText}
+						disabled={isCartLoading}
+					>
+						<Icon icon="remove" size="sm" />
+					</DialogDelete>
 				);
 			},
 		},
@@ -274,17 +272,15 @@ const CartsPage = () => {
 							<h3>購物車清單</h3>
 							<h6>pizza cart</h6>
 						</div>
-						<div className="remove_all">
-							<DialogDelete
-								fetchDeleteData={fetchRemoveCartItems}
-								className="btn btn-outline-danger border-0"
-								itemName="所有美食"
-								disabled={isCartLoading}
-							>
-								<span className="me-2">清空購物車</span>
-								<Icon icon="remove" />
-							</DialogDelete>
-						</div>
+						<DialogDelete
+							fetchDeleteData={fetchRemoveCartItems}
+							className="btn btn-outline-danger border-0"
+							itemName="所有美食"
+							disabled={isCartLoading}
+						>
+							<span className="me-2">清空購物車</span>
+							<Icon icon="remove" />
+						</DialogDelete>
 					</div>
 					<DynamicTable
 						data={carts.carts || []}

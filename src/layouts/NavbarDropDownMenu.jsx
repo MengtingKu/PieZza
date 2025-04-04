@@ -55,17 +55,15 @@ const NavbarDropDownMenu = () => {
 				const { chineseText } = splitText(cart.product_title);
 
 				return (
-					<div className="remove_item">
-						<DialogDelete
-							fetchDeleteData={fetchRemoveItem}
-							id={cart.id}
-							className="border-0 text-danger"
-							itemName={chineseText}
-							disabled={isCartLoading}
-						>
-							<Icon icon="remove" size="sm" />
-						</DialogDelete>
-					</div>
+					<DialogDelete
+						fetchDeleteData={fetchRemoveItem}
+						id={cart.id}
+						className="border-0 text-danger"
+						itemName={chineseText}
+						disabled={isCartLoading}
+					>
+						<Icon icon="remove" size="sm" />
+					</DialogDelete>
 				);
 			},
 		},
@@ -152,10 +150,10 @@ const NavbarDropDownMenu = () => {
 			</button>
 			<div
 				ref={dropdownRef}
-				className={`dropdown-menu dropdown-menu-end p-2 overflow-scroll${
+				className={`dropdown-menu dropdown-menu-end p-2 ${
 					!carts.carts.length && 'page_bg'
 				}`}
-				style={{ height: '500px' }}
+				style={{ height: '500px', overflow: 'scroll' }}
 			>
 				{' '}
 				{carts.carts.length ? (

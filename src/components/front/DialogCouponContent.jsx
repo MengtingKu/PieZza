@@ -145,9 +145,7 @@ const DialogCouponContent = ({ setTotalCost }) => {
 					點我抽優惠券
 				</button>
 			) : (
-				<small className="text-danger">
-					每天一次抽獎，券用過就沒了
-				</small>
+				<small className="text-danger">今天參加過抽獎</small>
 			)}
 
 			{showModal && (
